@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E9A3222F-FEED-4A71-A961-A57AD8261DCA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmartLib</RootNamespace>
+    <AssemblyName>SmartLib</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <DependsOnNETStandard>false</DependsOnNETStandard>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Output\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Output\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\Output\SmartLib.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="halcondotnet, Version=21.5.0.0, Culture=neutral, PublicKeyToken=4973bed59ddbf2b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Output\halcondotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseData\ROI.cs" />
+    <Compile Include="BaseData\ROICircle.cs" />
+    <Compile Include="BaseData\ROIFixRectangle1.cs" />
+    <Compile Include="BaseData\ROIRectangle1.cs" />
+    <Compile Include="BaseData\ROIRectangle2.cs" />
+    <Compile Include="BaseData\UserData.cs" />
+    <Compile Include="ControlEX\AttributeUtil.cs" />
+    <Compile Include="ControlEX\ControlExHeldper.cs" />
+    <Compile Include="ControlEX\Controls\ButtonEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlEX\Controls\ButtonEx.designer.cs">
+      <DependentUpon>ButtonEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlEX\Controls\CheckBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlEX\Controls\CheckBoxEx.designer.cs">
+      <DependentUpon>CheckBoxEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlEX\Controls\ComboBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlEX\Controls\ComboBoxEx.designer.cs">
+      <DependentUpon>ComboBoxEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlEX\Controls\CountTB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlEX\Controls\CountTB.designer.cs">
+      <DependentUpon>CountTB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlEX\Controls\DataGridViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlEX\Controls\DataGridViewEx.designer.cs">
+      <DependentUpon>DataGridViewEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlEX\Controls\LabelEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlEX\Controls\LabelEx.designer.cs">
+      <DependentUpon>LabelEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlEX\Controls\NumericUpDownEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlEX\Controls\NumericUpDownEx.designer.cs">
+      <DependentUpon>NumericUpDownEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlEX\Controls\RadioButtonEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlEX\Controls\RadioButtonEx.designer.cs">
+      <DependentUpon>RadioButtonEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlEX\Controls\TBCountEX.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlEX\Controls\TBCountEX.Designer.cs">
+      <DependentUpon>TBCountEX.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlEX\Controls\TBSimpleEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlEX\Controls\TBSimpleEx.designer.cs">
+      <DependentUpon>TBSimpleEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlEX\Controls\TextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ControlEX\Controls\TextBoxEx.designer.cs">
+      <DependentUpon>TextBoxEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlEX\IControlEx.cs" />
+    <Compile Include="Copy\ClonerToExprGenerator.cs" />
+    <Compile Include="Copy\DeepClonerCache.cs" />
+    <Compile Include="Copy\DeepClonerExprGenerator.cs" />
+    <Compile Include="Copy\DeepClonerExtensions.cs" />
+    <Compile Include="Copy\DeepClonerGenerator.cs" />
+    <Compile Include="Copy\DeepClonerMsilGenerator.cs" />
+    <Compile Include="Copy\DeepClonerMsilHelper.cs" />
+    <Compile Include="Copy\DeepClonerSafeTypes.cs" />
+    <Compile Include="Copy\DeepCloneState.cs" />
+    <Compile Include="Copy\ReflectionHelper.cs" />
+    <Compile Include="Copy\ShallowObjectCloner.cs" />
+    <Compile Include="Copy\TypeCreationHelper.cs" />
+    <Compile Include="DispCtrl\DispFunc.cs" />
+    <Compile Include="DispCtrl\DisplayCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DispCtrl\DisplayCtrl.designer.cs">
+      <DependentUpon>DisplayCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DispCtrl\LargeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DispCtrl\LargeView.designer.cs">
+      <DependentUpon>LargeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\ControlEx.cs" />
+    <Compile Include="Extensions\DictionaryEx.cs" />
+    <Compile Include="Extensions\EnumEx.cs" />
+    <Compile Include="Extensions\IConvertibleExtensions.cs" />
+    <Compile Include="Extensions\ObjectEx.cs" />
+    <Compile Include="Extensions\StringEx.cs" />
+    <Compile Include="Extensions\ConvertHelper.cs" />
+    <Compile Include="FileHelper.cs" />
+    <Compile Include="FrmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBase.Designer.cs">
+      <DependentUpon>FrmBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Messenger\CallbackMessage.cs" />
+    <Compile Include="Messenger\IMessenger.cs" />
+    <Compile Include="Messenger\Messenger.cs" />
+    <Compile Include="Messenger\WeakAction.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Response.cs" />
+    <Compile Include="VisionComFunc.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ControlEX\Controls\PointCtrl.resx" />
+    <EmbeddedResource Include="DispCtrl\DisplayCtrl.resx">
+      <DependentUpon>DisplayCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DispCtrl\LargeView.resx">
+      <DependentUpon>LargeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBase.resx">
+      <DependentUpon>FrmBase.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
