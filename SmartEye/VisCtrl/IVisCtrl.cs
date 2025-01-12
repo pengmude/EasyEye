@@ -40,8 +40,6 @@ namespace SmartVEye
 
         void StopConiSnapForAuto();
 
-        void SetCamEnable();
-
         Response TrainModelAuto();
 
         void ConnectPLC();

@@ -16,6 +16,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 
 namespace SmartVEye
 {
@@ -34,6 +37,8 @@ namespace SmartVEye
         public int CameraEnable { get; set; } = 1;//是否启用相机
         public int CamNumber { get; set; } = 1;//相机编号，只显示
         public bool IsTrainMode { get; set; } = false;
+        
+        private Queue<Image> imageQueue = new Queue<Image>(3);// 定义一个只能存放三张NG图像的队列
 
         #endregion
 
@@ -43,11 +48,19 @@ namespace SmartVEye
             CheckForIllegalCrossThreadCalls = false;
             WinCtrl.InitWindow();
             WinCtrl.WinMouseDownEvent += new HMouseEventHandler(VisWinMouseDown);
+            WinCtrl.WinMouseMoveEvent += new HMouseEventHandler(VisWinMouseMove);
         }
         ~VisCtrlV2()
         {
             WinCtrl.WinMouseDownEvent -= new HMouseEventHandler(VisWinMouseDown);
+            WinCtrl.WinMouseMoveEvent -= new HMouseEventHandler(VisWinMouseMove);
         }
+
+        /// <summary>
+        /// 鼠标按下
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void VisWinMouseDown(object sender, HMouseEventArgs e)
         {
             try
@@ -63,6 +76,27 @@ namespace SmartVEye
                 _logger.Error($"鼠标点击移动ROI异常!{ex.Message}");
             }
         }
+        /// <summary>
+        /// 鼠标移动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void VisWinMouseMove(object sender, HMouseEventArgs e)
+        {
+            try
+            {
+                if (!IsTrainMode) return;
+                WinCtrl.Ctrl_DelAllROI();
+                WinCtrl.Ctrl_CreateRectROI(e.Y, e.X, TrainROIWidth, TrainROIHeight);
+                TrainROIRow = e.Y;
+                TrainROICol = e.X;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"鼠标点击移动ROI异常!{ex.Message}");
+            }
+        }
+
         private void VisCtrl_Load(object sender, EventArgs e)
         {
             ShowProRecord();
@@ -72,6 +106,20 @@ namespace SmartVEye
         {
             IsContinueSnap = false;
         }
+
+        public void SetTriggerDelay()
+        {
+
+        }
+
+        public float GetTriggerDelay()
+        {
+            if (CommonData.CameraType == 0)
+                return CurHikCam.GetTriggerDelay().Data;
+            else
+                return CurBaslerCam.GetExposTime().Data;
+        }
+
         public Response InitCamera(string CamName)
         {
             if (CommonData.CameraType == 0)
@@ -80,7 +128,7 @@ namespace SmartVEye
                 Response ret = CurHikCam.CamOpen(CamName);
                 CurHikCam.SetLineTrig();
                 //CurHikCam.SetExposTime(Exposure);
-                if (cb_WhitePage.Checked)        //lcl 白页检测时修改曝光
+                if (comboBox_RunMode.SelectedIndex == 1)        //lcl 白页检测时修改曝光
                 {
                     CurHikCam.SetExposTime(WhitePageExposure);
                 }
@@ -89,6 +137,7 @@ namespace SmartVEye
                     CurHikCam.SetExposTime(Exposure);
                 }
                 CurHikCam.SetGain(Gain);
+                CurHikCam.SetTriggerDelay(TriggerDelay);
                 CurHikCam.PostFrameEvent += CurCam_PostFrameEvent;
                 CommonData.PostReadFrameEvent += CurCam_PostFrameEvent;
                 if (!ret) return ret;
@@ -101,7 +150,7 @@ namespace SmartVEye
                 Response ret = CurBaslerCam.CamOpen(CamName);
                 CurBaslerCam.SetLineTrig();
                 //CurBaslerCam.SetExposTime(Exposure);
-                if (cb_WhitePage.Checked)        //lcl 白页检测时修改曝光
+                if (comboBox_RunMode.SelectedIndex == 1)        //lcl 白页检测时修改曝光
                 {
                     CurBaslerCam.SetExposTime(WhitePageExposure);
                 }
@@ -110,6 +159,7 @@ namespace SmartVEye
                     CurBaslerCam.SetExposTime(Exposure);
                 }
                 CurBaslerCam.SetGain(Gain);
+                CurBaslerCam.settrr(TriggerDelay);
                 CurBaslerCam.PostFrameEvent += CurCam_PostFrameEvent;
                 CommonData.PostReadFrameEvent += CurCam_PostFrameEvent;
                 if (!ret) return ret;
@@ -151,15 +201,6 @@ namespace SmartVEye
             {
                 _logger.Info($"相机[{CamName}]关闭视频模式!");
             }
-        }
-        public void SetCamEnable()
-        {
-            if (cb_CamEnable.IsHandleCreated)
-                cb_CamEnable.Invoke(new Action(() =>
-                {
-                    if (CameraEnable > 0) cb_CamEnable.Checked = true;
-                    else cb_CamEnable.Checked = false;
-                }));
         }
         public void ConnectPLC()
         {
@@ -266,93 +307,106 @@ namespace SmartVEye
                     cb_WorkOnLine.Invoke(new Action(() => { IsWorkOnLine = cb_WorkOnLine.Checked; }));
                 }
                 if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]正在处理图像，获取相机联网状态!");
+
+                //如果不在学习状态才能进行检测
                 if (!CommonData.IsLearning)
                 {
-                    //检测方法
-                    if (cb_FindByte.Checked)
+                    //选择检测的模式，0-图文检测，1-白页检测，2-黑页检测
+                    switch (comboBox_RunMode.SelectedIndex)
                     {
-                        if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]正在处理图像，当前为文本检测模式!");
+                        case 0:
+                            if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]正在处理图像，当前为文本检测模式!");
 
-                        double OutShowImgScore = 0;
-                        Response<InspResult> ret;
-                        if (ImageCheckMode == 1)
-                        {
-                            ret = VisCtrlHelper.ImgModelMatchFunc(CamName, grabImage, WinCtrl, hv_ImgModelHandle,
-                                 AngleStart, AngleEnd, MinScale, MaxScale, MinScore,
-                                 MinContrast, (int)TrainROIWidth, (int)TrainROIHeight, IsWorkOnLine, ImgScore, out OutShowImgScore);
-                        }
-                        else
-                        {
-                            ret = VisCtrlHelper.ModelMatchFunc(CamName, grabImage, WinCtrl, hv_ModelHandle,
-                                AngleStart, AngleEnd, MinScale, MaxScale, MinScore,
-                                 MinContrast, (int)TrainROIWidth, (int)TrainROIHeight, IsWorkOnLine);
-                        }
-                        if (ret && ret.Data != null)
-                        {
-                            lb_ImgSimilarScore.Text = OutShowImgScore.ToString("P2");
-                            if (ret.Data.result == true)
+                            double OutShowImgScore = 0;
+                            Response<InspResult> ret0;
+                            if (ImageCheckMode == 1)
                             {
-                                SetRes(true);
-                                RecordOK += 1;
+                                ret0 = VisCtrlHelper.ImgModelMatchFunc(CamName, grabImage, WinCtrl, hv_ImgModelHandle,
+                                     AngleStart, AngleEnd, MinScale, MaxScale, MinScore,
+                                     MinContrast, (int)TrainROIWidth, (int)TrainROIHeight, IsWorkOnLine, ImgScore, out OutShowImgScore);
                             }
                             else
                             {
-                                SetRes(false);
-                                RecordNG += 1;
+                                ret0 = VisCtrlHelper.ModelMatchFunc(CamName, grabImage, WinCtrl, hv_ModelHandle,
+                                    AngleStart, AngleEnd, MinScale, MaxScale, MinScore,
+                                     MinContrast, (int)TrainROIWidth, (int)TrainROIHeight, IsWorkOnLine);
                             }
-                        }
-                        else
-                        {
-                            _logger.Error($"相机{CamName}检测异常!{ret.Msg}");
-                        }
-                    }
-                    else if (cb_WhitePage.Checked)
-                    {
-                        if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]正在处理图像，当前为白页检测模式!");
-                        //PageWhiteFunc(grabImage);
-                        Response<InspResult> ret = VisCtrlHelper.PageWhiteFunc(CamName, grabImage, WinCtrl, PageWBContourNum,
-                            PageWhite, IsWorkOnLine, TrainROIRow, TrainROICol, TrainROIWidth, TrainROIHeight);
-                        if (ret && ret.Data != null)
-                        {
-                            if (ret.Data.result == true)
+                            if (ret0 && ret0.Data != null)
                             {
-                                SetRes(true);
-                                RecordOK += 1;
+                                lb_ImgSimilarScore.Text = OutShowImgScore.ToString("P2");
+                                if (ret0.Data.result == true)
+                                {
+                                    //设置显示结果为OK
+                                    SetRes(true);
+                                    RecordOK += 1;
+                                }
+                                else
+                                {
+                                    //设置显示结果为NG
+                                    SetRes(false);
+                                    RecordNG += 1;
+                                    UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(grabImage));//更新NG图片的显示
+                                }
                             }
                             else
                             {
-                                SetRes(false);
-                                RecordNG += 1;
+                                _logger.Error($"相机{CamName}检测异常!{ret0.Msg}");
                             }
-                        }
-                        else
-                        {
-                            _logger.Error($"相机{CamName}检测异常!{ret.Msg}");
-                        }
-                    }
-                    else if (cb_BlackPage.Checked)
-                    {
-                        if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]正在处理图像，当前为黑页检测模式!");
-                        //PageBlackFun(grabImage);
-                        Response<InspResult> ret = VisCtrlHelper.PageBlackFun(CamName, grabImage, WinCtrl, PageWBContourNum,
-                            PageBlack, IsWorkOnLine, TrainROIRow, TrainROICol, TrainROIWidth, TrainROIHeight);
-                        if (ret && ret.Data != null)
-                        {
-                            if (ret.Data.result == true)
+                            break;
+                        case 1:
+                            if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]正在处理图像，当前为白页检测模式!");
+                            //PageWhiteFunc(grabImage);
+                            Response<InspResult> ret1 = VisCtrlHelper.PageWhiteFunc(CamName, grabImage, WinCtrl, PageWBContourNum,
+                                PageWhite, IsWorkOnLine, TrainROIRow, TrainROICol, TrainROIWidth, TrainROIHeight);
+                            if (ret1 && ret1.Data != null)
                             {
-                                SetRes(true);
-                                RecordOK += 1;
+                                if (ret1.Data.result == true)
+                                {
+                                    //设置显示结果为OK
+                                    SetRes(true);
+                                    RecordOK += 1;
+                                }
+                                else
+                                {
+                                    //设置显示结果为NG
+                                    SetRes(false);
+                                    RecordNG += 1;
+                                    UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(grabImage));//更新NG图片的显示
+                                }
                             }
                             else
                             {
-                                SetRes(false);
-                                RecordNG += 1;
+                                _logger.Error($"相机{CamName}检测异常!{ret1.Msg}");
                             }
-                        }
-                        else
-                        {
-                            _logger.Error($"相机{CamName}检测异常!{ret.Msg}");
-                        }
+                            break;
+                        case 2:
+                            if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]正在处理图像，当前为黑页检测模式!");
+                            //PageBlackFun(grabImage);
+                            Response<InspResult> ret2 = VisCtrlHelper.PageBlackFun(CamName, grabImage, WinCtrl, PageWBContourNum,
+                                PageBlack, IsWorkOnLine, TrainROIRow, TrainROICol, TrainROIWidth, TrainROIHeight);
+                            if (ret2 && ret2.Data != null)
+                            {
+                                if (ret2.Data.result == true)
+                                {
+                                    //设置显示结果为OK
+                                    SetRes(true);
+                                    RecordOK += 1;
+                                }
+                                else
+                                {
+                                    //设置显示结果为NG
+                                    SetRes(false);
+                                    RecordNG += 1;
+                                    UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(grabImage));//更新NG图片的显示
+                                }
+                            }
+                            else
+                            {
+                                _logger.Error($"相机{CamName}检测异常!{ret2.Msg}");
+                            }
+                            break;
+                        default:
+                            break;
                     }
                     if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]正在处理图像，检测完成!");
                     ShowProRecord();
@@ -369,6 +423,79 @@ namespace SmartVEye
                 imgProcTimer.Stop();
                 if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]检测耗时:{imgProcTimer.ElapsedMilliseconds}ms");
             }
+        }
+
+        [DllImport("kernel32.dll")]
+        public static extern void CopyMemory(int Destination, int add, int Length);
+
+        /// <summary>
+        /// HObject转8位Bitmap(单通道)
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="res"></param>
+
+        public static Bitmap HObject2Bitmap8(HObject image)
+        {
+            Bitmap res;
+            HTuple hpoint, type, width, height;
+            const int Alpha = 255;
+            HOperatorSet.GetImagePointer1(image, out hpoint, out type, out width, out height);
+            res = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
+            ColorPalette pal = res.Palette;
+            for (int i = 0; i <= 255; i++)
+            { pal.Entries[i] = Color.FromArgb(Alpha, i, i, i); }
+
+            res.Palette = pal; Rectangle rect = new Rectangle(0, 0, width, height);
+            BitmapData bitmapData = res.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
+            int PixelSize = Bitmap.GetPixelFormatSize(bitmapData.PixelFormat) / 8;
+            IntPtr ptr1 = bitmapData.Scan0;
+            IntPtr ptr2 = hpoint; int bytes = width * height;
+            byte[] rgbvalues = new byte[bytes];
+            System.Runtime.InteropServices.Marshal.Copy(ptr2, rgbvalues, 0, bytes);
+            System.Runtime.InteropServices.Marshal.Copy(rgbvalues, 0, ptr1, bytes);
+            res.UnlockBits(bitmapData);
+            return res;
+
+        }
+
+        /// <summary>
+        /// 更新NG图像队列
+        /// </summary>
+        /// <param name="newImage"></param>
+        private void UpdateImageQueueAndPictureBoxes(Image newImage)
+        {
+            // 如果队列已满，则移除最旧的图像
+            if (imageQueue.Count == 3)
+            {
+                Image oldestImage = imageQueue.Dequeue();
+                oldestImage.Dispose(); // 释放不再使用的图像资源
+            }
+
+            // 添加新图像到队列
+            imageQueue.Enqueue(newImage);
+
+            // 更新 PictureBox 控件以显示最新的三张图像
+            UpdatePictureBoxesFromQueue();
+        }
+
+
+        /// <summary>
+        /// 使用NG图片队列更新当前NG图的显示
+        /// </summary>
+        private void UpdatePictureBoxesFromQueue()
+        {
+            // 获取队列中的所有图像
+            List<Image> images = imageQueue.ToList();
+
+            // 根据队列中的图像数量更新 PictureBox 控件
+            pictureBox1.Image = images.ElementAtOrDefault(0);
+            pictureBox2.Image = images.ElementAtOrDefault(1);
+            pictureBox3.Image = images.ElementAtOrDefault(2);
+
+            // 确保 PictureBox 的大小模式适应图像
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         public Response ReadModel()
@@ -394,18 +521,58 @@ namespace SmartVEye
                 TrainROIHeight = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "trainlen2", 100);
                 CheckMode = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "checkmode", 0);
                 WhitePageExposure = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "whitePageExposure", 400);   //lcl 白页检测曝光
-                ImgScore = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "imgscore", 90);   //lcl 图片相似度
+                ImgScore = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "imgscore", 90);   //lcl 当前图片相似度
+                ImgScoreHight = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "imgscoreH", 90);   //lcl 图片相似度高
+                ImgScoreMid = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "imgscoreM", 80);   //lcl 图片相似度中
+                ImgScoreLow = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "imgscoreL", 70);   //lcl 图片相似度低
                 ImageCheckMode = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "imagecheckmode", 0);   //lcl 图像检测模式，0轮廓对比，1图像对比
                 PageWBContourNum = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "wbcontour", 1);
                 ImgLight = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "imglight", 255);
                 ImgDark = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "imgdark", 0);
-                if (cb_WhitePage.IsHandleCreated)
-                    cb_WhitePage.Invoke(new Action(() =>
+                TriggerDelay = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "triggerdelay", 0);// 新增相机触发延迟
+
+                //设置检测模式
+                if (comboBox_RunMode.IsHandleCreated)
+                {
+                    comboBox_RunMode.Invoke(new Action(() =>
                     {
-                        if (CheckMode == 0) { cb_FindByte.Checked = true; cb_WhitePage.Checked = false; cb_BlackPage.Checked = false; }
-                        else if (CheckMode == 1) { cb_WhitePage.Checked = true; cb_FindByte.Checked = false; cb_BlackPage.Checked = false; }
-                        else if (CheckMode == 2) { cb_BlackPage.Checked = true; cb_FindByte.Checked = false; cb_WhitePage.Checked = false; }
+                        switch (CheckMode)
+                        {
+                            case 0:
+                                comboBox_RunMode.SelectedIndex = 0;
+                                break;
+                            case 1:
+                                comboBox_RunMode.SelectedIndex = 1;
+                                break;
+                            case 2:
+                                comboBox_RunMode.SelectedIndex = 2;
+                                break;
+                            default:
+                                MessageBox.Show("无效的检测模式！");
+                                break;
+                        }
+                        //初始化上一次选择的检测模式
+                        previousIndex = comboBox_RunMode.SelectedIndex;
                     }));
+                }
+                
+                //设置检测精度
+                if (comboBox_DetectAccuracy.IsHandleCreated)
+                {
+                    comboBox_DetectAccuracy.Invoke(new Action(() =>
+                    {
+                        if(ImgScore == ImgScoreHight)
+                            comboBox_DetectAccuracy.SelectedIndex = 0;
+                        else if(ImgScore == ImgScoreMid)
+                            comboBox_DetectAccuracy.SelectedIndex = 1;
+                        else if(ImgScore == ImgScoreLow)
+                            comboBox_DetectAccuracy.SelectedIndex = 2;
+                        else
+                            comboBox_DetectAccuracy.SelectedIndex = -1;//当设置的图片相似度不等于预设高中低值其中一个时设置为不选择
+                    }));
+                }
+
+                // 建模的初始化ROI尺寸
                 oldROIRow = TrainROIRow;
                 oldROICol = TrainROICol;
                 oldROILen1 = TrainROIWidth;
@@ -440,6 +607,7 @@ namespace SmartVEye
                 IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "whitePageExposure", WhitePageExposure);   //lcl 白页检测曝光
                 IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "imgscore", ImgScore);   //lcl 图片相似度
                 IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "imagecheckmode", ImageCheckMode);   //lcl 图像检测模式，0轮廓对比，1图像对比
+                IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "triggerdelay", TriggerDelay);   //相机触发延迟
 
                 //要求每次打开软件记录都为0
                 RecordOK = 0;
@@ -693,13 +861,13 @@ namespace SmartVEye
         {
             //检测模式
             int checkmode = 0;
-            if (cb_FindByte.Checked) checkmode = 0;
-            else if (cb_WhitePage.Checked) checkmode = 1;
-            else if (cb_BlackPage.Checked) checkmode = 2;
+            if (comboBox_RunMode.SelectedIndex == 0) checkmode = 0;
+            else if (comboBox_RunMode.SelectedIndex == 1) checkmode = 1;
+            else if (comboBox_RunMode.SelectedIndex == 2) checkmode = 2;
             IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "checkmode", checkmode);
             if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]学习模式:{checkmode}!");
             //执行训练
-            if (cb_BlackPage.Checked || cb_WhitePage.Checked)
+            if (comboBox_RunMode.SelectedIndex == 1 || comboBox_RunMode.SelectedIndex == 2)
             {
                 if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]开始执行模式{checkmode}学习!");
                 Response<int> roiRet = WinCtrl.GetROICount();
@@ -849,13 +1017,13 @@ namespace SmartVEye
         {
             //检测模式
             int checkmode = 0;
-            if (cb_FindByte.Checked) checkmode = 0;
-            else if (cb_WhitePage.Checked) checkmode = 1;
-            else if (cb_BlackPage.Checked) checkmode = 2;
+            if (comboBox_RunMode.SelectedIndex == 0) checkmode = 0;
+            else if (comboBox_RunMode.SelectedIndex == 1) checkmode = 1;
+            else if (comboBox_RunMode.SelectedIndex == 2) checkmode = 2;
             IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "checkmode", checkmode);
             if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]学习模式:{checkmode}!");
             //执行训练
-            if (cb_BlackPage.Checked || cb_WhitePage.Checked)
+            if (comboBox_RunMode.SelectedIndex == 1 || comboBox_RunMode.SelectedIndex == 2)
             {
                 if (CommonData.IsSaveRunLog > 0) _logger.Info($"相机[{CamName}]开始执行模式{checkmode}学习!");
                 Response<int> roiRet = WinCtrl.GetROICount();
@@ -1046,12 +1214,7 @@ namespace SmartVEye
                 _logger.Error($"设置相机视频模式[{cb_RealImg.Checked}]异常!" + ex.Message);
             }
         }
-        private void cb_CamEnable_MouseUp(object sender, MouseEventArgs e)
-        {
-            CameraEnable = cb_CamEnable.Checked ? 1 : 0;
-            IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "enable", CameraEnable);
 
-        }
         private void cb_WorkOnLine_MouseUp(object sender, MouseEventArgs e)
         {
             if (!cb_WorkOnLine.Checked && !FrmMain.IsDisconnectAll)
@@ -1121,9 +1284,9 @@ namespace SmartVEye
         {
             try
             {
-                if (TrainROIWidth <= 0)
+                if (TrainROIWidth <= 100)
                 {
-                    MessageBox.Show("宽减已经最小，宽度不能小于0,请点击按钮宽加");
+                    MessageBox.Show("宽减已经最小，宽度不能小于100,请点击按钮宽加");
                     return;
                 }
                 if (!IsTrainMode) return;
@@ -1158,9 +1321,9 @@ namespace SmartVEye
         {
             try
             {
-                if (TrainROIHeight <= 0)
+                if (TrainROIHeight <= 100)
                 {
-                    MessageBox.Show("高减已经最小，高度不能小于0,请点击按钮高加");
+                    MessageBox.Show("高减已经最小，高度不能小于100,请点击按钮高加");
                     return;
                 }
                 if (!IsTrainMode) return;
@@ -1174,68 +1337,6 @@ namespace SmartVEye
                 _logger.Error("高度-异常!" + ex.Message);
             }
         }
-        private void cb_FindByte_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (MessageBox.Show("是否切换成图文模式？", "确认", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                // 如果用户确定，则取消选中复选框
-                cb_FindByte.Checked = true;
-                CurHikCam.SetExposTime(Exposure);
-            }
-            else
-            {
-                // 如果用户确定，则取消选中复选框
-                cb_FindByte.Checked = false;
-            }
-            if (cb_FindByte.Checked)
-            {
-                cb_WhitePage.Checked = false;
-                cb_BlackPage.Checked = false;
-            }
-            if (!cb_BlackPage.Checked && !cb_WhitePage.Checked) cb_FindByte.Checked = true;
-        }
-        private void cb_WhitePage_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (MessageBox.Show("是否切换成白页模式？", "确认", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                // 如果用户确定，则取消选中复选框
-                cb_WhitePage.Checked = true;
-                CurHikCam.SetExposTime(WhitePageExposure);
-            }
-            else
-            {
-                // 如果用户确定，则取消选中复选框
-                cb_WhitePage.Checked = false;
-            }
-            if (cb_WhitePage.Checked)
-            {
-                cb_FindByte.Checked = false;
-                cb_BlackPage.Checked = false;
-            }
-            if (!cb_BlackPage.Checked && !cb_WhitePage.Checked) cb_FindByte.Checked = true;
-        }
-
-        private void cb_BlackPage_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (MessageBox.Show("是否切换成黑页模式？", "确认", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                // 如果用户确定，则取消选中复选框
-                cb_BlackPage.Checked = true;
-                CurHikCam.SetExposTime(Exposure);
-            }
-            else
-            {
-                // 如果用户确定，则取消选中复选框
-                cb_BlackPage.Checked = false;
-            }
-            if (cb_BlackPage.Checked)
-            {
-                cb_FindByte.Checked = false;
-                cb_WhitePage.Checked = false;
-            }
-            if (!cb_BlackPage.Checked && !cb_WhitePage.Checked) cb_FindByte.Checked = true;
-        }
-
         private void btn_Train_MouseDown(object sender, MouseEventArgs e)
         {
             btn_Train.BackColor = Color.Aqua;
@@ -1253,7 +1354,7 @@ namespace SmartVEye
             //btn_HighPlus.Width = btn_WidthPlus.Width;
             //btn_HighSub.Width = btn_WidthPlus.Width;
 
-            btn_WidthPlus.Width = panel1.Width / 8;
+            btn_WidthPlus.Width = panel_Top.Width / 8;
             btn_WidthSub.Width = btn_WidthPlus.Width;
             btn_HighPlus.Width = btn_WidthPlus.Width;
             btn_HighSub.Width = btn_WidthPlus.Width;
@@ -1287,35 +1388,12 @@ namespace SmartVEye
         /// <summary>
         /// LCL20240818 建模时控件显示，学习时隐藏
         /// </summary>
-        public void DisplayOperateBtn(bool type)
+        public void DisplayOperateBtn(bool isDisplay)
         {
-            if (type == true)
-            {
-                btn_WidthSub.Visible = true;
-                btn_WidthPlus.Visible = true;
-                btn_HighPlus.Visible = true;
-                btn_HighSub.Visible = true;
-                btn_WidthPlus.Location = new Point(58, 465);  //宽+
-                btn_WidthSub.Location = new Point(683, 465);  //宽-
-                btn_HighPlus.Location = new Point(360, 70);    //高+
-                btn_HighSub.Location = new Point(360, 870);    //高-
-                this.Controls.Add(btn_WidthPlus);
-                btn_WidthPlus.BringToFront();
-                this.Controls.Add(btn_WidthSub);
-                btn_WidthSub.BringToFront();
-                this.Controls.Add(btn_HighPlus);
-                btn_HighPlus.BringToFront();
-                this.Controls.Add(btn_HighSub);
-                btn_HighSub.BringToFront();
-
-            }
-            else
-            {
-                btn_WidthSub.Visible = false;
-                btn_WidthPlus.Visible = false;
-                btn_HighPlus.Visible = false;
-                btn_HighSub.Visible = false;
-            }
+            btn_WidthSub.Visible = isDisplay;
+            btn_WidthPlus.Visible = isDisplay;
+            btn_HighPlus.Visible = isDisplay;
+            btn_HighSub.Visible = isDisplay;
         }
 
         private void cb_WorkOnLine_CheckedChanged(object sender, EventArgs e)
@@ -1342,42 +1420,6 @@ namespace SmartVEye
             }
         }
 
-        private void cb_FindByte_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_FindByte.Checked)
-            {
-                cb_FindByte.BackColor = Color.LimeGreen;
-            }
-            else
-            {
-                cb_FindByte.BackColor = Color.Salmon;
-            }
-        }
-
-        private void cb_WhitePage_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_WhitePage.Checked)
-            {
-                cb_WhitePage.BackColor = Color.LimeGreen;
-            }
-            else
-            {
-                cb_WhitePage.BackColor = Color.Salmon;
-            }
-        }
-
-        private void cb_BlackPage_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_BlackPage.Checked)
-            {
-                cb_BlackPage.BackColor = Color.LimeGreen;
-            }
-            else
-            {
-                cb_BlackPage.BackColor = Color.Salmon;
-            }
-        }
-
         /// <summary>
         /// 复选框背景色默认设置
         /// </summary>
@@ -1385,11 +1427,117 @@ namespace SmartVEye
         {
             if (cb_WorkOnLine.Checked) cb_WorkOnLine.BackColor = Color.LimeGreen;
             if (cb_RealImg.Checked) cb_RealImg.BackColor = Color.LimeGreen;
-            if (cb_FindByte.Checked) cb_FindByte.BackColor = Color.LimeGreen;
-            if (cb_WhitePage.Checked) cb_WhitePage.BackColor = Color.LimeGreen;
-            if (cb_BlackPage.Checked) cb_BlackPage.BackColor = Color.LimeGreen;
+        }
+
+        /// <summary>
+        /// 存储上一次选择的检测模式
+        /// </summary>
+        private int previousIndex;
+        /// <summary>
+        /// 切换检测的模式时
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox_RunMode_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            // 获取当前选中的索引
+            int newIndex = comboBox_RunMode.SelectedIndex;
+            // 选择与上次相同直接返回
+            //if (newIndex == previousIndex)
+            //    return;
+            string mode_str = newIndex == 0 ? "图文检测" : newIndex == 1 ? "白页检测" : "黑页检测";
+            // 显示消息框询问用户是否要更改选项
+            DialogResult result = MessageBox.Show($"您确定要切换{mode_str}吗？", "确认",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.No)
+            {
+                // 如果用户点击了“否”，则恢复到之前的索引
+                // 注意：需要保存之前的索引值
+                comboBox_RunMode.SelectedIndex = previousIndex;
+            }
+            else
+            {
+                if(CurHikCam == null)
+                {
+                    MessageBox.Show("相机未连接！");
+                    return;
+                }
+                // 如果用户点击了“是”，则更新之前的索引为新的索引
+                previousIndex = newIndex;
+                // 切换后要设置对应模式的曝光：图文、黑页检测曝光相同，白页不同
+                if(newIndex == 0 || newIndex == 2)
+                {
+                    CurHikCam.SetExposTime(Exposure);
+                }
+                else
+                    CurHikCam.SetExposTime(WhitePageExposure);
+            }
         }
 
 
+        private void comboBox_RunMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // 获取当前选中的索引
+            int newIndex = comboBox_RunMode.SelectedIndex;
+            // 选择与上次相同直接返回
+            if (newIndex == previousIndex)
+                return;
+            string mode_str = newIndex == 0 ? "图文检测" : newIndex == 1 ? "白页检测" : "黑页检测";
+            // 显示消息框询问用户是否要更改选项
+            DialogResult result = MessageBox.Show($"您确定要切换{mode_str}吗？", "确认",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.No)
+            {
+                // 如果用户点击了“否”，则恢复到之前的索引
+                // 注意：需要保存之前的索引值
+                comboBox_RunMode.SelectedIndex = previousIndex;
+            }
+            else
+            {
+                if (CurHikCam == null)
+                {
+                    MessageBox.Show("相机未连接！");
+                    return;
+                }
+                // 如果用户点击了“是”，则更新之前的索引为新的索引
+                previousIndex = newIndex;
+                // 切换后要设置对应模式的曝光：图文、黑页检测曝光相同，白页不同
+                if (newIndex == 0 || newIndex == 2)
+                {
+                    CurHikCam.SetExposTime(Exposure);
+                }
+                else
+                    CurHikCam.SetExposTime(WhitePageExposure);
+            }
+        }
+
+        /// <summary>
+        /// 改变检测精度时
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox_DetectAccuracy_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (comboBox_DetectAccuracy.SelectedIndex == -1) return;
+
+            switch (comboBox_DetectAccuracy.SelectedIndex)
+            {
+                case 0:
+                    ImgScore = ImgScoreHight;
+                    break;
+                case 1:
+                    ImgScore = ImgScoreMid;
+                    break;
+                case 2:
+                    ImgScore = ImgScoreLow;
+                    break;
+                default:
+                    MessageBox.Show("暂不支持的选项！");
+                    break;
+            }
+            IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "imgscore", ImgScore);   //lcl 当前图片相似度
+        }
     }
 }

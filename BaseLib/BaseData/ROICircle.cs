@@ -27,12 +27,12 @@ namespace BaseData
 		/// <summary>
 		/// 创建ROI
 		/// </summary>
-		/// <param name="midX">中心点X坐标</param>
-		/// <param name="midY">中心点Y坐标</param>
-		public override void createROI(double midX, double midY)
+		/// <param name="roiCenterX">中心点X坐标</param>
+		/// <param name="roiCenterY">中心点Y坐标</param>
+		public override void createROI(double roiCenterX, double roiCenterY)
 		{
-			midR = midY;
-			midC = midX;
+			midR = roiCenterY;
+			midC = roiCenterX;
 
 			radius = 100;
 
@@ -42,13 +42,13 @@ namespace BaseData
 		/// <summary>
 		///  创建ROI  
 		/// </summary>
-		/// <param name="midX">中心点X坐标</param>
-		/// <param name="midY">中心点Y坐标</param>
+		/// <param name="roiCenterX">中心点X坐标</param>
+		/// <param name="roiCenterY">中心点Y坐标</param>
 		/// <param name="rad">圆半径</param>
-		public void createROI(double midX, double midY, double rad)
+		public void createROI(double roiCenterX, double roiCenterY, double rad)
 		{
-			midR = midY;
-			midC = midX;
+			midR = roiCenterY;
+			midC = roiCenterX;
 
 			radius = rad;
 

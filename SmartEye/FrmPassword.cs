@@ -35,7 +35,6 @@ namespace SmartVEye
             }
             else
                 this.DialogResult = DialogResult.OK;
-            this.Close();
         }
 
         private void tb_PWD_KeyPress(object sender, KeyPressEventArgs e)

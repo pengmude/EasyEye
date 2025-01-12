@@ -92,6 +92,7 @@ namespace SmartLib
         //ROI创建相关
         private bool ROINeedCreate = false;
         private int ROIType = -1;
+        private bool IsMouseDown = false;
 
         /// <summary>
         /// 构造函数
@@ -1600,6 +1601,7 @@ namespace SmartLib
                 }
 
                 Ctrl_WinMouseUp(sender, e);
+                IsMouseDown = false;
             }
             catch (Exception ex)
             {
@@ -1671,8 +1673,8 @@ namespace SmartLib
                     ROIList[curROIIndex].moveByHandle(temp_x, temp_y);
                     RefreshDisp();
                 }
-
-                Ctrl_WinMouseMove(sender, e);
+                if(IsMouseDown)
+                    Ctrl_WinMouseMove(sender, e);
             }
             catch (Exception ex)
             {
@@ -1685,6 +1687,12 @@ namespace SmartLib
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
             //viewPort_HMouseDown(viewPort, viewPort.HMouseDown);
         }
+
+        /// <summary>
+        /// 鼠标按下事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void viewPort_HMouseDown(object sender, HMouseEventArgs e)
         {
             try
@@ -1692,9 +1700,10 @@ namespace SmartLib
                 if (!isInitWindow)
                     throw new Exception("未初始化窗体！");
 
+                #region 2025年1月12日 彭木德分析前人此处代码，应该和当前项目关系不大，应该是套用控件没删除冗余代码
+
                 double temp_x = e.X;
                 double temp_y = e.Y;
-
 
                 if ((e.Clicks == 2) && (e.Button == MouseButtons.Left))   //双击
                 {
@@ -1774,7 +1783,35 @@ namespace SmartLib
                     }
                 }
 
-                Ctrl_WinMouseDown(sender, e);
+                #endregion
+
+                #region 之前的"建模时在鼠标按下位置创建ROI"的功能，实际上是通过发布鼠标按下事件给外部处理ROI的创建
+
+                //Ctrl_WinMouseDown(sender, e);
+
+                #endregion
+
+                #region 如今要改为按下ROI内移动时是拖拽ROI，按下在ROI外和原来一样，本项目ROI只有一个可以直接选择ROI列表第一个元素
+
+                // 创建 HTuple 类型的坐标
+                HTuple row = e.Y;
+                HTuple column = e.X;
+
+                // 使用 test_region_point 操作符判断点是否在区域内
+                HTuple isInside;
+
+                HOperatorSet.TestRegionPoint(ROIList[0].getRegion(), row, column, out isInside);
+
+                // 将鼠标按下点是否在ROI内的结果转换为布尔值并输出
+                bool pointIsInside = isInside == 1;
+
+                //如果在，则移动时是拖拽ROI，否则是创建ROI
+                if (pointIsInside)
+                    IsMouseDown = true;
+                else
+                    Ctrl_WinMouseDown(sender, e);
+
+                #endregion
             }
             catch (Exception ex)
             {
@@ -2666,7 +2703,7 @@ namespace SmartLib
         /// <summary>
         /// 创建矩形ROI  len1:宽   len2:高
         /// </summary>
-        public Response<ROI> Ctrl_CreateRectROI(double row, double col, double len1, double len2)
+        public Response<ROI> Ctrl_CreateRectROI(double roiCenterY, double roiCenterX, double roiW, double roiH)
         {
             try
             {
@@ -2682,7 +2719,7 @@ namespace SmartLib
                     throw new Exception("外部刷新模式下,无法添加ROI！");
 
                 ROIRectangle1 temp_rect1 = new ROIRectangle1();
-                temp_rect1.createROI(col, row, len1, len2);
+                temp_rect1.createROI(roiCenterX, roiCenterY, roiW, roiH);
                 ROIList.Add(temp_rect1);
                 curROIIndex = ROIList.Count - 1;
                 RefreshDisp();

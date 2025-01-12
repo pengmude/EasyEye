@@ -72,9 +72,9 @@ namespace BaseData
         /// <summary>
         /// 创建ROI
         /// </summary>
-        /// <param name="midX">ROI X坐标(Column)</param>
-        /// <param name="midY">ROI Y坐标(Row)</param>
-        public virtual void createROI(double midX, double midY) { }
+        /// <param name="roiCenterX">ROI X坐标(Column)</param>
+        /// <param name="roiCenterY">ROI Y坐标(Row)</param>
+        public virtual void createROI(double roiCenterX, double roiCenterY) { }
 
         /// <summary>
         /// 在窗体中绘制ROI

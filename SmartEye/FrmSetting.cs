@@ -1,4 +1,5 @@
 ﻿using NLog;
+using SmartLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,7 @@ namespace SmartVEye
         string[] CamNameList = { "起始角度", "终止角度", "最小缩小倍数", "最大放大倍数","相似分数值", "模板色差" ,"相机曝光时间","相机增益",
             "是否启用相机","相机编号","ROI宽度","ROI高度","白页检测阈值","黑页检测阈值","训练ROI横坐标","训练ROI纵坐标","训练ROI宽度",
             "训练ROI高度", "检测模式","黑白页检测轮廓数量","数值减小图像变亮","数值增大图像变暗","筛选轮廓最小值","高精度模板色差",
-            "中精度模板色差","低精度模板色差","精度模式","白页模式曝光","图片相似度0-100","图像检测模式0LK-1TX"};
+            "中精度模板色差","低精度模板色差","精度模式","白页模式曝光","当前检测精度","检测精度-高","检测精度-中","检测精度-低","图像检测模式0LK-1TX"};
 
         //string[] CamNameList = { "起始角度", "终止角度", "最小缩小倍数", "最大放大倍数","相似分数值", "模板色差" ,"相机曝光时间","相机增益",
         //    "是否启用相机","相机编号","ROI宽度","ROI高度","白页检测阈值","黑页检测阈值","训练ROI横坐标","训练ROI纵坐标","训练ROI宽度",
@@ -34,7 +35,7 @@ namespace SmartVEye
         {
             try
             {
-                groupBox1.Width = this.Width / 2;
+                groupBox_System.Width = this.Width / 2;
                 cb_CamList.Items.Clear();
                 for (int idx = 0; idx < CommonData.CameraCount; idx++)
                 {
@@ -101,7 +102,7 @@ namespace SmartVEye
                 {
                     IniFileHelper.SaveINI(CommonData.SetFilePath, cb_CamList.Text, dgv_CamParam.Rows[idx].Cells["tb_CamParamName"].Value.ToString(), dgv_CamParam.Rows[idx].Cells["tb_CamParamValue"].Value.ToString());
                 }
-                CommonData.CamReadModel(0);
+                CommonData.CamReadModel(cb_CamList.SelectedIndex);
                 MessageBox.Show("参数保存成功!");
             }
             catch (Exception ex)
@@ -131,11 +132,6 @@ namespace SmartVEye
                 _logger.Error("相机参数同步异常!" + ex.Message);
                 MessageBox.Show("相机参数同步异常!" + ex.Message);
             }
-        }
-
-        private void FrmSetting_Resize(object sender, EventArgs e)
-        {
-            groupBox1.Width = this.Width / 2;
         }
     }
 }

@@ -46,7 +46,7 @@ namespace SmartVEye
             this.cb_IO1.AutoSize = true;
             this.cb_IO1.Location = new System.Drawing.Point(41, 60);
             this.cb_IO1.Name = "cb_IO1";
-            this.cb_IO1.Size = new System.Drawing.Size(83, 20);
+            this.cb_IO1.Size = new System.Drawing.Size(82, 20);
             this.cb_IO1.TabIndex = 3;
             this.cb_IO1.Text = "输出点1";
             this.cb_IO1.UseVisualStyleBackColor = true;
@@ -57,7 +57,7 @@ namespace SmartVEye
             this.cb_IO2.AutoSize = true;
             this.cb_IO2.Location = new System.Drawing.Point(130, 60);
             this.cb_IO2.Name = "cb_IO2";
-            this.cb_IO2.Size = new System.Drawing.Size(83, 20);
+            this.cb_IO2.Size = new System.Drawing.Size(82, 20);
             this.cb_IO2.TabIndex = 3;
             this.cb_IO2.Text = "输出点2";
             this.cb_IO2.UseVisualStyleBackColor = true;
@@ -68,7 +68,7 @@ namespace SmartVEye
             this.cb_IO3.AutoSize = true;
             this.cb_IO3.Location = new System.Drawing.Point(219, 60);
             this.cb_IO3.Name = "cb_IO3";
-            this.cb_IO3.Size = new System.Drawing.Size(83, 20);
+            this.cb_IO3.Size = new System.Drawing.Size(82, 20);
             this.cb_IO3.TabIndex = 3;
             this.cb_IO3.Text = "输出点3";
             this.cb_IO3.UseVisualStyleBackColor = true;
@@ -79,7 +79,7 @@ namespace SmartVEye
             this.cb_IO4.AutoSize = true;
             this.cb_IO4.Location = new System.Drawing.Point(308, 60);
             this.cb_IO4.Name = "cb_IO4";
-            this.cb_IO4.Size = new System.Drawing.Size(83, 20);
+            this.cb_IO4.Size = new System.Drawing.Size(82, 20);
             this.cb_IO4.TabIndex = 3;
             this.cb_IO4.Text = "输出点4";
             this.cb_IO4.UseVisualStyleBackColor = true;
@@ -90,7 +90,7 @@ namespace SmartVEye
             this.cb_IO5.AutoSize = true;
             this.cb_IO5.Location = new System.Drawing.Point(41, 105);
             this.cb_IO5.Name = "cb_IO5";
-            this.cb_IO5.Size = new System.Drawing.Size(83, 20);
+            this.cb_IO5.Size = new System.Drawing.Size(82, 20);
             this.cb_IO5.TabIndex = 3;
             this.cb_IO5.Text = "输出点5";
             this.cb_IO5.UseVisualStyleBackColor = true;
@@ -101,7 +101,7 @@ namespace SmartVEye
             this.cb_IO6.AutoSize = true;
             this.cb_IO6.Location = new System.Drawing.Point(130, 105);
             this.cb_IO6.Name = "cb_IO6";
-            this.cb_IO6.Size = new System.Drawing.Size(83, 20);
+            this.cb_IO6.Size = new System.Drawing.Size(82, 20);
             this.cb_IO6.TabIndex = 3;
             this.cb_IO6.Text = "输出点6";
             this.cb_IO6.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@ namespace SmartVEye
             this.cb_IO7.AutoSize = true;
             this.cb_IO7.Location = new System.Drawing.Point(219, 105);
             this.cb_IO7.Name = "cb_IO7";
-            this.cb_IO7.Size = new System.Drawing.Size(83, 20);
+            this.cb_IO7.Size = new System.Drawing.Size(82, 20);
             this.cb_IO7.TabIndex = 3;
             this.cb_IO7.Text = "输出点7";
             this.cb_IO7.UseVisualStyleBackColor = true;
@@ -123,7 +123,7 @@ namespace SmartVEye
             this.cb_IO8.AutoSize = true;
             this.cb_IO8.Location = new System.Drawing.Point(308, 105);
             this.cb_IO8.Name = "cb_IO8";
-            this.cb_IO8.Size = new System.Drawing.Size(83, 20);
+            this.cb_IO8.Size = new System.Drawing.Size(82, 20);
             this.cb_IO8.TabIndex = 3;
             this.cb_IO8.Text = "输出点8";
             this.cb_IO8.UseVisualStyleBackColor = true;
@@ -134,7 +134,7 @@ namespace SmartVEye
             this.lbl_Info.AutoSize = true;
             this.lbl_Info.Location = new System.Drawing.Point(38, 189);
             this.lbl_Info.Name = "lbl_Info";
-            this.lbl_Info.Size = new System.Drawing.Size(120, 16);
+            this.lbl_Info.Size = new System.Drawing.Size(119, 16);
             this.lbl_Info.TabIndex = 4;
             this.lbl_Info.Text = "IO[1]输出成功!";
             this.lbl_Info.Visible = false;
@@ -160,7 +160,7 @@ namespace SmartVEye
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmIOTest";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IO测试工具";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -39,6 +39,7 @@ namespace SmartVEye
         public int ImgDark = 0; //数值增大图像变暗
         public int Exposure = 100;//相机曝光时间
         public float Gain = 0;//相机增益
+        public float TriggerDelay = 0;//相机触发延迟微秒
         public bool IsWorkOnLine = true;//是否在线运行
         public Thread SnapThread = null;
         public bool IsContinueSnap = false;
@@ -67,7 +68,10 @@ namespace SmartVEye
         public HTuple hv_ImgModelHandle = new HTuple();//图像训练模板ID
 
         public int WhitePageExposure = 1000; //白页模式曝光
-        public int ImgScore = 90; //图片相似度
+        public int ImgScore = 90; //当前图片相似度
+        public int ImgScoreHight = 90; //图片相似度高
+        public int ImgScoreMid = 80; //图片相似度中
+        public int ImgScoreLow = 70; //图片相似度低
         /// <summary>
         /// 图像检测模式，0轮廓，1图像
         /// </summary>

@@ -277,6 +277,7 @@
             this.viewPort.Size = new System.Drawing.Size(605, 530);
             this.viewPort.TabIndex = 1;
             this.viewPort.WindowSize = new System.Drawing.Size(605, 530);
+            this.viewPort.HMouseMove += new HalconDotNet.HMouseEventHandler(this.viewPort_HMouseMove);
             this.viewPort.HMouseDown += new HalconDotNet.HMouseEventHandler(this.viewPort_HMouseDown);
             this.viewPort.HMouseUp += new HalconDotNet.HMouseEventHandler(this.viewPort_HMouseUp);
             this.viewPort.Resize += new System.EventHandler(this.viewPort_Resize);

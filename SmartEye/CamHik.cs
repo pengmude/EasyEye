@@ -211,6 +211,31 @@ namespace SmartVEye
             }
         }
 
+        public Response<float> GetTriggerDelay()
+        {
+            if (curCamera != null)
+            {
+                var delay = new MyCamera.MVCC_FLOATVALUE();
+                var nRet = curCamera.MV_CC_GetFloatValue_NET("TriggerDelayAbs", ref delay);
+                return MyCamera.MV_OK == nRet ? Response<float>.Ok(delay.fCurValue) : Response<float>.Fail("相机触发延迟获取失败");
+            }
+            else
+            {
+                return Response<float>.Fail("相机增益获取失败,相机为空!");
+            }
+        }
+
+        /// <summary>
+        /// 设置触发延迟，单位us
+        /// </summary>
+        /// <param name="time">单位us</param>
+        public void SetTriggerDelay(float delay)
+        {
+            if (curCamera == null) throw new Exception("相机对象为空！");
+
+            curCamera.MV_CC_SetFloatValue_NET("TriggerDelayAbs", delay);
+        }
+
         /// <summary>
         /// 设置曝光时间
         /// </summary>

@@ -167,6 +167,44 @@ namespace SmartVEye
             }
         }
 
+        public Response<double> GetTriggerDelay()
+        {
+            if (curCamera != null)
+            {
+                double triggerDelay = curCamera.Parameters[PLCamera.TriggerDelay].GetValue();
+                return Response<double>.Ok(triggerDelay);
+            }
+            else
+            {
+                return Response<double>.Fail("相机延迟触发时间获取失败,相机为空!");
+            }
+        }
+
+        /// <summary>
+        /// 设置触发延迟，单位us
+        /// </summary>
+        /// <param name="time">单位us</param>
+        public Response SetExposTime(double value)
+        {
+            try
+            {
+                if (curCamera != null)
+                {
+                    //单位：微妙
+                    curCamera.Parameters[PLUsbCamera.TriggerDelay].SetValue(value);
+                    return Response.Ok();
+                }
+                else
+                {
+                    return Response.Fail("设置相机触发延迟时间失败,相机为空!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Response.Fail("设置相机曝光时间失败!" + ex.Message);
+            }
+        }
+
         /// <summary>
         /// 获取增益值
         /// </summary>

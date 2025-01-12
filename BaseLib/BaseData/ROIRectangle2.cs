@@ -48,12 +48,12 @@ namespace BaseData
 		/// <summary>
 		/// 创建ROI
 		/// </summary>
-		/// <param name="midX">中心点X坐标</param>
-		/// <param name="midY">中心点Y坐标</param>
-		public override void createROI(double midX, double midY)
+		/// <param name="roiCenterX">中心点X坐标</param>
+		/// <param name="roiCenterY">中心点Y坐标</param>
+		public override void createROI(double roiCenterX, double roiCenterY)
 		{
-			midR = midY;
-			midC = midX;
+			midR = roiCenterY;
+			midC = roiCenterX;
 
 			length1 = 100;
 			length2 = 50;
@@ -74,15 +74,15 @@ namespace BaseData
 		/// <summary>
 		/// 创建ROI
 		/// </summary>
-		/// <param name="midX">中心点X坐标</param>
-		/// <param name="midY">中心点Y坐标</param>
+		/// <param name="roiCenterX">中心点X坐标</param>
+		/// <param name="roiCenterY">中心点Y坐标</param>
 		/// <param name="len1">ROI宽度</param>
 		/// <param name="len2">ROI高度</param>
 		/// <param name="ph">ROI角度</param>
-		public void createROI(double midX, double midY, double len1, double len2, double ph)
+		public void createROI(double roiCenterX, double roiCenterY, double len1, double len2, double ph)
 		{
-			midR = midY;
-			midC = midX;
+			midR = roiCenterY;
+			midC = roiCenterX;
 
 			length1 = len1;
 			length2 = len2;

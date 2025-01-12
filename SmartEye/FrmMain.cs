@@ -75,30 +75,42 @@ namespace SmartVEye
             IVisCtrl curVisCtrl = null;
             for (int idx = 0; idx < CommonData.CameraCount; idx++)
             {
-                if (CommonData.CameraCount == 1)
-                {
-                    curVisCtrl = new VisCtrlV1();
-                    lbl_WinMode.Text = "  Win:1";//用于标识窗体类型
-                }
-                else if (CommonData.CameraCount == 4 || CommonData.CameraCount == 6)
-                {
-                    if (CommonData.SysDpiType == 0)//DPI方案1
-                    {
-                        curVisCtrl = new VisCtrlV3();
-                        curVisCtrl.CtrlName = "Win" + idx;
-                        lbl_WinMode.Text = "  Win:3";//用于标识窗体类型
-                    }
-                    else//DPI方案0
-                    {
-                        curVisCtrl = new VisCtrlV2();
-                        lbl_WinMode.Text = "  Win:2";//用于标识窗体类型
-                    }
-                }
-                else if (CommonData.CameraCount == 2 || CommonData.CameraCount == 3)
-                {
-                    curVisCtrl = new VisCtrlV4();
-                    lbl_WinMode.Text = "  Win:4";//用于标识窗体类型
-                }
+                #region 旧的逻辑
+
+                //if (CommonData.CameraCount == 1)
+                //{
+                //    curVisCtrl = new VisCtrlV1();
+                //    lbl_WinMode.Text = "  Win:1";//用于标识窗体类型
+                //}
+                //else if (CommonData.CameraCount == 4 || CommonData.CameraCount == 6)
+                //{
+                //    if (CommonData.SysDpiType == 0)//DPI方案1
+                //    {
+                //        curVisCtrl = new VisCtrlV3();
+                //        curVisCtrl.CtrlName = "Win" + idx;
+                //        lbl_WinMode.Text = "  Win:3";//用于标识窗体类型
+                //    }
+                //    else//DPI方案0
+                //    {
+                //        curVisCtrl = new VisCtrlV2();
+                //        lbl_WinMode.Text = "  Win:2";//用于标识窗体类型
+                //    }
+                //}
+                //else if (CommonData.CameraCount == 2 || CommonData.CameraCount == 3)
+                //{
+                //    curVisCtrl = new VisCtrlV4();
+                //    lbl_WinMode.Text = "  Win:4";//用于标识窗体类型
+                //}
+
+                #endregion
+
+                #region 新的逻辑
+
+                curVisCtrl = new VisCtrlV2();
+                lbl_WinMode.Text = "  Win:2";//用于标识窗体类型
+
+                #endregion
+
                 curVisCtrl.CamName = "CAM" + (idx + 1);
                 ((UserControl)curVisCtrl).Dock = DockStyle.Fill;
                 VisCtrlList.Add(curVisCtrl);
@@ -226,11 +238,7 @@ namespace SmartVEye
 
         private void CamReadModel(int whichCam)
         {
-            foreach (IVisCtrl item in VisCtrlList)
-            {
-                item.NeedClearRecord = false;
-                item.ReadModel();
-            }
+            VisCtrlList[whichCam].ReadModel();
         }
 
         private void btn_LearnAll_Click(object sender, EventArgs e)
@@ -330,6 +338,7 @@ namespace SmartVEye
                             item.DisConnectPLC();
                         }
                         ShowSystemInfo("一键脱机成功!", 0);
+                        frmPassword.Close();
                     }
                 }
                 else
@@ -465,7 +474,7 @@ namespace SmartVEye
                 {
                     VisCtrlList[idx].CameraEnable = IniFileHelper.ReadINI(CommonData.SetFilePath, VisCtrlList[idx].CamName, "enable", 1);
                     VisCtrlList[idx].CamNumber = IniFileHelper.ReadINI(CommonData.SetFilePath, VisCtrlList[idx].CamName, "number", 1);
-                    VisCtrlList[idx].SetCamEnable();
+                    //VisCtrlList[idx].SetCamEnable();
                     VisCtrlList[idx].SetRes(true);
                     if (VisCtrlList[idx].CameraEnable <= 0) continue;
                     Response ret = VisCtrlList[idx].ReadModel();
@@ -483,7 +492,7 @@ namespace SmartVEye
                     {
                         HaveError = true;
                         ShowSystemInfo($"相机[{VisCtrlList[idx].CamName}]打开异常!{camRet}", 1);
-                        MessageBox.Show($"相机[{VisCtrlList[idx].CamName}]打开异常!{camRet}");
+                        //MessageBox.Show($"相机[{VisCtrlList[idx].CamName}]打开异常!{camRet}");
                     }
                 }
                 pnl_Menu.Invoke(new Action(() => { pnl_Menu.Enabled = true; tlp_MainContainer.Enabled = true; }));
@@ -578,36 +587,39 @@ namespace SmartVEye
         Stopwatch watch = new Stopwatch();
         private void btn_TestAll_Click(object sender, EventArgs e)
         {
-            string file = @"C:\Users\Feng\Desktop\CAM2";
-            string[] files = Directory.GetFiles(file);
-            IsFrmText = true;
-            Thread thread = new Thread(new ThreadStart(() =>
+            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                int exceptionIdx = 0;
-                try
+                string path = folderBrowserDialog1.SelectedPath;
+                string[] files = Directory.GetFiles(path);
+                IsFrmText = true;
+                Thread thread = new Thread(new ThreadStart(() =>
                 {
-                    int idx = 0;
-                    while (IsFrmText)
+                    int exceptionIdx = 0;
+                    try
                     {
-                        if (idx >= files.Length) idx = 0;
-                        exceptionIdx = idx;
-                        HOperatorSet.ReadImage(out HObject CurImage, files[idx]);
-                        CommonData.PostReadFrame(CurImage);
-                        Thread.Sleep(10);
-                        Console.WriteLine(exceptionIdx + "  " + files[exceptionIdx]);
-                        idx++;
+                        int idx = 0;
+                        while (IsFrmText)
+                        {
+                            if (idx >= files.Length) idx = 0;
+                            exceptionIdx = idx;
+                            HOperatorSet.ReadImage(out HObject CurImage, files[idx]);
+                            CommonData.PostReadFrame(CurImage);
+                            Thread.Sleep(200);
+                            Console.WriteLine(exceptionIdx + "  " + files[exceptionIdx]);
+                            idx++;
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(exceptionIdx + "  " + files[exceptionIdx] + "  " + ex.Message);
-                    throw;
-                }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(exceptionIdx + "  " + files[exceptionIdx] + "  " + ex.Message);
+                        throw;
+                    }
 
 
-            }));
-            thread.IsBackground = true;
-            thread.Start();
+                }));
+                thread.IsBackground = true;
+                thread.Start();
+            }
         }
 
         private void lbl_CurVersion_DoubleClick(object sender, EventArgs e)
@@ -657,8 +669,8 @@ namespace SmartVEye
 
         private void tb_ROIStep_Scroll(object sender, EventArgs e)
         {
-            lbl_ROIStep.Text = tb_ROIStep.Value.ToString();
-            ROIStep = Convert.ToInt32(lbl_ROIStep.Text);
+            lbl_ROISize.Text = tb_ROISize.Value.ToString();
+            ROIStep = Convert.ToInt32(lbl_ROISize.Text);
         }
 
         private void btn_FrmTestStop_Click(object sender, EventArgs e)
@@ -708,6 +720,30 @@ namespace SmartVEye
             }
         }
 
-      
+        /// <summary>
+        /// 点击打开设置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_Settings_Click(object sender, EventArgs e)
+        {
+            FrmPassword frmPassword = new FrmPassword();
+            if (frmPassword.ShowDialog() == DialogResult.OK)
+            {
+                frmPassword.Close();
+                FrmSetting frmSetting = new FrmSetting();
+                frmSetting.ShowDialog();
+            }
+        }
+        
+        /// <summary>
+        /// 选择不同的相机时
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
