@@ -39,7 +39,6 @@ namespace SmartVEye
         public int ImgDark = 0; //数值增大图像变暗
         public int Exposure = 100;//相机曝光时间
         public float Gain = 0;//相机增益
-        public float TriggerDelay = 0;//相机触发延迟微秒
         public bool IsWorkOnLine = true;//是否在线运行
         public Thread SnapThread = null;
         public bool IsContinueSnap = false;

@@ -92,7 +92,6 @@ namespace SmartLib
         //ROI创建相关
         private bool ROINeedCreate = false;
         private int ROIType = -1;
-        private bool IsMouseDown = false;
 
         /// <summary>
         /// 构造函数
@@ -1601,7 +1600,6 @@ namespace SmartLib
                 }
 
                 Ctrl_WinMouseUp(sender, e);
-                IsMouseDown = false;
             }
             catch (Exception ex)
             {
@@ -1673,8 +1671,8 @@ namespace SmartLib
                     ROIList[curROIIndex].moveByHandle(temp_x, temp_y);
                     RefreshDisp();
                 }
-                if(IsMouseDown)
-                    Ctrl_WinMouseMove(sender, e);
+
+                Ctrl_WinMouseMove(sender, e);
             }
             catch (Exception ex)
             {
@@ -1785,33 +1783,7 @@ namespace SmartLib
 
                 #endregion
 
-                #region 之前的"建模时在鼠标按下位置创建ROI"的功能，实际上是通过发布鼠标按下事件给外部处理ROI的创建
-
-                //Ctrl_WinMouseDown(sender, e);
-
-                #endregion
-
-                #region 如今要改为按下ROI内移动时是拖拽ROI，按下在ROI外和原来一样，本项目ROI只有一个可以直接选择ROI列表第一个元素
-
-                // 创建 HTuple 类型的坐标
-                HTuple row = e.Y;
-                HTuple column = e.X;
-
-                // 使用 test_region_point 操作符判断点是否在区域内
-                HTuple isInside;
-
-                HOperatorSet.TestRegionPoint(ROIList[0].getRegion(), row, column, out isInside);
-
-                // 将鼠标按下点是否在ROI内的结果转换为布尔值并输出
-                bool pointIsInside = isInside == 1;
-
-                //如果在，则移动时是拖拽ROI，否则是创建ROI
-                if (pointIsInside)
-                    IsMouseDown = true;
-                else
-                    Ctrl_WinMouseDown(sender, e);
-
-                #endregion
+                Ctrl_WinMouseDown(sender, e);
             }
             catch (Exception ex)
             {

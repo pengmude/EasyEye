@@ -1,0 +1,3798 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SmartLib</name>
+    </assembly>
+    <members>
+        <member name="T:BaseData.ROI">
+            <summary>
+            ROI工具类
+            </summary>
+        </member>
+        <member name="F:BaseData.ROI.NumHandles">
+            <summary>
+            操作ROI的角点数
+            </summary>
+        </member>
+        <member name="F:BaseData.ROI.activeHandleIdx">
+            <summary>
+            选中ROI的索引号
+            </summary>
+        </member>
+        <member name="F:BaseData.ROI.OperatorFlag">
+            <summary>
+            定义ROI的标志 'positive' 或 'negative'.
+            </summary>
+        </member>
+        <member name="F:BaseData.ROI.flagLineStyle">
+            <summary>
+            ROI线类型
+            </summary>
+        </member>
+        <member name="F:BaseData.ROI.roiLineWidth">
+            <summary>
+            ROI线宽
+            </summary>
+        </member>
+        <member name="F:BaseData.ROI.ROI_TYPE_LINE">
+            <summary>
+            ROI类型 直线ROI
+            </summary>
+        </member>
+        <member name="F:BaseData.ROI.ROI_TYPE_CIRCLE">
+            <summary>
+            ROI类型 圆形ROI
+            </summary>
+        </member>
+        <member name="F:BaseData.ROI.ROI_TYPE_CIRCLEARC">
+            <summary>
+            ROI类型 圆弧ROI
+            </summary>
+        </member>
+        <member name="F:BaseData.ROI.ROI_TYPE_RECTANCLE1">
+            <summary>
+            ROI类型 长方形1
+            </summary>
+        </member>
+        <member name="F:BaseData.ROI.ROI_TYPE_RECTANGLE2">
+            <summary>
+            ROI类型 长方形2
+            </summary>
+        </member>
+        <member name="F:BaseData.ROI.posOperation">
+            <summary>
+            位置操作标志
+            </summary>
+        </member>
+        <member name="F:BaseData.ROI.negOperation">
+            <summary>
+            neg操作标志
+            </summary>
+        </member>
+        <member name="M:BaseData.ROI.#ctor">
+            <summary>
+            ROI工具类构造函数
+            </summary>
+        </member>
+        <member name="M:BaseData.ROI.createROI(System.Double,System.Double)">
+            <summary>
+            创建ROI
+            </summary>
+            <param name="roiCenterX">ROI X坐标(Column)</param>
+            <param name="roiCenterY">ROI Y坐标(Row)</param>
+        </member>
+        <member name="M:BaseData.ROI.draw(HalconDotNet.HTuple)">
+            <summary>
+            在窗体中绘制ROI
+            </summary>
+            <param name="winHandle">提供的halcon窗体</param>
+        </member>
+        <member name="M:BaseData.ROI.distToClosestHandle(System.Double,System.Double)">
+            <summary>
+            返回距离某个点位最近的ROI的距离
+            Returns the distance of the ROI handle being
+            closest to the image point(x,y)
+            </summary>
+            <param name="x">指定点X坐标 column</param>
+            <param name="y">指定点Y坐标 row</param>
+            <returns>返回距离某个点位最近的ROI的距离</returns>
+        </member>
+        <member name="M:BaseData.ROI.displayActive(HalconDotNet.HTuple)">
+            <summary>
+            在指定窗口中绘制选中的ROI
+            </summary>
+            <param name="winHandle">提供的halcon窗体</param>
+        </member>
+        <member name="M:BaseData.ROI.moveByHandle(System.Double,System.Double)">
+            <summary>
+            移动ROI
+            </summary>
+            <param name="x">指定点X坐标 column</param>
+            <param name="y">指定点Y坐标 row</param>
+        </member>
+        <member name="M:BaseData.ROI.getRegion">
+            <summary>
+            获取ROI的区域对象
+            </summary>
+            <returns>返回ROI区域对象</returns>
+        </member>
+        <member name="M:BaseData.ROI.getDistanceFromStartPoint(System.Double,System.Double)">
+            <summary>
+            获取距离指定点的距离
+            </summary>
+            <param name="row">指定点row坐标</param>
+            <param name="col">指定点column坐标</param>
+            <returns>距离指定点的距离</returns>
+        </member>
+        <member name="M:BaseData.ROI.getModelData">
+            <summary>
+            获取ROI模型信息
+            </summary>
+            <returns>返回ROI模型信息</returns>
+        </member>
+        <member name="M:BaseData.ROI.getNumHandles">
+            <summary>
+            获取定义ROI的句柄数
+            </summary>
+            <returns>定义ROI的句柄数</returns>
+        </member>
+        <member name="M:BaseData.ROI.getActHandleIdx">
+            <summary>
+            获取选中ROI的句柄索引
+            </summary>
+            <returns>选中ROI的句柄索引</returns>
+        </member>
+        <member name="M:BaseData.ROI.getOperatorFlag">
+            <summary>
+            获取ROI的标志符
+            Gets the sign of the ROI object, being either 
+            'positive' or 'negative'. This sign is used when creating a model
+            region for matching applications from a list of ROIs.
+            </summary>
+            <returns>返回ROI的标志符</returns>
+        </member>
+        <member name="M:BaseData.ROI.getCenterPoint">
+            <summary>
+            返回ROI中心点坐标
+            </summary>
+            <returns>返回ROI中心点坐标</returns>
+        </member>
+        <member name="T:BaseData.ROICircle">
+            <summary>
+            圆形ROI
+            </summary>
+        </member>
+        <member name="M:BaseData.ROICircle.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:BaseData.ROICircle.createROI(System.Double,System.Double)">
+            <summary>
+            创建ROI
+            </summary>
+            <param name="roiCenterX">中心点X坐标</param>
+            <param name="roiCenterY">中心点Y坐标</param>
+        </member>
+        <member name="M:BaseData.ROICircle.createROI(System.Double,System.Double,System.Double)">
+            <summary>
+             创建ROI  
+            </summary>
+            <param name="roiCenterX">中心点X坐标</param>
+            <param name="roiCenterY">中心点Y坐标</param>
+            <param name="rad">圆半径</param>
+        </member>
+        <member name="M:BaseData.ROICircle.draw(HalconDotNet.HTuple)">
+            <summary>
+            在窗体中绘制ROI
+            </summary>
+            <param name="winHandle">提供的halcon窗体</param>
+        </member>
+        <member name="M:BaseData.ROICircle.distToClosestHandle(System.Double,System.Double)">
+            <summary>
+            返回距离某个点位最近的ROI的距离
+            Returns the distance of the ROI handle being
+            closest to the image point(x,y)
+            </summary>
+            <param name="x">指定点X坐标 column</param>
+            <param name="y">指定点Y坐标 row</param>
+            <returns>返回距离某个点位最近的ROI的距离</returns>
+        </member>
+        <member name="M:BaseData.ROICircle.displayActive(HalconDotNet.HTuple)">
+            <summary>
+            在指定窗口中绘制选中的ROI
+            </summary>
+            <param name="winHandle">提供的halcon窗体</param>
+        </member>
+        <member name="M:BaseData.ROICircle.getRegion">
+            <summary>
+            获取ROI的区域对象
+            </summary>
+            <returns>返回ROI的区域对象</returns>
+        </member>
+        <member name="M:BaseData.ROICircle.getDistanceFromStartPoint(System.Double,System.Double)">
+            <summary>
+            获取距离指定点的距离
+            </summary>
+            <param name="row">指定点row坐标</param>
+            <param name="col">指定点column坐标</param>
+            <returns>返回距离指定点的距离</returns>
+        </member>
+        <member name="M:BaseData.ROICircle.getModelData">
+            <summary>
+            获取ROI模型信息
+            </summary>
+            <returns>返回ROI模型信息</returns>
+        </member>
+        <member name="M:BaseData.ROICircle.moveByHandle(System.Double,System.Double)">
+            <summary>
+            移动ROI
+            </summary>
+            <param name="newX">新位置X坐标 column</param>
+            <param name="newY">新位置Y坐标 row</param>
+        </member>
+        <member name="M:BaseData.ROICircle.getCenterPoint">
+            <summary>
+            返回ROI中心点坐标
+            </summary>
+            <returns>返回ROI中心点坐标</returns>
+        </member>
+        <member name="T:BaseData.ROIFixRectangle1">
+            <summary>
+            固定尺寸ROI
+            </summary>
+        </member>
+        <member name="M:BaseData.ROIFixRectangle1.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:BaseData.ROIFixRectangle1.createROI(System.Double,System.Double)">
+            <summary>
+            创建ROI
+            </summary>
+            <param name="roiCenterX">中心点X坐标</param>
+            <param name="roiCenterY">中心点Y坐标</param>
+        </member>
+        <member name="M:BaseData.ROIFixRectangle1.createROI(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            创建矩形1 ROI
+            </summary>
+            <param name="roiCenterX">中心点X坐标</param>
+            <param name="roiCenterY">中心点Y坐标</param>
+            <param name="len1">ROI宽度</param>
+            <param name="len2">ROI高度</param>
+        </member>
+        <member name="M:BaseData.ROIFixRectangle1.draw(HalconDotNet.HTuple)">
+            <summary>
+            在窗体中绘制ROI
+            </summary>
+            <param name="winHandle">提供的halcon窗体</param>
+        </member>
+        <member name="M:BaseData.ROIFixRectangle1.distToClosestHandle(System.Double,System.Double)">
+            <summary>
+            返回距离某个点位最近的ROI的距离
+            Returns the distance of the ROI handle being
+            closest to the image point(x,y)
+            </summary>
+            <param name="x">指定点X坐标 column</param>
+            <param name="y">指定点Y坐标 row</param>
+            <returns>返回距离某个点位最近的ROI的距离</returns>
+        </member>
+        <member name="M:BaseData.ROIFixRectangle1.displayActive(HalconDotNet.HTuple)">
+            <summary>
+            在指定窗口中绘制选中的ROI
+            </summary>
+            <param name="winHandle">提供的halcon窗体</param>
+        </member>
+        <member name="M:BaseData.ROIFixRectangle1.getRegion">
+            <summary>
+            获取ROI的区域对象
+            </summary>
+            <returns>返回ROI的区域对象</returns>
+        </member>
+        <member name="M:BaseData.ROIFixRectangle1.getModelData">
+            <summary>
+            获取ROI模型信息
+            </summary>
+            <returns>返回ROI模型信息</returns>
+        </member>
+        <member name="M:BaseData.ROIFixRectangle1.moveByHandle(System.Double,System.Double)">
+            <summary>
+            移动ROI
+            </summary>
+            <param name="newX">新位置X坐标 column</param>
+            <param name="newY">新位置Y坐标 row</param>
+        </member>
+        <member name="M:BaseData.ROIFixRectangle1.getCenterPoint">
+            <summary>
+            返回ROI中心点坐标
+            </summary>
+            <returns>返回ROI中心点坐标</returns>
+        </member>
+        <member name="T:BaseData.ROIRectangle1">
+            <summary>
+            矩形ROI1
+            </summary>
+        </member>
+        <member name="M:BaseData.ROIRectangle1.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:BaseData.ROIRectangle1.createROI(System.Double,System.Double)">
+            <summary>
+            创建ROI
+            </summary>
+            <param name="roiCenterX">中心点X坐标</param>
+            <param name="roiCenterY">中心点Y坐标</param>
+        </member>
+        <member name="M:BaseData.ROIRectangle1.createROI(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            创建ROI
+            </summary>
+            <param name="roiCenterX">中心点X坐标</param>
+            <param name="roiCenterY">中心点Y坐标</param>
+            <param name="roiW">ROI宽度</param>
+            <param name="roiH">ROI高度</param>
+        </member>
+        <member name="M:BaseData.ROIRectangle1.draw(HalconDotNet.HTuple)">
+            <summary>
+            在窗体中绘制ROI
+            </summary>
+            <param name="winHandle">提供的halcon窗体</param>
+        </member>
+        <member name="M:BaseData.ROIRectangle1.distToClosestHandle(System.Double,System.Double)">
+            <summary>
+            返回距离某个点位最近的ROI的距离
+            Returns the distance of the ROI handle being
+            closest to the image point(x,y)
+            </summary>
+            <param name="x">指定点X坐标 column</param>
+            <param name="y">指定点Y坐标 row</param>
+            <returns>返回距离某个点位最近的ROI的距离</returns>
+        </member>
+        <member name="M:BaseData.ROIRectangle1.displayActive(HalconDotNet.HTuple)">
+            <summary>
+            在指定窗口中绘制选中的ROI
+            </summary>
+            <param name="winHandle">提供的halcon窗体</param>
+        </member>
+        <member name="M:BaseData.ROIRectangle1.getRegion">
+            <summary>
+            获取ROI的区域对象
+            </summary>
+            <returns>返回ROI的区域对象</returns>
+        </member>
+        <member name="M:BaseData.ROIRectangle1.getModelData">
+            <summary>
+            获取ROI模型信息
+            </summary>
+            <returns>返回ROI模型信息</returns>
+        </member>
+        <member name="M:BaseData.ROIRectangle1.moveByHandle(System.Double,System.Double)">
+            <summary>
+            移动ROI
+            </summary>
+            <param name="newX">新位置X坐标 column</param>
+            <param name="newY">新位置Y坐标 row</param>
+        </member>
+        <member name="M:BaseData.ROIRectangle1.getCenterPoint">
+            <summary>
+            返回ROI中心点坐标
+            </summary>
+            <returns>返回ROI中心点坐标</returns>
+        </member>
+        <member name="T:BaseData.ROIRectangle2">
+            <summary>
+            矩形ROI2
+            </summary>
+        </member>
+        <member name="F:BaseData.ROIRectangle2.length1">
+            <summary>Half length of the rectangle side, perpendicular to phi</summary>
+        </member>
+        <member name="F:BaseData.ROIRectangle2.length2">
+            <summary>Half length of the rectangle side, in direction of phi</summary>
+        </member>
+        <member name="F:BaseData.ROIRectangle2.midR">
+            <summary>Row coordinate of midpoint of the rectangle</summary>
+        </member>
+        <member name="F:BaseData.ROIRectangle2.midC">
+            <summary>Column coordinate of midpoint of the rectangle</summary>
+        </member>
+        <member name="F:BaseData.ROIRectangle2.phi">
+            <summary>Orientation of rectangle defined in radians.</summary>
+        </member>
+        <member name="M:BaseData.ROIRectangle2.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:BaseData.ROIRectangle2.createROI(System.Double,System.Double)">
+            <summary>
+            创建ROI
+            </summary>
+            <param name="roiCenterX">中心点X坐标</param>
+            <param name="roiCenterY">中心点Y坐标</param>
+        </member>
+        <member name="M:BaseData.ROIRectangle2.createROI(System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            创建ROI
+            </summary>
+            <param name="roiCenterX">中心点X坐标</param>
+            <param name="roiCenterY">中心点Y坐标</param>
+            <param name="len1">ROI宽度</param>
+            <param name="len2">ROI高度</param>
+            <param name="ph">ROI角度</param>
+        </member>
+        <member name="M:BaseData.ROIRectangle2.draw(HalconDotNet.HTuple)">
+            <summary>
+            在窗体中绘制ROI
+            </summary>
+            <param name="winHandle">提供的halcon窗体</param>
+        </member>
+        <member name="M:BaseData.ROIRectangle2.distToClosestHandle(System.Double,System.Double)">
+            <summary>
+            返回距离某个点位最近的ROI的距离
+            Returns the distance of the ROI handle being
+            closest to the image point(x,y)
+            </summary>
+            <param name="x">指定点X坐标 column</param>
+            <param name="y">指定点Y坐标 row</param>
+            <returns>返回距离某个点位最近的ROI的距离</returns>
+        </member>
+        <member name="M:BaseData.ROIRectangle2.displayActive(HalconDotNet.HTuple)">
+            <summary>
+            在指定窗口中绘制选中的ROI
+            </summary>
+            <param name="winHandle">提供的halcon窗体</param>
+        </member>
+        <member name="M:BaseData.ROIRectangle2.getRegion">
+            <summary>
+            获取ROI的区域对象
+            </summary>
+            <returns>返回ROI的区域对象</returns>
+        </member>
+        <member name="M:BaseData.ROIRectangle2.getModelData">
+            <summary>
+            获取ROI模型信息
+            </summary>
+            <returns>返回ROI模型信息</returns>
+        </member>
+        <member name="M:BaseData.ROIRectangle2.moveByHandle(System.Double,System.Double)">
+            <summary>
+            移动ROI
+            </summary>
+            <param name="newX">新位置X坐标 column</param>
+            <param name="newY">新位置Y坐标 row</param>
+        </member>
+        <member name="M:BaseData.ROIRectangle2.updateHandlePos">
+            <summary>
+            Auxiliary method to recalculate the contour points of 
+            the rectangle by transforming the initial row and 
+            column coordinates (rowsInit, colsInit) by the updated
+            homography hom2D
+            </summary>
+        </member>
+        <member name="M:BaseData.ROIRectangle2.getCenterPoint">
+            <summary>
+            返回ROI中心点坐标
+            </summary>
+            <returns>返回ROI中心点坐标</returns>
+        </member>
+        <member name="T:BaseData.UserLevel">
+            <summary>
+            用户权限等级枚举
+            </summary>
+        </member>
+        <member name="F:BaseData.UserLevel.Operator">
+            <summary>
+            操作员
+            </summary>
+        </member>
+        <member name="F:BaseData.UserLevel.Technician">
+            <summary>
+            技术员
+            </summary>
+        </member>
+        <member name="F:BaseData.UserLevel.Engineer">
+            <summary>
+            工程师
+            </summary>
+        </member>
+        <member name="F:BaseData.UserLevel.Admin">
+            <summary>
+            管理员
+            </summary>
+        </member>
+        <member name="F:BaseData.UserLevel.SuperAdmin">
+            <summary>
+            开发员
+            </summary>
+        </member>
+        <member name="F:BaseData.UserLevel.SSuperAdmin">
+            <summary>
+            超级开发员
+            </summary>
+        </member>
+        <member name="T:BaseData.UserObj">
+            <summary>
+            系统用户类
+            </summary>
+        </member>
+        <member name="P:BaseData.UserObj.UName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:BaseData.UserObj.UPwd">
+            <summary>
+            用户密码
+            </summary>
+        </member>
+        <member name="P:BaseData.UserObj.ULevel">
+            <summary>
+            用户权限等级
+            </summary>
+        </member>
+        <member name="P:BaseData.UserObj.ULvlName">
+            <summary>
+            用户权限名称
+            </summary>
+        </member>
+        <member name="M:BaseData.UserObj.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:BaseData.UserObj.#ctor(System.String,System.String,BaseData.UserLevel,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name">用户名</param>
+            <param name="pwd">用户密码</param>
+            <param name="level">用户权限等级</param>
+            <param name="lvlname">用户权限名称</param>
+        </member>
+        <member name="T:SmartLib.ValueUnitAttribute">
+            <summary>
+            单位描述
+            </summary>
+        </member>
+        <member name="P:SmartLib.ValueUnitAttribute.ValueUnit">
+            <summary>
+            单位描述
+            </summary>
+        </member>
+        <member name="M:SmartLib.ValueUnitAttribute.#ctor(System.String)">
+            <summary>
+            单位描述
+            </summary>
+            <param name="data">数值</param>
+        </member>
+        <member name="T:SmartLib.ValueMinMaxAttribute">
+            <summary>
+            变量的最大最小值
+            </summary>
+        </member>
+        <member name="P:SmartLib.ValueMinMaxAttribute.ValueMin">
+            <summary>
+            最小值
+            </summary>
+        </member>
+        <member name="P:SmartLib.ValueMinMaxAttribute.ValueMax">
+            <summary>
+            最大值
+            </summary>
+        </member>
+        <member name="M:SmartLib.ValueMinMaxAttribute.#ctor(System.Double,System.Double)">
+            <summary>
+            变量的最大最小值
+            </summary>
+            <param name="data">数值</param>
+        </member>
+        <member name="T:SmartLib.ControlExHeldper">
+            <summary>
+            控件扩展工具类
+            </summary>
+        </member>
+        <member name="M:SmartLib.ControlExHeldper.SetAllTBExValue(System.Windows.Forms.Control,System.Object[])">
+            <summary>
+            自动查找控件并赋值(只能是属性)
+            </summary>
+            <param name="control">保存TextBoxEx和CheckBoxEx的容器</param>
+            <param name="data">保存属性的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ControlExHeldper.GetAllTBExValue(System.Windows.Forms.Control,System.Object[])">
+            <summary>
+            自动查找控件并保存数据(只能是属性)
+            </summary>
+            <param name="control">保存TextBoxEx和CheckBoxEx的容器</param>
+            <param name="data">保存属性的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ControlExHeldper.SplitVariableName(System.String)">
+            <summary>
+            将连接名分开,后面引进字典和数组添加的方法
+            </summary>
+            <param name="VariableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ControlExHeldper.SetReflectionData(SmartLib.ReflectionData,System.Object)">
+            <summary>
+            反射设置值
+            </summary>
+            <param name="rD"></param>
+            <param name="theSetValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ControlExHeldper.GetDicOrListValue(System.Object,System.Object)">
+            <summary>
+            判断是否为数组或字典
+            </summary>
+            <param name="objdd"></param>
+            <param name="KeyValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ControlExHeldper.IsNormalValue(System.Object)">
+            <summary>
+            是否为值类型
+            </summary>
+            <param name="thevalue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ControlExHeldper.Checkname(System.String)">
+            <summary>
+            检查变量是否是字典或数组
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ControlExHeldper.ReflectSetValue(System.String,System.Object,System.Object)">
+            <summary>
+            反射设置值
+            </summary>
+            <param name="name"></param>
+            <param name="instance"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ControlExHeldper.ReflectGetValue(System.String,System.Object)">
+            <summary>
+            反射获取值值
+            </summary>
+            <param name="name"></param>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ControlExHeldper.GetDescription(SmartLib.ReflectionData)">
+            <summary>
+            返回描述
+            </summary>
+            <param name="rD"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ControlExHeldper.GetMinMaxAttribute(System.String,System.Object)">
+            <summary>
+            获取最大最小值特性
+            </summary>
+            <param name="name"></param>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="F:SmartLib.ReflectionData.propertyInfo">
+            <summary>
+            属性信息
+            </summary>
+        </member>
+        <member name="F:SmartLib.ReflectionData.fieldInfo">
+            <summary>
+            字段信息
+            </summary>
+        </member>
+        <member name="F:SmartLib.ReflectionData.FinalVariableName">
+            <summary>
+            最后变量的名字
+            </summary>
+        </member>
+        <member name="F:SmartLib.ReflectionData.DataContext">
+            <summary>
+            最后的对象
+            </summary>
+        </member>
+        <member name="F:SmartLib.ReflectionData.objdd">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="F:SmartLib.ReflectionData.KeyValue">
+            <summary>
+            是字典或数组或列表的键值
+            </summary>
+        </member>
+        <member name="F:SmartLib.ReflectionData.FinalDicOrArryOrList">
+            <summary>
+            最后一个变量是字典或数组或列表
+            </summary>
+        </member>
+        <member name="T:SmartLib.DicOrArryRef">
+            <summary>
+            字典类型或数组反射
+            </summary>
+        </member>
+        <member name="F:SmartLib.DicOrArryRef.KeyValue">
+            <summary>
+            是字典或数组或列表的键值
+            </summary>
+        </member>
+        <member name="F:SmartLib.DicOrArryRef.VarName">
+            <summary>
+            属性名或字段名
+            </summary>
+        </member>
+        <member name="F:SmartLib.DicOrArryRef.FinalDicOrArryOrList">
+            <summary>
+            最后一个变量是字典或数组或列表
+            </summary>
+        </member>
+        <member name="T:SmartLib.ShowDataMode">
+            <summary>
+            数据显示模式
+            </summary>
+        </member>
+        <member name="F:SmartLib.ShowDataMode.ShowData">
+            <summary>
+            显示数据,可以显示描述的话会显示
+            </summary>
+        </member>
+        <member name="F:SmartLib.ShowDataMode.ShowDescription">
+            <summary>
+            显示描述
+            </summary>
+        </member>
+        <member name="F:SmartLib.ShowDataMode.ShowValueUnit">
+            <summary>
+            显示数据的单位
+            </summary>
+        </member>
+        <member name="T:SmartLib.ButtonEx">
+            <summary>
+            按钮扩展类
+            </summary>
+        </member>
+        <member name="T:SmartLib.ButtonEx.ChangeBtnColorEventhandle">
+            <summary>
+            设置按键颜色的委托
+            </summary>
+            <param name="StatusTagName">标签名称</param>
+            <param name="color">颜色</param>
+        </member>
+        <member name="E:SmartLib.ButtonEx.ChangeBtnColorEvent">
+            <summary>
+            设置按键颜色的委托
+            </summary>
+        </member>
+        <member name="T:SmartLib.ButtonEx.ChangeBtnTextEventhandle">
+            <summary>
+            设置按键Text的委托
+            </summary>
+            <param name="StatusTagName">标签名称</param>
+            <param name="text">Text</param>
+        </member>
+        <member name="E:SmartLib.ButtonEx.ChangeBtnTextEvent">
+            <summary>
+            设置按键Text的委托
+            </summary>
+        </member>
+        <member name="F:SmartLib.ButtonEx._colorsDic">
+            <summary>
+            记录颜色
+            </summary>
+        </member>
+        <member name="F:SmartLib.ButtonEx._textsDic">
+            <summary>
+            记录text
+            </summary>
+        </member>
+        <member name="M:SmartLib.ButtonEx.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:SmartLib.ButtonEx._StatusTagName">
+            <summary>
+            标记名称
+            </summary>
+        </member>
+        <member name="P:SmartLib.ButtonEx.StatusTagName">
+            <summary>
+            标记名称
+            </summary>
+        </member>
+        <member name="M:SmartLib.ButtonEx.ChangeBtnColor(System.String,System.Drawing.Color)">
+            <summary>
+            设置按钮颜色
+            </summary>
+            <param name="StatusTagName">按钮标签名称</param>
+            <param name="color">颜色</param>
+        </member>
+        <member name="M:SmartLib.ButtonEx.ChangeBtnColor``1(``0@,``0,System.Drawing.Color,System.String)">
+            <summary>
+            设置按钮颜色
+            </summary>
+            <typeparam name="T">参数类型</typeparam>
+            <param name="properValue">原值</param>
+            <param name="newValue">新值</param>
+            <param name="color">按钮颜色</param>
+            <param name="StatusTagName">对应变量名称</param>
+        </member>
+        <member name="M:SmartLib.ButtonEx.ChangeBtnColor``1(``0@,``0,System.Drawing.Color,System.String,System.String)">
+            <summary>
+            设置按钮颜色
+            </summary>
+            <typeparam name="T">参数类型</typeparam>
+            <param name="properValue">原值</param>
+            <param name="newValue">新值</param>
+            <param name="color">按钮颜色</param>
+            <param name="text">按钮Text</param>
+            <param name="StatusTagName">对应变量名称</param>
+        </member>
+        <member name="M:SmartLib.ButtonEx.ChangeBtnColorAndText(System.Int32@,System.Int32,System.Drawing.Color,System.String,System.String)">
+            <summary>
+            设置按钮颜色和显示文本
+            </summary>
+            <param name="properValue"></param>
+            <param name="newValue"></param>
+            <param name="color"></param>
+            <param name="AllTexts"></param>
+            <param name="StatusTagName"></param>
+        </member>
+        <member name="F:SmartLib.ButtonEx.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:SmartLib.ButtonEx.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:SmartLib.ButtonEx.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:SmartLib.CheckBoxEx">
+            <summary>
+            CheckBox扩展类
+            </summary>
+        </member>
+        <member name="M:SmartLib.CheckBoxEx.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:SmartLib.CheckBoxEx.IsUseDataBinding">
+            <summary>
+            是否使用数据绑定
+            </summary>
+        </member>
+        <member name="P:SmartLib.CheckBoxEx.VariableName">
+            <summary>
+            变量名称
+            </summary>
+        </member>
+        <member name="P:SmartLib.CheckBoxEx.ObjectClassName">
+            <summary>
+            对象类名
+            </summary>
+        </member>
+        <member name="M:SmartLib.CheckBoxEx.SetDataBinding(System.Object[])">
+            <summary>
+            设置控件数据源
+            </summary>
+            <param name="AlldataSouces">控件数据源</param>
+        </member>
+        <member name="M:SmartLib.CheckBoxEx.GettData(System.Object[])">
+            <summary>
+            获取控件数据源
+            </summary>
+            <param name="AlldataSouces">控件数据源</param>
+        </member>
+        <member name="F:SmartLib.CheckBoxEx.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:SmartLib.CheckBoxEx.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:SmartLib.CheckBoxEx.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:SmartLib.ComboBoxEx">
+            <summary>
+            ComboBox扩展类
+            </summary>
+        </member>
+        <member name="M:SmartLib.ComboBoxEx.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:SmartLib.ComboBoxEx.IsItemFormDescription">
+            <summary>
+            是否 用变量的描述当Items源,用逗号分隔
+            </summary>
+        </member>
+        <member name="P:SmartLib.ComboBoxEx.IsUseDataBinding">
+            <summary>
+            是否使用数据绑定
+            </summary>
+        </member>
+        <member name="P:SmartLib.ComboBoxEx.VariableName">
+            <summary>
+            变量名称
+            </summary>
+        </member>
+        <member name="P:SmartLib.ComboBoxEx.ObjectClassName">
+            <summary>
+            对象类名
+            </summary>
+        </member>
+        <member name="P:SmartLib.ComboBoxEx.CurrentSelectedItem">
+            <summary>
+            对象类名
+            </summary>
+        </member>
+        <member name="P:SmartLib.ComboBoxEx.SelectItem">
+            <summary>
+            选择项
+            </summary>
+        </member>
+        <member name="M:SmartLib.ComboBoxEx.SetDataBinding(System.Object[])">
+            <summary>
+            设置控件数据源
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="M:SmartLib.ComboBoxEx.GettData(System.Object[])">
+            <summary>
+            获取控件数据源
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="F:SmartLib.ComboBoxEx.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:SmartLib.ComboBoxEx.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:SmartLib.ComboBoxEx.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:SmartLib.CountTB">
+            <summary>
+            CountTB 计数TextBox工具类
+            </summary>
+        </member>
+        <member name="T:SmartLib.CountTB.ChangeTextEventhandle">
+            <summary>
+            设置按键颜色的委托
+            </summary>
+            <param name="StatusTagName">标签名称</param>
+            <param name="showMes">显示信息</param>
+        </member>
+        <member name="E:SmartLib.CountTB.ChangeBtnColorEvent">
+            <summary>
+            设置按键颜色的委托
+            </summary>
+        </member>
+        <member name="M:SmartLib.CountTB.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:SmartLib.CountTB._StatusTagName">
+            <summary>
+            标记名称
+            </summary>
+        </member>
+        <member name="P:SmartLib.CountTB.StatusTagName">
+            <summary>
+            标记名称
+            </summary>
+        </member>
+        <member name="M:SmartLib.CountTB.ChangeText(System.String,System.String)">
+            <summary>
+            改变控件内容
+            </summary>
+            <param name="StatusTagName"></param>
+            <param name="showMes"></param>
+        </member>
+        <member name="F:SmartLib.CountTB.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:SmartLib.CountTB.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:SmartLib.CountTB.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:SmartLib.DataGridViewEx">
+            <summary>
+            DataGridView扩展类
+            </summary>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.DataGridViewEx_CellEndEdit(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
+            <summary>
+            推出编辑事件
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:SmartLib.DataGridViewEx._ctrCanEdit">
+            <summary>
+            可以编辑
+            </summary>
+        </member>
+        <member name="P:SmartLib.DataGridViewEx.CtrlCanEdit">
+            <summary>
+            显示整个单元的数据
+            </summary>
+        </member>
+        <member name="F:SmartLib.DataGridViewEx._ctrlSelectAllRow">
+            <summary>
+            选择一行模式
+            </summary>
+        </member>
+        <member name="P:SmartLib.DataGridViewEx.CtrlSelectAllRow">
+            <summary>
+            选择一行模式
+            </summary>
+        </member>
+        <member name="T:SmartLib.DataGridViewEx.TellHaveCopyEventHandler">
+            <summary>
+            通知Ctrl_V,复制了数据
+            </summary>
+        </member>
+        <member name="E:SmartLib.DataGridViewEx.TellHaveCopyEvent">
+            <summary>
+            通知Ctrl_V,复制了数据
+            </summary>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.TellHaveCopy">
+            <summary>
+            通知Ctrl_V,复制了数据
+            </summary>
+        </member>
+        <member name="T:SmartLib.DataGridViewEx.MultipleCellEditEventHandler">
+            <summary>
+            多个表格被编辑
+            </summary>
+        </member>
+        <member name="E:SmartLib.DataGridViewEx.MultipleCellEditEvent">
+            <summary>
+            多个表格被编辑
+            </summary>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.MultipleCellEdit">
+            <summary>
+            多个表格被编辑
+            </summary>
+        </member>
+        <member name="F:SmartLib.DataGridViewEx.haveManyEdit">
+            <summary>
+            多个表格被编辑
+            </summary>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.ProcessCmdKey(System.Windows.Forms.Message@,System.Windows.Forms.Keys)">
+            <summary>
+            ProcessCmdKey 处理命令键
+            </summary>
+            <param name="msg">信息</param>
+            <param name="keyData">键值</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.IsEnglishChar(System.String)">
+            <summary>
+            是否包含英文字母
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.CalcStr(System.String)">
+            <summary>
+            计算字符串解析表达式 1+2(2*(3+4))
+            </summary>
+            <param name="str">传入的字符串</param>
+            <returns>计算得到的结果</returns>
+        </member>
+        <member name="T:SmartLib.DataGridViewEx.Operation">
+            <summary>
+            操作
+            </summary>
+        </member>
+        <member name="F:SmartLib.DataGridViewEx.Operation.priority">
+            <summary>
+            操作优先级
+            </summary>
+        </member>
+        <member name="P:SmartLib.DataGridViewEx.Operation.PrioRity">
+            <summary>
+            优先级
+            </summary>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.Operation.OperationResult(System.Double,System.Double)">
+            <summary>
+            操作结果
+            </summary>
+            <param name="a">参数a</param>
+            <param name="b">参数b</param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartLib.DataGridViewEx.AddOperation">
+             <summary>
+            加操作 
+             </summary>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.AddOperation.OperationResult(System.Double,System.Double)">
+            <summary>
+            操作结果
+            </summary>
+            <param name="a">参数a</param>
+            <param name="b">参数b</param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartLib.DataGridViewEx.SubOperation">
+            <summary>
+            减操作
+            </summary>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.SubOperation.OperationResult(System.Double,System.Double)">
+            <summary>
+            操作结果
+            </summary>
+            <param name="a">参数a</param>
+            <param name="b">参数b</param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartLib.DataGridViewEx.MultipOperation">
+            <summary>
+            乘操作
+            </summary>
+        </member>
+        <member name="P:SmartLib.DataGridViewEx.MultipOperation.PrioRity">
+            <summary>
+            优先级
+            </summary>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.MultipOperation.OperationResult(System.Double,System.Double)">
+            <summary>
+            操作结果
+            </summary>
+            <param name="a">参数a</param>
+            <param name="b">参数b</param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartLib.DataGridViewEx.DivOperation">
+            <summary>
+            除操作
+            </summary>
+        </member>
+        <member name="P:SmartLib.DataGridViewEx.DivOperation.PrioRity">
+            <summary>
+            优先级
+            </summary>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.DivOperation.OperationResult(System.Double,System.Double)">
+            <summary>
+            操作结果
+            </summary>
+            <param name="a">参数a</param>
+            <param name="b">参数b</param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartLib.DataGridViewEx.ModOperation">
+            <summary>
+            取余操作
+            </summary>
+        </member>
+        <member name="P:SmartLib.DataGridViewEx.ModOperation.PrioRity">
+            <summary>
+            优先级
+            </summary>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.ModOperation.OperationResult(System.Double,System.Double)">
+            <summary>
+            操作结果
+            </summary>
+            <param name="a">参数a</param>
+            <param name="b">参数b</param>
+            <returns></returns>
+        </member>
+        <member name="F:SmartLib.DataGridViewEx.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:SmartLib.DataGridViewEx.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:SmartLib.LabelEx">
+            <summary>
+            Label扩展类
+            </summary>
+        </member>
+        <member name="M:SmartLib.LabelEx.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:SmartLib.LabelEx.IsShowValue">
+            <summary>
+            显示模式 ShowData:显示数据 ShowDescription:显示数据 ShowValueUnit:显示数据的单位 
+            </summary>
+        </member>
+        <member name="P:SmartLib.LabelEx.ObjectClassName">
+            <summary>
+            对象类名
+            </summary>
+        </member>
+        <member name="P:SmartLib.LabelEx.IsUseDataBinding">
+            <summary>
+            是否使用数据绑定
+            </summary>
+        </member>
+        <member name="P:SmartLib.LabelEx.VariableName">
+            <summary>
+            变量名称
+            </summary>
+        </member>
+        <member name="M:SmartLib.LabelEx.SetDataBinding(System.Object[])">
+            <summary>
+            设置数据绑定
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="M:SmartLib.LabelEx.GettData(System.Object[])">
+            <summary>
+            获取数据 空函数 不可用
+            </summary>
+            <param name="AlldataSouces">数据源</param>
+        </member>
+        <member name="F:SmartLib.LabelEx.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:SmartLib.LabelEx.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:SmartLib.LabelEx.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:SmartLib.NumericUpDownEx">
+            <summary>
+            NumericUpDown扩展类
+            </summary>
+        </member>
+        <member name="M:SmartLib.NumericUpDownEx.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:SmartLib.NumericUpDownEx.ObjectClassName">
+            <summary>
+            对象类名
+            </summary>
+        </member>
+        <member name="P:SmartLib.NumericUpDownEx.IsUseDataBinding">
+            <summary>
+            是否使用数据绑定
+            </summary>
+        </member>
+        <member name="P:SmartLib.NumericUpDownEx.VariableName">
+            <summary>
+            变量名称
+            </summary>
+        </member>
+        <member name="M:SmartLib.NumericUpDownEx.SetDataBinding(System.Object[])">
+            <summary>
+            设置数据绑定
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="M:SmartLib.NumericUpDownEx.GettData(System.Object[])">
+            <summary>
+            获取数据
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="F:SmartLib.NumericUpDownEx.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:SmartLib.NumericUpDownEx.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:SmartLib.NumericUpDownEx.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:SmartLib.RadioButtonEx">
+            <summary>
+            RadioButton扩展类
+            </summary>
+        </member>
+        <member name="M:SmartLib.RadioButtonEx.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:SmartLib.RadioButtonEx.VariableName">
+            <summary>
+            变量名称
+            </summary>
+        </member>
+        <member name="P:SmartLib.RadioButtonEx.ObjectClassName">
+            <summary>
+            对象类名
+            </summary>
+        </member>
+        <member name="P:SmartLib.RadioButtonEx.IsUseDataBinding">
+            <summary>
+            是否使用数据绑定
+            </summary>
+        </member>
+        <member name="M:SmartLib.RadioButtonEx.SetDataBinding(System.Object[])">
+            <summary>
+            设置数据绑定
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="M:SmartLib.RadioButtonEx.GettData(System.Object[])">
+            <summary>
+            获取数据
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="F:SmartLib.RadioButtonEx.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:SmartLib.RadioButtonEx.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:SmartLib.RadioButtonEx.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:SmartLib.TBCountEX">
+            <summary>
+            TBCount扩展工具类
+            </summary>
+        </member>
+        <member name="T:SmartLib.TBCountEX.ChangeTextEventhandle">
+            <summary>
+            设置控件内容
+            </summary>
+            <param name="TagName"></param>
+            <param name="showMes"></param>
+        </member>
+        <member name="E:SmartLib.TBCountEX.ChangeTextEvent">
+            <summary>
+            设置按键颜色的委托
+            </summary>
+        </member>
+        <member name="F:SmartLib.TBCountEX._StatusTagName">
+            <summary>
+            标记名称
+            </summary>
+        </member>
+        <member name="P:SmartLib.TBCountEX.TagName">
+            <summary>
+            标记名称
+            </summary>
+        </member>
+        <member name="M:SmartLib.TBCountEX.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:SmartLib.TBCountEX.ChangeText(System.String,System.String)">
+            <summary>
+            改变控件文本内容
+            </summary>
+            <param name="TagName"></param>
+            <param name="showMess"></param>
+        </member>
+        <member name="F:SmartLib.TBCountEX.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:SmartLib.TBCountEX.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:SmartLib.TBCountEX.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:SmartLib.TBSimpleEx">
+            <summary>
+            TBSimple扩展类
+            </summary>
+        </member>
+        <member name="M:SmartLib.TBSimpleEx.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:SmartLib.TBSimpleEx.Maximum">
+            <summary>
+            最大值
+            </summary>
+        </member>
+        <member name="P:SmartLib.TBSimpleEx.Minimum">
+            <summary>
+            最小值
+            </summary>
+        </member>
+        <member name="P:SmartLib.TBSimpleEx.Increment">
+            <summary>
+            鼠标滚轮变化改变的数值
+            </summary>
+        </member>
+        <member name="P:SmartLib.TBSimpleEx.NeedCheckMinMax">
+            <summary>
+            是否需要检查数值范围
+            </summary>
+        </member>
+        <member name="P:SmartLib.TBSimpleEx.ObjectClassName">
+            <summary>
+            对象类名
+            </summary>
+        </member>
+        <member name="P:SmartLib.TBSimpleEx.IsUseDataBinding">
+            <summary>
+            是否使用数据绑定
+            </summary>
+        </member>
+        <member name="P:SmartLib.TBSimpleEx.VariableName">
+            <summary>
+            变量名称
+            </summary>
+        </member>
+        <member name="M:SmartLib.TBSimpleEx.SetDataBinding(System.Object[])">
+            <summary>
+            设置数据绑定
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="M:SmartLib.TBSimpleEx.GettData(System.Object[])">
+            <summary>
+            获取数据
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="F:SmartLib.TBSimpleEx.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:SmartLib.TBSimpleEx.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:SmartLib.TBSimpleEx.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:SmartLib.TextBoxEx">
+            <summary>
+            TextBox扩展类
+            </summary>
+        </member>
+        <member name="M:SmartLib.TextBoxEx.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.HeightP5">
+            <summary>
+            Lable和TextBox间距
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.WidthP3">
+            <summary>
+            左边的间距
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.LableForeColor">
+            <summary>
+            Lable字体颜色
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.TextBoxForeColor">
+            <summary>
+            文本字体颜色
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.LineColor">
+            <summary>
+            下划线颜色
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.AllBackColor">
+            <summary>
+            背景颜色
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.SeletColor">
+            <summary>
+            选中颜色
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.LableFont">
+            <summary>
+            Lable字体大小
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.TextBoxFont">
+            <summary>
+            字体大小
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.Text">
+            <summary>
+            Label的Text
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.Maximum">
+            <summary>
+            最大值
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.Minimum">
+            <summary>
+            最小值
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.Increment">
+            <summary>
+            鼠标滚轮变化改变的数值
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.NeedCheckMinMax">
+            <summary>
+            是否需要检查数值范围
+            </summary>
+        </member>
+        <member name="M:SmartLib.TextBoxEx.HideTextBox">
+            <summary>
+            隐藏TexBox
+            </summary>
+        </member>
+        <member name="M:SmartLib.TextBoxEx.ShowTextBox">
+            <summary>
+            隐藏TexBox
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.ObjectClassName">
+            <summary>
+            对象类名
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.IsUseDataBinding">
+            <summary>
+            是否使用数据绑定
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.VariableName">
+            <summary>
+            变量名称
+            </summary>
+        </member>
+        <member name="P:SmartLib.TextBoxEx.Value">
+            <summary>
+            文本
+            </summary>
+        </member>
+        <member name="M:SmartLib.TextBoxEx.SetDataBinding(System.Object[])">
+            <summary>
+            设置数据绑定
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="M:SmartLib.TextBoxEx.GettData(System.Object[])">
+            <summary>
+            获取数据
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="F:SmartLib.TextBoxEx.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:SmartLib.TextBoxEx.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:SmartLib.TextBoxEx.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:SmartLib.IControlEx">
+            <summary>
+            IControlEx 控件扩展接口
+            </summary>
+        </member>
+        <member name="P:SmartLib.IControlEx.VariableName">
+            <summary>
+            变量名称
+            </summary>
+        </member>
+        <member name="P:SmartLib.IControlEx.ObjectClassName">
+            <summary>
+            对象的类名
+            </summary>
+        </member>
+        <member name="P:SmartLib.IControlEx.IsUseDataBinding">
+            <summary>
+            使用数据绑定
+            </summary>
+        </member>
+        <member name="M:SmartLib.IControlEx.SetDataBinding(System.Object[])">
+            <summary>
+            数据源绑定
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="M:SmartLib.IControlEx.GettData(System.Object[])">
+            <summary>
+            获取数据,IsUseDataBinding为false才使用
+            </summary>
+            <param name="AlldataSouces"></param>
+        </member>
+        <member name="M:SmartLib.DeepClonerCache.ClearCache">
+            <summary>
+                This method can be used when we switch between safe / unsafe variants (for testing)
+            </summary>
+        </member>
+        <member name="T:SmartLib.DeepClonerExtensions">
+            <summary>
+            DeepClonerExtensions类
+            </summary>
+        </member>
+        <member name="M:SmartLib.DeepClonerExtensions.DeepClone``1(``0)">
+            <summary>
+                Performs deep (full) copy of object and related graph
+            </summary>
+        </member>
+        <member name="M:SmartLib.DeepClonerExtensions.DeepCloneTo``2(``0,``1)">
+            <summary>
+                Performs deep (full) copy of object and related graph to existing object
+            </summary>
+            <returns>existing filled object</returns>
+            <remarks>Method is valid only for classes, classes should be descendants in reality, not in declaration</remarks>
+        </member>
+        <member name="M:SmartLib.DeepClonerExtensions.ShallowCloneTo``2(``0,``1)">
+            <summary>
+                Performs shallow copy of object to existing object
+            </summary>
+            <returns>existing filled object</returns>
+            <remarks>Method is valid only for classes, classes should be descendants in reality, not in declaration</remarks>
+        </member>
+        <member name="M:SmartLib.DeepClonerExtensions.ShallowClone``1(``0)">
+            <summary>
+                Performs shallow (only new object returned, without cloning of dependencies) copy of object
+            </summary>
+        </member>
+        <member name="T:SmartLib.DeepClonerSafeTypes">
+            <summary>
+                Safe types are types, which can be copied without real cloning. e.g. simple structs or strings (it is immutable)
+            </summary>
+        </member>
+        <member name="T:SmartLib.ShallowObjectCloner">
+            <summary>
+                Internal class but due implementation restriction should be public
+            </summary>
+        </member>
+        <member name="M:SmartLib.ShallowObjectCloner.DoCloneObject(System.Object)">
+            <summary>
+                Abstract method for real object cloning
+            </summary>
+        </member>
+        <member name="M:SmartLib.ShallowObjectCloner.CloneObject(System.Object)">
+            <summary>
+                Performs real shallow object clone
+            </summary>
+        </member>
+        <member name="M:SmartLib.ShallowObjectCloner.SwitchTo(System.Boolean)">
+            <summary>
+                Purpose of this method is testing variants
+            </summary>
+        </member>
+        <member name="T:SmartLib.DisplayCtrl">
+            <summary>
+            窗体控件类
+            </summary>
+        </member>
+        <member name="F:SmartLib.DisplayCtrl.curROIIndex">
+            <summary>
+            当前ROI索引号
+            </summary>
+        </member>
+        <member name="F:SmartLib.DisplayCtrl.objListParam">
+            <summary>
+            string 0:颜色 2：线宽度 3：fill or margin
+            </summary>
+        </member>
+        <member name="F:SmartLib.DisplayCtrl.messageListParam">
+            <summary>
+            string 0：row  1：column  2：文本颜色  3:字体大小  4:是否需要背景  5:背景颜色  6:是否粗体  7：是否斜体
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:SmartLib.DisplayCtrl.WinMouseMoveEvent">
+            <summary>
+            鼠标移动事件
+            </summary>
+        </member>
+        <member name="F:SmartLib.DisplayCtrl.WinMouseUpEvent">
+            <summary>
+            鼠标抬起事件
+            </summary>
+        </member>
+        <member name="F:SmartLib.DisplayCtrl.WinMouseDownEvent">
+            <summary>
+            鼠标按下事件
+            </summary>
+        </member>
+        <member name="F:SmartLib.DisplayCtrl.WinMouseWheelEvent">
+            <summary>
+            鼠标滚轮事件
+            </summary>
+        </member>
+        <member name="F:SmartLib.DisplayCtrl.AdaptImageEvent">
+            <summary>
+            自适应图像事件
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.InitWindow">
+            <summary>
+            初始化窗体
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.SetOutRefreshMode(System.Boolean)">
+            <summary>
+            设置窗体外部刷新模式
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetWindowHandle">
+            <summary>
+            获取窗体句柄
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.SetCameraSetMode(System.Boolean)">
+            <summary>
+            设置相机设置运行模式
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.SetRightMenuEnable(System.Boolean)">
+            <summary>
+            设置窗体右菜单是否显示
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.SetWindowSizeAndPosi(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            设置窗体显示区域大小
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetWindowOrigSize">
+            <summary>
+            获取窗体显示原始区域大小  宽,高
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetWindowNowSize">
+            <summary>
+            获取窗体当前显示区域大小  x,y,宽,高
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetWindowImage">
+            <summary>
+            获取当前窗体图像
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.DumpWindowImage">
+            <summary>
+            获取窗体映射图片
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.DisplayImage(HalconDotNet.HObject)">
+            <summary>
+            显示图像
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.DisplayObject(HalconDotNet.HObject,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            显示OBJ
+            <para>objColor    Obj显示的颜色,如果是数字则显示多种颜色</para>
+            <para>lineSize    Obj显示线宽</para>
+            <para>drawMode    0：轮廓   1：填充</para>
+            <para>lineStyle   数值表示线段间隔，不为0则为虚线</para>
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.DisplayROI(BaseData.ROI)">
+            <summary>
+            显示ROI
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.DisplayActiveROI">
+            <summary>
+            显示ROI
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.DisplayROINotClone(BaseData.ROI)">
+            <summary>
+            显示ROI
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.DisplayMessage(System.String,HalconDotNet.HTuple,HalconDotNet.HTuple,System.String,System.Int32,System.Boolean,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            窗体显示信息
+            <para>context：显示文本内容</para>
+             <para>row，column：显示文本坐标</para>
+             <para>font_color：显示文本颜色</para>
+             <para>size：文本字体大小</para>
+             <para>needBackGround：文本是否需要背景，默认false</para>
+             <para>back_color：文本背景颜色</para>
+             <para>bold：文本是否粗体，默认false</para>
+             <para>slant：文本是否斜体，默认false</para>
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.DisplayBuffer">
+            <summary>
+            窗体显示刷新
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.ClearALLWindow">
+            <summary>
+            清空窗体所有内容
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetActiveROI">
+            <summary>
+            获取窗体当前选中ROI
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetROIList">
+            <summary>
+            获取窗体所有ROI
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.DrawObject(System.String)">
+            <summary>
+            绘制图像
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.ClearAllObj">
+            <summary>
+            清空所有对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.ClearDispObj">
+            <summary>
+            清空除ROI之外的对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_LoadImage">
+            <summary>
+            加载图像
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_SaveImage">
+            <summary>
+            保存图像
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_SaveWindow">
+            <summary>
+            保存窗体缩略图
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_AddRectROI">
+            <summary>
+            添加长方形ROI
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_AddDirRectROI">
+            <summary>
+            添加有方向矩形ROI
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_AddCircleROI">
+            <summary>
+            添加圆形ROI
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_SelectROISave">
+            <summary>
+            保存选中的ROI
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_ROILoad">
+            <summary>
+            加载ROI
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_DelAllROI">
+            <summary>
+            删除所有ROI
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_DelSelectROI">
+            <summary>
+            删除选中ROI
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_ROIOrder">
+            <summary>
+            ROI排序
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_ApaptImage">
+            <summary>
+            自适应图像
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.SetObjectColor(System.String)">
+            <summary>
+            设置窗体显示OBJ颜色
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.SetDrawMode(System.Int32)">
+            <summary>
+            设置窗体OBJ绘制模式
+            <para>0：轮廓</para>
+            <para>1：填充</para>
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.SetLineSize(System.Int32)">
+            <summary>
+            设置线宽
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.SetLineStyle(System.Int32)">
+            <summary>
+            设置线显示样式
+            </summary>
+            <param name="size">虚线点间隔</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.SetFlush(System.Boolean)">
+            <summary>
+            设置窗体显示缓冲
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.RefreshDisp">
+            <summary>
+            图像内部刷新
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.ScaleImage(System.Double,System.Double,System.Double)">
+            <summary>
+            图像缩放
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.moveImage(System.Double,System.Double)">
+            <summary>
+            图像移动
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.viewPort_HMouseDown(System.Object,HalconDotNet.HMouseEventArgs)">
+            <summary>
+            鼠标按下事件
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="E:SmartLib.DisplayCtrl.CtrlLoadedImage">
+            <summary>
+            加载了图像事件
+            </summary>
+        </member>
+        <member name="T:SmartLib.DisplayCtrl.MarkCamCenterEventHandler">
+            <summary>
+            将Mark点移动到相机视野中心事件句柄
+            </summary>
+            <param name="Row">Mark点 Row坐标</param>
+            <param name="Col">Mark点 Column坐标</param>
+            <param name="RowDist">Mark点距离视野中心Row方向距离</param>
+            <param name="ColDist">Mark点距离视野中心Column方向距离</param>
+            <param name="AllDist">Mark点距离视野中心直线距离</param>
+        </member>
+        <member name="F:SmartLib.DisplayCtrl.CtrlMarkCamCenterEvent">
+            <summary>
+            将Mark点移动到相机视野中心事件
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.DisplayROI(System.Collections.ArrayList)">
+            <summary>
+            显示ROI列表
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetROICenterList">
+            <summary>
+            获取当前ROI中心坐标列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetActiveROIIdx">
+            <summary>
+            获取当前选中ROI索引号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetROICount">
+            <summary>
+            获取窗体中ROI数量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.ClearROIList">
+            <summary>
+            清除当前ROI列表
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetROISize(System.Int32)">
+            <summary>
+            获取当前选中ROI的尺寸
+            数据依次为:
+            Rectangle1: row1, col1, row2, col2
+            Rectangle2: midR, midC, phi, length1, length2
+            Circle: midR, midC, radius
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetActiveRegion">
+            <summary>
+            获取当前选中ROI所截取的区域
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetRegionList">
+            <summary>
+            获取ROI列表所截取的区域列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetActiveImage">
+            <summary>
+            获取当前选中ROI截取的图像
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.GetActiveImages">
+            <summary>
+            获取当前窗体中ROI截取的图像列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.CtrlShowStatus(System.Boolean)">
+            <summary>
+            设置窗体底部状态栏是否显示
+            </summary>
+            <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.CtrlShowWinCross(System.Boolean)">
+            <summary>
+            显示窗体中心线
+            </summary>
+            <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_AddFixRectROI">
+            <summary>
+            添加固定长度正方形ROI
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.AddROI(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            添加ROI
+            </summary>
+            <param name="roiType">ROI类型</param>
+            <param name="row">Row坐标</param>
+            <param name="column">Column坐标</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.AddROI(System.Int32,HalconDotNet.HTuple,System.Int32,System.Int32)">
+            <summary>
+            添加ROI
+            </summary>
+            <param name="roiType">ROI类型</param>
+            <param name="roiSize">ROI尺寸</param>
+            <param name="row">Row坐标</param>
+            <param name="column">Column坐标</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_CreateRectROI(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            创建矩形ROI  len1:宽   len2:高
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_CreateFixRectROI(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            创建固定矩形ROI  len1:宽   len2:高
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_CreateCircleROI(System.Double,System.Double,System.Double)">
+            <summary>
+            创建圆形ROI  radius:半径
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Ctrl_CreateDirRectROI(System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            创建方向矩形ROI  len1:宽   len2:高  phi:矩形方向弧度
+            </summary>
+        </member>
+        <member name="F:SmartLib.DisplayCtrl.components">
+            <summary> 
+            必需的设计器变量。
+            </summary>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.Dispose(System.Boolean)">
+            <summary> 
+            清理所有正在使用的资源。
+            </summary>
+            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        </member>
+        <member name="M:SmartLib.DisplayCtrl.InitializeComponent">
+            <summary> 
+            设计器支持所需的方法 - 不要修改
+            使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="F:SmartLib.LargeView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SmartLib.LargeView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SmartLib.LargeView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SmartLib.ControlEx">
+            <summary>
+            控件扩展方法类
+            </summary>
+        </member>
+        <member name="M:SmartLib.ControlEx.BeginInvokeControlAction``1(``0,System.Windows.Forms.MethodInvoker)">
+            <summary>
+            跨线程调用UI,不阻塞调用方
+            </summary>
+            <typeparam name="TControl">控件类型</typeparam>
+            <param name="cont">控件实例</param>
+            <param name="action">执行动作</param>
+        </member>
+        <member name="M:SmartLib.ControlEx.BeginInvokeFormAction``1(``0,System.Windows.Forms.MethodInvoker)">
+            <summary>
+            跨线程调用UI,不阻塞调用方
+            </summary>
+            <typeparam name="TForm">Form类型</typeparam>
+            <param name="form">Form窗体实例</param>
+            <param name="action">动作</param>
+        </member>
+        <member name="T:SmartLib.DictionaryEx">
+            <summary>
+            字典扩展方法类
+            </summary>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.GetValueOrDefault``2(System.Collections.Generic.Dictionary{``0,``1},``0,``1)">
+            <summary>
+            获取与指定的键相关联的值，如果没有则返回输入的默认值
+            </summary>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.AddOrUpdate``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
+            <summary>
+                添加或更新键值对
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.AddOrUpdate``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+                添加或更新键值对
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="that">另一个字典集</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.AddOrUpdateTo``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+                添加或更新键值对
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="that">另一个字典集</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.AddOrUpdate``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1,System.Func{``0,``1,``1})">
+            <summary>
+                添加或更新键值对
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="key">键</param>
+            <param name="addValue">添加时的值</param>
+            <param name="updateValueFactory">更新时的操作</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.AddOrUpdateAsync``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1,System.Func{``0,``1,System.Threading.Tasks.Task{``1}})">
+            <summary>
+                添加或更新键值对
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="key">键</param>
+            <param name="addValue">添加时的值</param>
+            <param name="updateValueFactory">更新时的操作</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.AddOrUpdate``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1,``1)">
+            <summary>
+                添加或更新键值对
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="key">键</param>
+            <param name="addValue">添加时的值</param>
+            <param name="updateValue">更新时的值</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.AddOrUpdate``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1},System.Func{``0,``1,``1})">
+            <summary>
+                添加或更新键值对
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="that">另一个字典集</param>
+            <param name="updateValueFactory">更新时的操作</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.AddOrUpdateTo``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1},System.Func{``0,``1,``1})">
+            <summary>
+                添加或更新键值对
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="that">另一个字典集</param>
+            <param name="updateValueFactory">更新时的操作</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.AddOrUpdate``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``0,``1},System.Func{``0,``1,``1})">
+            <summary>
+                添加或更新键值对
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="key">键</param>
+            <param name="addValueFactory">添加时的操作</param>
+            <param name="updateValueFactory">更新时的操作</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.AddOrUpdateAsync``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``0,System.Threading.Tasks.Task{``1}},System.Func{``0,``1,System.Threading.Tasks.Task{``1}})">
+            <summary>
+                添加或更新键值对
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="key">键</param>
+            <param name="addValueFactory">添加时的操作</param>
+            <param name="updateValueFactory">更新时的操作</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.GetOrAdd``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``1})">
+            <summary>
+                获取或添加
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="key"></param>
+            <param name="addValueFactory"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.GetOrAddAsync``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{System.Threading.Tasks.Task{``1}})">
+            <summary>
+                获取或添加
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="key"></param>
+            <param name="addValueFactory"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.GetOrAdd``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
+            <summary>
+                获取或添加
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="key"></param>
+            <param name="addValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.ForEach``2(System.Collections.Generic.IDictionary{``0,``1},System.Action{``0,``1})">
+            <summary>
+                遍历IEnumerable
+            </summary>
+            <param name="dic"></param>
+            <param name="action">回调方法</param>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.ToDictionarySafety``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+                安全的转换成字典集
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <param name="source"></param>
+            <param name="keySelector">键选择器</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.ToDictionarySafety``3(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Func{``0,``2})">
+            <summary>
+                安全的转换成字典集
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TElement"></typeparam>
+            <param name="source"></param>
+            <param name="keySelector">键选择器</param>
+            <param name="elementSelector">值选择器</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.ToConcurrentDictionary``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+                安全的转换成字典集
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <param name="source"></param>
+            <param name="keySelector">键选择器</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.DictionaryEx.ToConcurrentDictionary``3(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Func{``0,``2})">
+            <summary>
+                安全的转换成字典集
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TElement"></typeparam>
+            <param name="source"></param>
+            <param name="keySelector">键选择器</param>
+            <param name="elementSelector">值选择器</param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartLib.EnumEx">
+            <summary>
+            枚举扩展类
+            </summary>
+        </member>
+        <member name="M:SmartLib.EnumEx.GetDescription(System.Enum,System.String)">
+            <summary>
+                获取特性 (DescriptionAttribute) 的说明；如果未使用该特性，则返回枚举的名称。可指定的默认值。
+            </summary>
+            <param name="enum"></param>
+            <param name="def">默认值</param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartLib.IConvertibleExtensions">
+            <summary>
+            类型转换扩展方法类
+            </summary>
+        </member>
+        <member name="M:SmartLib.IConvertibleExtensions.ConvertTo``1(System.IConvertible)">
+            <summary>
+                类型直转
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.IConvertibleExtensions.TryConvertTo``1(System.IConvertible,``0)">
+            <summary>
+                类型直转
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <param name="defaultValue">转换失败的默认值</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.IConvertibleExtensions.TryConvertTo``1(System.IConvertible,``0@)">
+            <summary>
+                类型直转
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <param name="result">转换失败的默认值</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.IConvertibleExtensions.TryConvertTo(System.IConvertible,System.Type,System.Object@)">
+            <summary>
+                类型直转
+            </summary>
+            <param name="value"></param>
+            <param name="type">目标类型</param>
+            <param name="result">转换失败的默认值</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.IConvertibleExtensions.ConvertTo(System.IConvertible,System.Type)">
+            <summary>
+                类型直转
+            </summary>
+            <param name="value"></param>
+            <param name="type">目标类型</param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartLib.ObjectEx">
+            <summary>
+            Object扩展方法类
+            </summary>
+        </member>
+        <member name="F:SmartLib.ObjectEx.MapDic">
+            <summary>
+                属性映射(静态对象，无需重复建立属性映射关系，提高效率)
+            </summary>
+        </member>
+        <member name="M:SmartLib.ObjectEx.Copy``2(``0)">
+            <summary>
+                S复制到D(创建对象D)
+            </summary>
+            <typeparam name="D">输出对象类型</typeparam>
+            <typeparam name="S">输入对象类型</typeparam>
+            <param name="s">输入对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ObjectEx.Copy``2(``0,``1)">
+            <summary>
+                S复制到D(对象D已存在)
+            </summary>
+            <typeparam name="D">输出对象类型</typeparam>
+            <typeparam name="S">输入对象类型</typeparam>
+            <param name="s">输入对象</param>
+            <param name="d">输出对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ObjectEx.Copy``2(System.Linq.IQueryable{``0})">
+            <summary>
+                SList复制到DList
+            </summary>
+            <typeparam name="D">输出对象类型</typeparam>
+            <typeparam name="S">输入对象类型</typeparam>
+            <param name="sList">输入对象集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ObjectEx.Copy``2(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+                SList复制到DList
+            </summary>
+            <typeparam name="D">输出对象类型</typeparam>
+            <typeparam name="S">输入对象类型</typeparam>
+            <param name="sList">输入对象集合</param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartLib.TypeAndValue">
+            <summary>
+                类型和值
+            </summary>
+        </member>
+        <member name="P:SmartLib.TypeAndValue.type">
+            <summary>
+                类型
+            </summary>
+        </member>
+        <member name="P:SmartLib.TypeAndValue.value">
+            <summary>
+                值
+            </summary>
+        </member>
+        <member name="T:SmartLib.StringEx">
+            <summary>
+            字符串扩展工具类
+            </summary>
+        </member>
+        <member name="M:SmartLib.StringEx.IsNullOrEmpty(System.String)">
+            <summary>
+            判断字符串是否为空
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.StringEx.IsValidFileName(System.String)">
+            <summary>
+                文件名是否有效
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.StringEx.MatchInetAddress(System.String,System.Boolean@)">
+            <summary>
+                校验IP地址的正确性，同时支持IPv4和IPv6
+            </summary>
+            <param name="s">源字符串</param>
+            <param name="isMatch">是否匹配成功，若返回true，则会得到一个Match对象，否则为null</param>
+            <returns>匹配对象</returns>
+        </member>
+        <member name="M:SmartLib.StringEx.MatchInetAddress(System.String)">
+            <summary>
+                校验IP地址的正确性，同时支持IPv4和IPv6
+            </summary>
+            <param name="s">源字符串</param>
+            <returns>是否匹配成功</returns>
+        </member>
+        <member name="M:SmartLib.StringEx.MatchPhoneNumber(System.String,System.Boolean@)">
+            <summary>
+                匹配手机号码
+            </summary>
+            <param name="s">源字符串</param>
+            <param name="isMatch">是否匹配成功，若返回true，则会得到一个Match对象，否则为null</param>
+            <returns>匹配对象</returns>
+        </member>
+        <member name="M:SmartLib.StringEx.MatchPhoneNumber(System.String)">
+            <summary>
+                匹配手机号码
+            </summary>
+            <param name="s">源字符串</param>
+            <returns>是否匹配成功</returns>
+        </member>
+        <member name="M:SmartLib.StringEx.PathCombine(System.String,System.String)">
+            <summary>
+            返回路径字符的合并值
+            </summary>
+            <param name="path1">路径1</param>
+            <param name="path2">路径2</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.StringEx.PathCombine(System.String,System.String,System.String)">
+            <summary>
+            返回路径字符的合并值
+            </summary>
+            <param name="path1">路径1</param>
+            <param name="path2">路径2</param>
+            <param name="path3">路径3</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.StringEx.PathCombine(System.String,System.String,System.String,System.String)">
+            <summary>
+            返回路径字符的合并值
+            </summary>
+            <param name="path1">path1</param>
+            <param name="path2">path2</param>
+            <param name="path3">path3</param>
+            <param name="path4">path4</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.StringEx.PathCombine(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            返回路径字符的合并值
+            </summary>
+            <param name="path1">path1</param>
+            <param name="path2">path2</param>
+            <param name="path3">path3</param>
+            <param name="path4">path4</param>
+            <param name="path5">path5</param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartLib.ConvertHelper">
+            <summary>
+            数据转换工具类
+            </summary>
+        </member>
+        <member name="M:SmartLib.ConvertHelper.ObjToInt(System.Object)">
+            <summary>
+            对象转int类型
+            </summary>
+            <param name="thisValue">需要转换的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ConvertHelper.ObjToDate(System.Object)">
+            <summary>
+            对象转时间
+            </summary>
+            <param name="thisValue">需要转换的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ConvertHelper.ObjToDateStr(System.Object)">
+            <summary>
+            对象转时间格式字符串
+            </summary>
+            <param name="thisValue">需要转换的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ConvertHelper.ObjToDateStr(System.Object,System.String)">
+            <summary>
+            对象转时间格式字符串
+            </summary>
+            <param name="thisValue">需要转换的对象</param>
+            <param name="forMat">字符串格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ConvertHelper.ObjToBool(System.Object)">
+            <summary>
+            对象转bool类型
+            </summary>
+            <param name="thisValue">需要转换的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.ConvertHelper.DateToTimeStamp(System.DateTime)">
+            <summary>
+                获取当前时间的时间戳
+            </summary>
+            <param name="thisValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.FileHelper.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="M:SmartLib.FileHelper.GetPostfixStr(System.String)">
+            <summary>
+                取后缀名
+            </summary>
+            <param name="filename">文件名</param>
+            <returns>.gif|.html格式</returns>
+        </member>
+        <member name="M:SmartLib.FileHelper.GetAvailableFileWithPrefixOrderSize(System.String,System.String,System.Int32,System.String)">
+            <summary>
+                根据文件大小获取指定前缀的可用文件名
+            </summary>
+            <param name="folderPath">文件夹</param>
+            <param name="prefix">文件前缀</param>
+            <param name="size">文件大小(1m)</param>
+            <param name="ext">文件后缀(.log)</param>
+            <returns>可用文件名</returns>
+        </member>
+        <member name="M:SmartLib.FileHelper.CreateFileIfNotExist(System.String)">
+            <summary>
+                不存在则创建
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:SmartLib.FileHelper.DeleteIfExist(System.String)">
+            <summary>
+                存在则删除
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:SmartLib.FileHelper.WriteFile(System.String,System.String)">
+            <summary>
+                写文件
+            </summary>
+            <param name="Path">文件路径</param>
+            <param name="Strings">文件内容</param>
+        </member>
+        <member name="M:SmartLib.FileHelper.WriteFile(System.String,System.String,System.Text.Encoding)">
+            <summary>
+                写文件
+            </summary>
+            <param name="Path">文件路径</param>
+            <param name="Strings">文件内容</param>
+            <param name="encode">编码格式</param>
+        </member>
+        <member name="M:SmartLib.FileHelper.ReadFile(System.String)">
+            <summary>
+                读文件
+            </summary>
+            <param name="Path">文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.FileHelper.ReadFile(System.String,System.Text.Encoding)">
+            <summary>
+                读文件
+            </summary>
+            <param name="Path">文件路径</param>
+            <param name="encode">编码格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.FileHelper.FileAdd(System.String,System.String)">
+            <summary>
+                追加文件
+            </summary>
+            <param name="Path">文件路径</param>
+            <param name="strings">内容</param>
+        </member>
+        <member name="M:SmartLib.FileHelper.FileCoppy(System.String,System.String)">
+            <summary>
+                拷贝文件
+            </summary>
+            <param name="orignFile">原始文件</param>
+            <param name="NewFile">新文件路径</param>
+        </member>
+        <member name="M:SmartLib.FileHelper.FileDel(System.String)">
+            <summary>
+                删除文件
+            </summary>
+            <param name="Path">路径</param>
+        </member>
+        <member name="M:SmartLib.FileHelper.FileMove(System.String,System.String)">
+            <summary>
+                移动文件
+            </summary>
+            <param name="orignFile">原始路径</param>
+            <param name="NewFile">新路径</param>
+        </member>
+        <member name="M:SmartLib.FileHelper.FolderCreate(System.String,System.String)">
+            <summary>
+                在当前目录下创建目录
+            </summary>
+            <param name="orignFolder">当前目录</param>
+            <param name="NewFloder">新目录</param>
+        </member>
+        <member name="M:SmartLib.FileHelper.DeleteFolder(System.String)">
+            <summary>
+                递归删除文件夹目录及文件
+            </summary>
+            <param name="dir"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.FileHelper.CopyDir(System.String,System.String)">
+            <summary>
+                指定文件夹下面的所有内容copy到目标文件夹下面
+            </summary>
+            <param name="srcPath">原始路径</param>
+            <param name="aimPath">目标文件夹</param>
+        </member>
+        <member name="M:SmartLib.FileHelper.SerializeFile(System.Object,System.String)">
+            <summary>
+            文件序列化
+            </summary>
+            <param name="myObject">序列化对象</param>
+            <param name="filePath">序列化文件</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.FileHelper.AntiSerializeFile(System.String)">
+            <summary>
+                反序列化
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SmartLib.FrmBase">
+            <summary>
+                可最大化的窗体
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.FormTitle">
+            <summary>
+                窗体标题
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.FormText">
+            <summary>
+                窗体文本内容
+            </summary>
+        </member>
+        <member name="M:SmartLib.FrmBase.#ctor">
+            <summary>
+                构造函数
+            </summary>
+        </member>
+        <member name="P:SmartLib.FrmBase.IsShowMaxBtn">
+            <summary>
+            设置最大化按钮可见性
+            </summary>
+        </member>
+        <member name="P:SmartLib.FrmBase.IsShowBottomPanel">
+            <summary>
+            设置底部面板可见性
+            </summary>
+        </member>
+        <member name="P:SmartLib.FrmBase.Sizable">
+            <summary>
+            是否可变大小
+            </summary>
+        </member>
+        <member name="M:SmartLib.FrmBase.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            OnPaint事件
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:SmartLib.FrmBase.ResizeDirection">
+            <summary>
+                Various directions the form can be resized in
+            </summary>
+        </member>
+        <member name="T:SmartLib.FrmBase.WM">
+            <summary>
+                Window Messages
+                <see href="https://docs.microsoft.com/en-us/windows/win32/winmsg/about-messages-and-message-queues" />
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.WM.NonClientCalcSize">
+            <summary>
+                WM_NCCALCSIZE
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.WM.NonClientActivate">
+            <summary>
+                WM_NCACTIVATE
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.WM.NonClientLeftButtonDown">
+            <summary>
+                WM_NCLBUTTONDOWN
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.WM.SystemCommand">
+            <summary>
+                WM_SYSCOMMAND
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.WM.MouseMove">
+            <summary>
+                WM_MOUSEMOVE
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.WM.LeftButtonDown">
+            <summary>
+                WM_LBUTTONDOWN
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.WM.LeftButtonUp">
+            <summary>
+                WM_LBUTTONUP
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.WM.LeftButtonDoubleClick">
+            <summary>
+                WM_LBUTTONDBLCLK
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.WM.RightButtonDown">
+            <summary>
+                WM_RBUTTONDOWN
+            </summary>
+        </member>
+        <member name="T:SmartLib.FrmBase.HT">
+            <summary>
+                Hit Test Results
+                <see href="https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-nchittest" />
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.HT.None">
+            <summary>
+                HTNOWHERE - Nothing under cursor
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.HT.Caption">
+            <summary>
+                HTCAPTION - Titlebar
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.HT.Left">
+            <summary>
+                HTLEFT - Left border
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.HT.Right">
+            <summary>
+                HTRIGHT - Right border
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.HT.Top">
+            <summary>
+                HTTOP - Top border
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.HT.TopLeft">
+            <summary>
+                HTTOPLEFT - Top left corner
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.HT.TopRight">
+            <summary>
+                HTTOPRIGHT - Top right corner
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.HT.Bottom">
+            <summary>
+                HTBOTTOM - Bottom border
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.HT.BottomLeft">
+            <summary>
+                HTBOTTOMLEFT - Bottom left corner
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.HT.BottomRight">
+            <summary>
+                HTBOTTOMRIGHT - Bottom right corner
+            </summary>
+        </member>
+        <member name="T:SmartLib.FrmBase.WS">
+            <summary>
+                Window Styles
+                <see href="https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles" />
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.WS.MinimizeBox">
+            <summary>
+                WS_MINIMIZEBOX - Allow minimizing from taskbar
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.WS.SizeFrame">
+            <summary>
+                WS_SIZEFRAME - Required for Aero Snapping
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.WS.SysMenu">
+            <summary>
+                WS_SYSMENU - Trigger the creation of the system menu
+            </summary>
+        </member>
+        <member name="T:SmartLib.FrmBase.TPM">
+            <summary>
+                Track Popup Menu Flags
+                <see href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-trackpopupmenu" />
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.TPM.LeftAlign">
+            <summary>
+                TPM_LEFTALIGN
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.TPM.ReturnCommand">
+            <summary>
+                TPM_RETURNCMD
+            </summary>
+        </member>
+        <member name="P:SmartLib.FrmBase.CreateParams">
+            <summary>
+            CreateParams
+            </summary>
+        </member>
+        <member name="M:SmartLib.FrmBase.OnCreateControl">
+            <summary>
+            Winform OnCreateControl事件
+            </summary>
+        </member>
+        <member name="M:SmartLib.FrmBase.WndProc(System.Windows.Forms.Message@)">
+            <summary>
+            Winform WndProc
+            </summary>
+            <param name="m"></param>
+        </member>
+        <member name="M:SmartLib.FrmBase.OnMove(System.EventArgs)">
+            <summary>
+            窗体移动
+            </summary>
+            <param name="e">事件</param>
+        </member>
+        <member name="M:SmartLib.FrmBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            鼠标按下
+            </summary>
+            <param name="e">鼠标事件</param>
+        </member>
+        <member name="M:SmartLib.FrmBase.OnMouseEnter(System.EventArgs)">
+            <summary>
+            鼠标进入
+            </summary>
+            <param name="e">事件</param>
+        </member>
+        <member name="M:SmartLib.FrmBase.OnMouseLeave(System.EventArgs)">
+            <summary>
+            鼠标离开
+            </summary>
+            <param name="e">事件</param>
+        </member>
+        <member name="M:SmartLib.FrmBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            鼠标移动
+            </summary>
+            <param name="e">鼠标事件</param>
+        </member>
+        <member name="M:SmartLib.FrmBase.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            鼠标抬起
+            </summary>
+            <param name="e">鼠标事件</param>
+        </member>
+        <member name="M:SmartLib.FrmBase.ReleaseCapture">
+            <summary>
+            当前线程从窗体中释放鼠标
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.FrmBase.SendMessage(System.IntPtr,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            向窗体发送指定信息
+            SendMessage函数调用指定窗口的窗口过程，直到窗口过程处理完消息才返回
+            </summary>
+            <param name="hwnd">窗体句柄</param>
+            <param name="wMsg">wMsg</param>
+            <param name="wParam">wParam</param>
+            <param name="lParam">lParam</param>
+            <returns></returns>
+        </member>
+        <member name="F:SmartLib.FrmBase.WM_SYSCOMMAND">
+            <summary>
+            WM_SYSCOMMAND
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.SC_MAXIMIZE">
+            <summary>
+            SC_MAXIMIZE
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.SC_RESTORE">
+            <summary>
+            SC_RESTORE
+            </summary>
+        </member>
+        <member name="M:SmartLib.FrmBase.btn_title_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            窗体标题鼠标按下
+            </summary>
+            <param name="sender">sender</param>
+            <param name="e">鼠标事件</param>
+        </member>
+        <member name="M:SmartLib.FrmBase.btn_title_MouseMove(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            窗体标题鼠标移动
+            </summary>
+            <param name="sender">sender</param>
+            <param name="e">鼠标事件</param>
+        </member>
+        <member name="M:SmartLib.FrmBase.GetWindowLongPtr(System.IntPtr,System.Int32)">
+            <summary>
+                Provides a single method to call either the 32-bit or 64-bit method based on the size of an <see cref="T:System.IntPtr" />
+                for getting the
+                Window Style flags.<br />
+                <see href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptra">GetWindowLongPtr</see>
+            </summary>
+        </member>
+        <member name="M:SmartLib.FrmBase.SetWindowLongPtr(System.IntPtr,System.Int32,System.IntPtr)">
+            <summary>
+                Provides a single method to call either the 32-bit or 64-bit method based on the size of an <see cref="T:System.IntPtr" />
+                for setting the
+                Window Style flags.<br />
+                <see href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowlongptra">SetWindowLongPtr</see>
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SmartLib.FrmBase.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SmartLib.FrmBase.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.btn_title">
+            <summary>
+            窗体标题栏
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.lab_curpro">
+            <summary>
+            窗体标题栏显示内容
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.ToolsPanel">
+            <summary>
+            窗体工具栏
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.btn_close">
+            <summary>
+            关闭按钮
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.btn_max">
+            <summary>
+            最大化按钮
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.btn_Min">
+            <summary>
+            最小化按钮
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.btn_mainLogo">
+            <summary>
+            Logo按钮
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.MainPanel">
+            <summary>
+            主窗体控件
+            </summary>
+        </member>
+        <member name="F:SmartLib.FrmBase.panelBottom">
+            <summary>
+            底部工具
+            </summary>
+        </member>
+        <member name="T:SmartLib.CallbackMessage`1">
+            <summary>
+            回调消息类，发送者可调用Execute方法接收收件人发送的消息。实现双工通信
+            </summary>
+            <typeparam name="TCallbackParameter"></typeparam>
+        </member>
+        <member name="M:SmartLib.CallbackMessage`1.#ctor(System.Action{`0})">
+            <summary>
+            回调消息
+            </summary>
+            <param name="callback">回调执行动作</param>
+        </member>
+        <member name="M:SmartLib.CallbackMessage`1.Execute(System.String[][])">
+            <summary>
+                使用任意数量的参数执行随消息提供的回调。
+            </summary>
+            <param name="arguments">将传递给回调方法的一些参数。</param>
+            <returns>回调方法返回的对象。</returns>
+        </member>
+        <member name="P:SmartLib.CallbackMessage`1.Msg">
+            <summary>
+            信息
+            </summary>
+        </member>
+        <member name="T:SmartLib.IMessenger">
+            <summary>
+            Messenger接口
+            </summary>
+        </member>
+        <member name="M:SmartLib.IMessenger.Cleanup">
+            <summary>
+            扫描收件人列表中的无效实例并将其删除
+            </summary>
+        </member>
+        <member name="M:SmartLib.IMessenger.Register``1(System.Object,System.Action{``0})">
+            <summary>
+            注册Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+            <param name="action">传递口令</param>
+        </member>
+        <member name="M:SmartLib.IMessenger.Register``1(System.Object,System.Object,System.Action{``0})">
+            <summary>
+            注册Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+            <param name="token">传递口令</param>
+            <param name="action">当接收到消息时执行这个action</param>
+        </member>
+        <member name="M:SmartLib.IMessenger.RequestCleanup">
+             <summary>
+             通知Messenger应扫描和清理收件人列表。
+             由于收件人存储为 WeakReference，即使 Messenger 将收件人保留在列表中，收件人也可能被垃圾收集。
+            在清理操作期间，所有“死”收件人都将从列表中删除。 由于此操作可能需要一些时间，因此仅在应用程序空闲时执行。
+             出于这个原因，Messenger 类的用户应该使用 RequestCleanup 而不是强制使用 Cleanup
+             </summary>
+        </member>
+        <member name="M:SmartLib.IMessenger.Send``1(``0,System.Object)">
+            <summary>
+            Messenger发送消息
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="message">传递内容</param>
+            <param name="token">传递口令</param>
+        </member>
+        <member name="M:SmartLib.IMessenger.UnRegister(System.Object)">
+            <summary>
+            注销Messenger
+            </summary>
+            <param name="recipient">接收对象</param>
+        </member>
+        <member name="M:SmartLib.IMessenger.UnRegister``1(System.Object)">
+            <summary>
+            注销Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+        </member>
+        <member name="M:SmartLib.IMessenger.UnRegister``1(System.Object,System.Object)">
+            <summary>
+            注销Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+            <param name="token">传递口令</param>
+        </member>
+        <member name="M:SmartLib.IMessenger.UnRegister``1(System.Object,System.Action{``0})">
+            <summary>
+            注销Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+            <param name="action">当接收到消息时执行这个action</param>
+        </member>
+        <member name="M:SmartLib.IMessenger.UnRegister``1(System.Object,System.Object,System.Action{``0})">
+            <summary>
+            注销Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+            <param name="token">传递口令</param>
+            <param name="action">当接收到消息时执行这个action</param>
+        </member>
+        <member name="T:SmartLib.Messenger">
+            <summary>
+                信使，用于给接发送消息传参,任何对象都可以是接收端；任何对象都可以是发送端；任何对象都可以是消息。
+            </summary>
+        </member>
+        <member name="P:SmartLib.Messenger.Default">
+            <summary>
+            单例
+            </summary>
+        </member>
+        <member name="M:SmartLib.Messenger.Register``1(System.Object,System.Action{``0})">
+            <summary>
+            注册Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+            <param name="action">当接收到消息时执行这个action</param>
+        </member>
+        <member name="M:SmartLib.Messenger.Register``1(System.Object,System.Object,System.Action{``0})">
+            <summary>
+            注册Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+            <param name="token">传递口令</param>
+            <param name="action">当接收到消息时执行的action</param>
+        </member>
+        <member name="M:SmartLib.Messenger.UnRegister(System.Object)">
+             <summary>
+            注销Messenger
+             </summary>
+             <param name="recipient">接收对象</param>
+        </member>
+        <member name="M:SmartLib.Messenger.UnRegister``1(System.Object)">
+            <summary>
+            注销Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+        </member>
+        <member name="M:SmartLib.Messenger.UnregisterFromLists``1(System.Object,System.Object,System.Action{``0},System.Collections.Generic.Dictionary{System.Type,System.Collections.Generic.List{SmartLib.Messenger.WeakActionAndToken}})">
+            <summary>
+            从列表中注销Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+            <param name="token">传递口令</param>
+            <param name="action">当接收到消息时执行的action</param>
+            <param name="lists">Messenger列表</param>
+        </member>
+        <member name="M:SmartLib.Messenger.UnRegister``1(System.Object,System.Action{``0})">
+            <summary>
+            注销Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+            <param name="action">传递口令</param>
+        </member>
+        <member name="M:SmartLib.Messenger.UnRegister``1(System.Object,System.Object,System.Action{``0})">
+            <summary>
+            注销Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+            <param name="token">传递口令</param>
+            <param name="action">当接收到消息时执行的action</param>
+        </member>
+        <member name="M:SmartLib.Messenger.UnRegister``1(System.Object,System.Object)">
+            <summary>
+            注销Messenger
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="recipient">接收对象</param>
+            <param name="token">传递口令</param>
+        </member>
+        <member name="M:SmartLib.Messenger.SendToList``1(``0,System.Collections.Generic.IEnumerable{SmartLib.Messenger.WeakActionAndToken},System.Object,System.Type)">
+            <summary>
+            将Messenger加入列表
+            </summary>
+            <typeparam name="TMessage">传递类型</typeparam>
+            <param name="message">传递内容</param>
+            <param name="weakActionsAndTokens">弱连接和口令</param>
+            <param name="token">传递口令</param>
+            <param name="messageTargetType">Messenger模板类型</param>
+        </member>
+        <member name="M:SmartLib.Messenger.Send``1(``0,System.Object)">
+            <summary>
+            向已注册的收件人发送邮件。该邮件将仅到达使用其中一个Register方法为此邮件类型注册的收件人以及targetType的收件人。
+            </summary>
+            <typeparam name="TMessage">将发送的消息类型。</typeparam>
+            <param name="message">发送的消息</param>
+            <param name="token">消息通道的令牌。 如果接收者使用令牌注册，
+            并且发送者使用相同的令牌发送消息，则该消息将被传递给接收者。
+            注册时未使用令牌（或使用不同令牌）的其他收件人将不会收到该消息。
+            同样，没有任何令牌或使用不同令牌发送的消息将不会传递给该收件人。</param>
+        </member>
+        <member name="M:SmartLib.Messenger.Cleanup">
+            <summary>
+                扫描收件人列表中的无效实例并将其删除
+            </summary>
+        </member>
+        <member name="M:SmartLib.Messenger.RequestCleanup">
+             <summary>
+             通知Messenger应扫描和清理收件人列表。
+             由于收件人存储为 WeakReference，即使 Messenger 将收件人保留在列表中，收件人也可能被垃圾收集。
+            在清理操作期间，所有“死”收件人都将从列表中删除。 由于此操作可能需要一些时间，因此仅在应用程序空闲时执行。
+             出于这个原因，Messenger 类的用户应该使用 RequestCleanup 而不是强制使用 Cleanup
+             </summary>
+        </member>
+        <member name="T:SmartLib.WeakAction">
+            <summary>
+            封装一个弱引用Action，让拥有者可以随时用垃圾回收器收集
+            避免内存泄漏
+            </summary>
+        </member>
+        <member name="M:SmartLib.WeakAction.#ctor">
+            <summary>
+            弱引用构造函数
+            </summary>
+        </member>
+        <member name="M:SmartLib.WeakAction.#ctor(System.Action,System.Boolean)">
+            <summary>
+            弱引用构造函数
+            </summary>
+            <param name="action">哦当作</param>
+            <param name="keepTargetAlive">是否持续保持</param>
+        </member>
+        <member name="M:SmartLib.WeakAction.#ctor(System.Object,System.Action,System.Boolean)">
+            <summary>
+            弱引用构造函数
+            </summary>
+            <param name="target">目标</param>
+            <param name="action">动作</param>
+            <param name="keepTargetAlive">是否持续保持</param>
+        </member>
+        <member name="P:SmartLib.WeakAction.Method">
+            <summary>
+            提供方法的元数据信息访问，通过构造方法访问
+            </summary>
+        </member>
+        <member name="P:SmartLib.WeakAction.MethodName">
+            <summary>
+            方法名称
+            </summary>
+        </member>
+        <member name="P:SmartLib.WeakAction.ActionReference">
+            <summary>
+            给动态的弱方法的目标设置一个弱引用
+            </summary>
+        </member>
+        <member name="P:SmartLib.WeakAction.Reference">
+            <summary>
+            给静态的弱方法的目标设置一个弱引用
+            </summary>
+        </member>
+        <member name="P:SmartLib.WeakAction.LiveReference">
+            <summary>
+            设置一个强引用，当构造方法的keepTargetAlive参数是True的时候生效
+            </summary>
+        </member>
+        <member name="P:SmartLib.WeakAction.IsAlive">
+            <summary>
+            返回一个值指明是否方法的拥有者仍活着或者已经被垃圾回收器回收了
+            </summary>
+        </member>
+        <member name="P:SmartLib.WeakAction.Target">
+            <summary>
+            返回一个值指明方法的拥有者
+            </summary>
+        </member>
+        <member name="P:SmartLib.WeakAction.ActionTarget">
+            <summary>
+            返回弱引用的拥有者
+            </summary>
+        </member>
+        <member name="M:SmartLib.WeakAction.Execute">
+            <summary>
+            如果拥有者还生还，则执行
+            </summary>
+        </member>
+        <member name="M:SmartLib.WeakAction.MarkForDeletion">
+            <summary>
+            将此实例的引用设置为null。
+            </summary>
+        </member>
+        <member name="T:SmartLib.WeakAction`1">
+            <summary>
+            弱引用类
+            </summary>
+            <typeparam name="T">类型</typeparam>
+        </member>
+        <member name="M:SmartLib.WeakAction`1.#ctor(System.Action{`0},System.Boolean)">
+            <summary>
+            初始化 WeakAction 类的新实例。初始化 WeakAction 类的新实例。
+            </summary>
+        </member>
+        <member name="M:SmartLib.WeakAction`1.#ctor(System.Object,System.Action{`0},System.Boolean)">
+            <summary>
+            初始化 WeakAction 类的新实例
+            </summary>
+            <param name="target">action动作的拥有者</param>
+            <param name="action">执行的action</param>
+            <param name="keepTargetAlive">如果为true,则Action的目标将保留为强引用,这可能会导致内存泄漏;
+            仅当操作使用闭包时,才将此参数设置为true; 可以参考http://galasoft.ch/s/mvvmweakaction</param>
+        </member>
+        <member name="P:SmartLib.WeakAction`1.MethodName">
+            <summary>
+            获取弱引用方法名称
+            </summary>
+        </member>
+        <member name="P:SmartLib.WeakAction`1.IsAlive">
+            <summary>
+            查看当前引用的所有者是否仍然存活
+            </summary>
+        </member>
+        <member name="M:SmartLib.WeakAction`1.ExecuteWithObject(System.Object)">
+            <summary>
+            使用一个object类型参数执行action
+            </summary>
+            <param name="parameter">参数</param>
+        </member>
+        <member name="M:SmartLib.WeakAction`1.MarkForDeletion">
+            <summary>
+            标记弱引被删除
+            </summary>
+        </member>
+        <member name="M:SmartLib.WeakAction`1.Execute">
+            <summary>
+            执行弱引用
+            </summary>
+        </member>
+        <member name="M:SmartLib.WeakAction`1.Execute(`0)">
+            <summary>
+            执行弱引用
+            </summary>
+            <param name="parameter">参数</param>
+        </member>
+        <member name="T:SmartLib.IExecuteWithObject">
+            <summary>
+            这个接口是为WeakAction类设计的，如果您存储了多个WeakAction{T}实例，但事先不知道T代表什么类型，那么这个接口就非常有用。
+            </summary>
+        </member>
+        <member name="P:SmartLib.IExecuteWithObject.Target">
+            <summary>
+            引用的参数
+            </summary>
+        </member>
+        <member name="M:SmartLib.IExecuteWithObject.ExecuteWithObject(System.Object)">
+            <summary>
+            执行引用
+            </summary>
+            <param name="parameter">使用的参数</param>
+        </member>
+        <member name="M:SmartLib.IExecuteWithObject.MarkForDeletion">
+            <summary>
+            删除所有引用
+            </summary>
+        </member>
+        <member name="T:SmartLib.Response`1">
+            <summary>
+            带参数的Response
+            </summary>
+            <typeparam name="TResult">参数类型</typeparam>
+        </member>
+        <member name="P:SmartLib.Response`1.IsSuccessful">
+            <summary>
+            是否执行成功
+            </summary>
+        </member>
+        <member name="P:SmartLib.Response`1.Msg">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="P:SmartLib.Response`1.ErroCode">
+            <summary>
+            错误代码
+            </summary>
+        </member>
+        <member name="P:SmartLib.Response`1.Data">
+            <summary>
+            返回结果数据
+            </summary>
+        </member>
+        <member name="P:SmartLib.Response`1.IsShowErrMsg">
+            <summary>
+            是否弹出错误信息
+            </summary>
+        </member>
+        <member name="M:SmartLib.Response`1.Ok(`0)">
+            <summary>
+                成功
+            </summary>
+            <param name="data">返回数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.Response`1.Fail(System.String,`0,System.String)">
+            <summary>
+            返回失败
+            </summary>
+            <param name="str">错误信息</param>
+            <param name="data">数据</param>
+            <param name="code">错误代码</param>
+            <returns>返回结果</returns>
+        </member>
+        <member name="M:SmartLib.Response`1.op_Implicit(SmartLib.Response{`0})~System.String">
+            <summary>
+            返回错误信息
+            </summary>
+            <param name="res"></param>
+        </member>
+        <member name="M:SmartLib.Response`1.op_Implicit(SmartLib.Response{`0})~System.Boolean">
+            <summary>
+            返回OKNG结果
+            </summary>
+            <param name="res"></param>
+        </member>
+        <member name="M:SmartLib.Response`1.ToString">
+            <summary>
+            返回错误信息 转换为string类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SmartLib.Response">
+            <summary>
+            Response类
+            </summary>
+        </member>
+        <member name="P:SmartLib.Response.IsSuccessful">
+            <summary>
+            是否执行成功
+            </summary>
+        </member>
+        <member name="P:SmartLib.Response.Msg">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="P:SmartLib.Response.ErroCode">
+            <summary>
+            错误代码
+            </summary>
+        </member>
+        <member name="P:SmartLib.Response.IsShowErrMsg">
+            <summary>
+            是否弹出错误信息
+            </summary>
+        </member>
+        <member name="M:SmartLib.Response.Ok(System.String)">
+            <summary>
+            返回成功
+            </summary>
+            <param name="msg">信息内容</param>
+            <returns>返回结果</returns>
+        </member>
+        <member name="M:SmartLib.Response.Fail(System.String,System.String)">
+            <summary>
+                失败
+            </summary>
+            <param name="str">错误信息</param>
+            <param name="code">错误代码</param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.Response.op_Implicit(SmartLib.Response)~System.String">
+            <summary>
+            返回错误信息
+            </summary>
+            <param name="res"></param>
+        </member>
+        <member name="M:SmartLib.Response.op_Implicit(SmartLib.Response)~System.Boolean">
+            <summary>
+            返回OKNG结果
+            </summary>
+            <param name="res"></param>
+        </member>
+        <member name="M:SmartLib.Response.ToString">
+            <summary>
+            返回错误信息 转换为string类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartLib.VisionComFunc.ImageisEmpty(HalconDotNet.HObject)">
+            <summary>
+            判断图片是否为空
+            </summary>
+        </member>
+        <member name="M:SmartLib.VisionComFunc.ObjectisEmpty(HalconDotNet.HObject)">
+            <summary>
+            判断HObject是否为空
+            </summary>
+        </member>
+        <member name="M:SmartLib.VisionComFunc.GetImgGray(HalconDotNet.HObject,System.Int32,System.Int32)">
+            <summary>
+            获取图像某一点灰度值
+            </summary>
+        </member>
+        <member name="M:SmartLib.VisionComFunc.GetImageSize(HalconDotNet.HObject)">
+            <summary>
+            获取图像尺寸
+            </summary>
+            <param name="inputImage">传入图像</param>
+            <returns>返回图像尺寸 格式:宽 高</returns>
+        </member>
+        <member name="M:SmartLib.VisionComFunc.ReadImage(System.String)">
+            <summary>
+            从文件读取图片
+            </summary>
+        </member>
+        <member name="M:SmartLib.VisionComFunc.WriteImage(HalconDotNet.HObject,System.String)">
+            <summary>
+            保存图片
+            </summary>
+        </member>
+        <member name="M:SmartLib.VisionComFunc.BoolImgColor(HalconDotNet.HObject)">
+            <summary>
+            判断图片是否是彩色图像
+            </summary>
+        </member>
+        <member name="M:SmartLib.VisionComFunc.BoolMoreObject(HalconDotNet.HObject)">
+            <summary>
+            判断图片是否是彩色图像
+            </summary>
+        </member>
+        <member name="M:SmartLib.VisionComFunc.GetColorImgHSV(HalconDotNet.HObject)">
+            <summary>
+            获取彩色图片HSV通道图像
+            </summary>
+        </member>
+        <member name="M:SmartLib.VisionComFunc.GetImgQual(HalconDotNet.HObject)">
+            <summary>
+            获取图像质量评价 ；  均值，偏差值
+            </summary>
+        </member>
+        <member name="M:SmartLib.VisionComFunc.GetMatchShapeContours(HalconDotNet.HTuple,HalconDotNet.HTuple,HalconDotNet.HTuple,HalconDotNet.HTuple,HalconDotNet.HTuple)">
+            <summary>
+            匹配结果轮廓
+            </summary>
+        </member>
+        <member name="M:SmartLib.VisionComFunc.lineLenEx(HalconDotNet.HTuple,HalconDotNet.HTuple,HalconDotNet.HTuple,HalconDotNet.HTuple,HalconDotNet.HTuple,HalconDotNet.HTuple@,HalconDotNet.HTuple@,HalconDotNet.HTuple@,HalconDotNet.HTuple@)">
+            <summary>
+            扩展直线长度
+            </summary>
+            <param name="hv_Row1"></param>
+            <param name="hv_Column1"></param>
+            <param name="hv_Row2"></param>
+            <param name="hv_Column2"></param>
+            <param name="hv_lineLenEx"></param>
+            <param name="hv_RowEx1"></param>
+            <param name="hv_ColEx1"></param>
+            <param name="hv_RowEx2"></param>
+            <param name="hv_ColEx2"></param>
+        </member>
+    </members>
+</doc>

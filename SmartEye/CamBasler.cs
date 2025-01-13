@@ -184,7 +184,7 @@ namespace SmartVEye
         /// 设置触发延迟，单位us
         /// </summary>
         /// <param name="time">单位us</param>
-        public Response SetExposTime(double value)
+        public Response SetTriggerDelay(double value)
         {
             try
             {
@@ -201,7 +201,7 @@ namespace SmartVEye
             }
             catch (Exception ex)
             {
-                return Response.Fail("设置相机曝光时间失败!" + ex.Message);
+                return Response.Fail("设置相机触发延迟时间失败!" + ex.Message);
             }
         }
 

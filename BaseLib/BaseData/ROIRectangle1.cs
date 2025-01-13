@@ -68,10 +68,11 @@ namespace BaseData
 		{
 			HOperatorSet.SetLineWidth(winHandle, roiLineWidth);
 			HOperatorSet.DispRectangle1(winHandle, row1, col1, row2, col2);
-            HOperatorSet.DispRectangle2(winHandle, row1, col1, 0, 5, 5);
-            HOperatorSet.DispRectangle2(winHandle, row1, col2, 0, 5, 5);
-            HOperatorSet.DispRectangle2(winHandle, row2, col2, 0, 5, 5);
-            HOperatorSet.DispRectangle2(winHandle, row2, col1, 0, 5, 5);
+			// 绘制四个顶点矩形
+            //HOperatorSet.DispRectangle2(winHandle, row1, col1, 0, 5, 5);
+            //HOperatorSet.DispRectangle2(winHandle, row1, col2, 0, 5, 5);
+            //HOperatorSet.DispRectangle2(winHandle, row2, col2, 0, 5, 5);
+            //HOperatorSet.DispRectangle2(winHandle, row2, col1, 0, 5, 5);
             HOperatorSet.DispRectangle2(winHandle, midR, midC, 0, 5, 5);
 		}
 

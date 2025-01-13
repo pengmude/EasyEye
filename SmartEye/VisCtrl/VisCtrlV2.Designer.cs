@@ -41,28 +41,23 @@ namespace SmartVEye
             this.lbl_Res = new System.Windows.Forms.Label();
             this.lbl_CamIndex = new System.Windows.Forms.Label();
             this.comboBox_RunMode = new System.Windows.Forms.ComboBox();
-            this.btn_Train = new System.Windows.Forms.Button();
-            this.btn_TrainMode = new System.Windows.Forms.Button();
             this.btn_HighPlus = new System.Windows.Forms.Button();
             this.btn_WidthPlus = new System.Windows.Forms.Button();
             this.WinCtrl = new SmartLib.DisplayCtrl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_TrainMode = new System.Windows.Forms.Button();
+            this.btn_Train = new System.Windows.Forms.Button();
             this.comboBox_DetectAccuracy = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_WidthSub = new System.Windows.Forms.Button();
             this.btn_HighSub = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.previewWin1 = new SmartVEye.VisCtrl.PreviewWin();
             this.tableLayoutPanel_Result = new System.Windows.Forms.TableLayoutPanel();
             this.panel_View = new System.Windows.Forms.Panel();
             this.panel_Top = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProRecord)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.tableLayoutPanel_Result.SuspendLayout();
             this.panel_View.SuspendLayout();
             this.panel_Top.SuspendLayout();
@@ -214,42 +209,6 @@ namespace SmartVEye
             this.comboBox_RunMode.TabIndex = 6;
             this.comboBox_RunMode.SelectedIndexChanged += new System.EventHandler(this.comboBox_RunMode_SelectedIndexChanged);
             // 
-            // btn_Train
-            // 
-            this.btn_Train.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_Train.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btn_Train.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Train.Font = new System.Drawing.Font("黑体", 25F, System.Drawing.FontStyle.Bold);
-            this.btn_Train.Image = global::SmartVEye.Properties.Resources.no;
-            this.btn_Train.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Train.Location = new System.Drawing.Point(12, 70);
-            this.btn_Train.Margin = new System.Windows.Forms.Padding(1);
-            this.btn_Train.Name = "btn_Train";
-            this.btn_Train.Size = new System.Drawing.Size(140, 58);
-            this.btn_Train.TabIndex = 2;
-            this.btn_Train.Text = "学习";
-            this.btn_Train.UseVisualStyleBackColor = false;
-            this.btn_Train.Click += new System.EventHandler(this.btn_Train_Click);
-            this.btn_Train.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Train_MouseDown);
-            this.btn_Train.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Train_MouseUp);
-            // 
-            // btn_TrainMode
-            // 
-            this.btn_TrainMode.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_TrainMode.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btn_TrainMode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_TrainMode.Font = new System.Drawing.Font("黑体", 25F, System.Drawing.FontStyle.Bold);
-            this.btn_TrainMode.Image = global::SmartVEye.Properties.Resources.no;
-            this.btn_TrainMode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_TrainMode.Location = new System.Drawing.Point(12, 3);
-            this.btn_TrainMode.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.btn_TrainMode.Name = "btn_TrainMode";
-            this.btn_TrainMode.Size = new System.Drawing.Size(140, 58);
-            this.btn_TrainMode.TabIndex = 5;
-            this.btn_TrainMode.Text = "建模";
-            this.btn_TrainMode.UseVisualStyleBackColor = false;
-            this.btn_TrainMode.Click += new System.EventHandler(this.btn_TrainMode_Click);
-            // 
             // btn_HighPlus
             // 
             this.btn_HighPlus.BackColor = System.Drawing.Color.Aqua;
@@ -319,6 +278,42 @@ namespace SmartVEye
             this.tableLayoutPanel1.Size = new System.Drawing.Size(164, 531);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
+            // btn_TrainMode
+            // 
+            this.btn_TrainMode.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_TrainMode.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btn_TrainMode.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_TrainMode.Font = new System.Drawing.Font("黑体", 25F, System.Drawing.FontStyle.Bold);
+            this.btn_TrainMode.Image = global::SmartVEye.Properties.Resources.no;
+            this.btn_TrainMode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_TrainMode.Location = new System.Drawing.Point(12, 3);
+            this.btn_TrainMode.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.btn_TrainMode.Name = "btn_TrainMode";
+            this.btn_TrainMode.Size = new System.Drawing.Size(140, 58);
+            this.btn_TrainMode.TabIndex = 5;
+            this.btn_TrainMode.Text = "建模";
+            this.btn_TrainMode.UseVisualStyleBackColor = false;
+            this.btn_TrainMode.Click += new System.EventHandler(this.btn_TrainMode_Click);
+            // 
+            // btn_Train
+            // 
+            this.btn_Train.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_Train.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btn_Train.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Train.Font = new System.Drawing.Font("黑体", 25F, System.Drawing.FontStyle.Bold);
+            this.btn_Train.Image = global::SmartVEye.Properties.Resources.no;
+            this.btn_Train.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Train.Location = new System.Drawing.Point(12, 70);
+            this.btn_Train.Margin = new System.Windows.Forms.Padding(1);
+            this.btn_Train.Name = "btn_Train";
+            this.btn_Train.Size = new System.Drawing.Size(140, 58);
+            this.btn_Train.TabIndex = 2;
+            this.btn_Train.Text = "学习";
+            this.btn_Train.UseVisualStyleBackColor = false;
+            this.btn_Train.Click += new System.EventHandler(this.btn_Train_Click);
+            this.btn_Train.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Train_MouseDown);
+            this.btn_Train.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Train_MouseUp);
+            // 
             // comboBox_DetectAccuracy
             // 
             this.comboBox_DetectAccuracy.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -350,9 +345,7 @@ namespace SmartVEye
             this.tableLayoutPanel2.Controls.Add(this.btn_HighPlus, 2, 3);
             this.tableLayoutPanel2.Controls.Add(this.btn_HighSub, 3, 3);
             this.tableLayoutPanel2.Controls.Add(this.WinCtrl, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox2, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox3, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.previewWin1, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -396,35 +389,14 @@ namespace SmartVEye
             this.btn_HighSub.Visible = false;
             this.btn_HighSub.Click += new System.EventHandler(this.btn_HighSub_Click);
             // 
-            // pictureBox2
+            // previewWin1
             // 
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.ControlText;
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Location = new System.Drawing.Point(3, 151);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(174, 142);
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlText;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(174, 142);
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.SystemColors.ControlText;
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox3.Location = new System.Drawing.Point(3, 299);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(174, 142);
-            this.pictureBox3.TabIndex = 9;
-            this.pictureBox3.TabStop = false;
+            this.previewWin1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.previewWin1.Location = new System.Drawing.Point(3, 3);
+            this.previewWin1.Name = "previewWin1";
+            this.tableLayoutPanel2.SetRowSpan(this.previewWin1, 3);
+            this.previewWin1.Size = new System.Drawing.Size(174, 438);
+            this.previewWin1.TabIndex = 9;
             // 
             // tableLayoutPanel_Result
             // 
@@ -463,8 +435,7 @@ namespace SmartVEye
             // 
             // VisCtrlV2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.panel_View);
             this.Controls.Add(this.panel_Top);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -476,9 +447,6 @@ namespace SmartVEye
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProRecord)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tableLayoutPanel_Result.ResumeLayout(false);
             this.panel_View.ResumeLayout(false);
             this.panel_Top.ResumeLayout(false);
@@ -509,8 +477,6 @@ namespace SmartVEye
         private System.Windows.Forms.Panel panel_Top;
         private System.Windows.Forms.Button btn_WidthSub;
         private System.Windows.Forms.Button btn_HighSub;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private VisCtrl.PreviewWin previewWin1;
     }
 }

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Security.Cryptography;
+using System.Linq.Expressions;
 
 namespace SmartVEye
 {
@@ -75,7 +76,7 @@ namespace SmartVEye
             IVisCtrl curVisCtrl = null;
             for (int idx = 0; idx < CommonData.CameraCount; idx++)
             {
-                #region 旧的逻辑
+                #region 旧的控件
 
                 //if (CommonData.CameraCount == 1)
                 //{
@@ -104,17 +105,18 @@ namespace SmartVEye
 
                 #endregion
 
-                #region 新的逻辑
+                #region 新的控件
 
                 curVisCtrl = new VisCtrlV2();
                 lbl_WinMode.Text = "  Win:2";//用于标识窗体类型
 
                 #endregion
-
                 curVisCtrl.CamName = "CAM" + (idx + 1);
                 ((UserControl)curVisCtrl).Dock = DockStyle.Fill;
                 VisCtrlList.Add(curVisCtrl);
             }
+            VisCtrlV2.CameraOpenEvent += CameraOpenEvent;
+
             if (CommonData.CameraCount == 1)
             {
                 tlp_MainContainer.ColumnStyles[1].Width = 0;
@@ -161,6 +163,33 @@ namespace SmartVEye
             AuthorityTimer.Tick += AuthorityTimer_Tick;
             AuthorityTimer.Start();
 
+        }
+
+        /// <summary>
+        /// 确保打开相机之后获取一次触发延迟的值给主界面显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CameraOpenEvent(object sender, EventArgs e)
+        {
+            if(sender is VisCtrlV2 visCtrl)
+            {
+                try
+                {
+                    // 触发延迟相机默认选中第一项
+                    comboBox_CamList.Items.Add(visCtrl.CamName);
+                    if (comboBox_CamList.Items.Count > 0)
+                        comboBox_CamList.SelectedIndex = 0;
+
+                    double delay = IniFileHelper.ReadINI(CommonData.SetFilePath, visCtrl.CamName, "triggerdelay", 0);
+                    visCtrl.SetTriggerDelay(delay);
+                    label_TriggerDelay.Text = delay.ToString();
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void AuthorityTimer_Tick(object sender, EventArgs e)
@@ -579,9 +608,12 @@ namespace SmartVEye
 
         private void btn_TestLoad_Click(object sender, EventArgs e)
         {
-            HOperatorSet.ReadImage(out HObject CurImage, @"E:\TestImage\DCImage.bmp");
-            //HOperatorSet.ScaleImage(CurImage, out CurImage, 3.49, 0);
-            CommonData.PostReadFrame(CurImage.Clone());
+            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                HOperatorSet.ReadImage(out HObject CurImage, openFileDialog1.FileName);
+                //HOperatorSet.ScaleImage(CurImage, out CurImage, 3.49, 0);
+                CommonData.PostReadFrame(CurImage.Clone());
+            }
         }
 
         Stopwatch watch = new Stopwatch();
@@ -743,7 +775,70 @@ namespace SmartVEye
         /// <param name="e"></param>
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            try
+            {
+                if (VisCtrlList.Find((item)=>item.CamName == comboBox_CamList.Text) is VisCtrlV2 visCtrl)
+                {
+                    label_TriggerDelay.Text = visCtrl.GetTriggerDelay().ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        /// <summary>
+        /// 点击一次减少100ms
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_DelaySub_Click(object sender, EventArgs e)
+        {
+            double curVal = double.Parse(label_TriggerDelay.Text);
+            try
+            {
+                if (VisCtrlList.Find((item) => item.CamName == comboBox_CamList.Text) is VisCtrlV2 visCtrl)
+                {
+                    if (curVal <= 100)
+                        throw new Exception("最多减到0");
+                    curVal -= 100;
+                    visCtrl.SetTriggerDelay(curVal);
+                    IniFileHelper.SaveINI(CommonData.SetFilePath, visCtrl.CamName, "triggerdelay", curVal);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            label_TriggerDelay.Text = curVal.ToString();
+        }
 
+        /// <summary>
+        /// 点击一次增加100ms
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_DelayPlus_Click(object sender, EventArgs e)
+        {
+            double curVal = double.Parse(label_TriggerDelay.Text);
+            try
+            {
+                if (VisCtrlList.Find((item) => item.CamName == comboBox_CamList.Text) is VisCtrlV2 visCtrl)
+                {
+                    if (curVal >= double.MaxValue - 100)
+                        throw new Exception("不能超过上限！");
+                    curVal += 100;
+                    visCtrl.SetTriggerDelay(curVal);
+                    IniFileHelper.SaveINI(CommonData.SetFilePath, visCtrl.CamName, "triggerdelay", curVal);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            label_TriggerDelay.Text = curVal.ToString();
         }
     }
 }

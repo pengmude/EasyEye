@@ -31,37 +31,38 @@ namespace SmartVEye
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.tlp_MainContainer = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel_Bottom = new System.Windows.Forms.TableLayoutPanel();
+            this.tb_InfoBox = new System.Windows.Forms.Label();
+            this.lbl_WinMode = new System.Windows.Forms.Label();
+            this.lbl_Phone = new System.Windows.Forms.LinkLabel();
+            this.lbl_CurVersion = new System.Windows.Forms.LinkLabel();
             this.pnl_Menu = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnCancelAlarm = new System.Windows.Forms.Button();
-            this.lbl_ROISize = new System.Windows.Forms.Label();
-            this.label_ROITitle = new System.Windows.Forms.Label();
             this.tb_ROISize = new System.Windows.Forms.TrackBar();
-            this.btn_FrmTestStop = new System.Windows.Forms.Button();
-            this.btn_TestAll = new System.Windows.Forms.Button();
-            this.btn_TestLoad = new System.Windows.Forms.Button();
             this.btn_DisConnAll = new System.Windows.Forms.Button();
             this.btn_ConnAll = new System.Windows.Forms.Button();
             this.btn_TrainModeAll = new System.Windows.Forms.Button();
             this.btn_LearnAll = new System.Windows.Forms.Button();
             this.btn_ClearRecord = new System.Windows.Forms.Button();
-            this.tb_InfoBox = new System.Windows.Forms.Label();
-            this.lbl_Phone = new System.Windows.Forms.LinkLabel();
-            this.lbl_CurVersion = new System.Windows.Forms.LinkLabel();
-            this.lbl_WinMode = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel_Bottom = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_Settings = new System.Windows.Forms.Button();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox_CamList = new System.Windows.Forms.ComboBox();
             this.button_DelaySub = new System.Windows.Forms.Button();
+            this.lbl_ROISize = new System.Windows.Forms.Label();
+            this.label_ROITitle = new System.Windows.Forms.Label();
+            this.btn_TestLoad = new System.Windows.Forms.Button();
+            this.btn_TestAll = new System.Windows.Forms.Button();
+            this.btn_FrmTestStop = new System.Windows.Forms.Button();
+            this.btn_Settings = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.button_DelayPlus = new System.Windows.Forms.Button();
             this.label_TriggerDelay = new System.Windows.Forms.Label();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tlp_MainContainer.SuspendLayout();
-            this.pnl_Menu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tb_ROISize)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel_Bottom.SuspendLayout();
+            this.pnl_Menu.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_ROISize)).BeginInit();
             this.SuspendLayout();
             // 
             // tlp_MainContainer
@@ -83,6 +84,72 @@ namespace SmartVEye
             this.tlp_MainContainer.Size = new System.Drawing.Size(1595, 648);
             this.tlp_MainContainer.TabIndex = 2;
             // 
+            // tableLayoutPanel_Bottom
+            // 
+            this.tableLayoutPanel_Bottom.ColumnCount = 4;
+            this.tlp_MainContainer.SetColumnSpan(this.tableLayoutPanel_Bottom, 3);
+            this.tableLayoutPanel_Bottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel_Bottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tableLayoutPanel_Bottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel_Bottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel_Bottom.Controls.Add(this.tb_InfoBox, 0, 0);
+            this.tableLayoutPanel_Bottom.Controls.Add(this.lbl_WinMode, 3, 0);
+            this.tableLayoutPanel_Bottom.Controls.Add(this.lbl_Phone, 1, 0);
+            this.tableLayoutPanel_Bottom.Controls.Add(this.lbl_CurVersion, 2, 0);
+            this.tableLayoutPanel_Bottom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel_Bottom.Location = new System.Drawing.Point(4, 614);
+            this.tableLayoutPanel_Bottom.Name = "tableLayoutPanel_Bottom";
+            this.tableLayoutPanel_Bottom.RowCount = 1;
+            this.tableLayoutPanel_Bottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel_Bottom.Size = new System.Drawing.Size(1587, 30);
+            this.tableLayoutPanel_Bottom.TabIndex = 5;
+            // 
+            // tb_InfoBox
+            // 
+            this.tb_InfoBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tb_InfoBox.Location = new System.Drawing.Point(3, 0);
+            this.tb_InfoBox.Name = "tb_InfoBox";
+            this.tb_InfoBox.Size = new System.Drawing.Size(1131, 30);
+            this.tb_InfoBox.TabIndex = 0;
+            this.tb_InfoBox.Text = "          ";
+            this.tb_InfoBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_WinMode
+            // 
+            this.lbl_WinMode.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_WinMode.AutoSize = true;
+            this.lbl_WinMode.ForeColor = System.Drawing.Color.Blue;
+            this.lbl_WinMode.Location = new System.Drawing.Point(1519, 8);
+            this.lbl_WinMode.Name = "lbl_WinMode";
+            this.lbl_WinMode.Size = new System.Drawing.Size(56, 14);
+            this.lbl_WinMode.TabIndex = 7;
+            this.lbl_WinMode.Text = "  Win:1";
+            this.lbl_WinMode.DoubleClick += new System.EventHandler(this.lbl_WinMode_DoubleClick);
+            // 
+            // lbl_Phone
+            // 
+            this.lbl_Phone.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_Phone.AutoSize = true;
+            this.lbl_Phone.Location = new System.Drawing.Point(1230, 8);
+            this.lbl_Phone.Name = "lbl_Phone";
+            this.lbl_Phone.Size = new System.Drawing.Size(63, 14);
+            this.lbl_Phone.TabIndex = 5;
+            this.lbl_Phone.TabStop = true;
+            this.lbl_Phone.Text = "        ";
+            // 
+            // lbl_CurVersion
+            // 
+            this.lbl_CurVersion.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_CurVersion.AutoSize = true;
+            this.lbl_CurVersion.LinkColor = System.Drawing.Color.Blue;
+            this.lbl_CurVersion.Location = new System.Drawing.Point(1401, 8);
+            this.lbl_CurVersion.Name = "lbl_CurVersion";
+            this.lbl_CurVersion.Size = new System.Drawing.Size(91, 14);
+            this.lbl_CurVersion.TabIndex = 4;
+            this.lbl_CurVersion.TabStop = true;
+            this.lbl_CurVersion.Text = "Ver: 1.0.0.0";
+            this.lbl_CurVersion.DoubleClick += new System.EventHandler(this.lbl_CurVersion_DoubleClick);
+            // 
             // pnl_Menu
             // 
             this.pnl_Menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -93,6 +160,52 @@ namespace SmartVEye
             this.pnl_Menu.Name = "pnl_Menu";
             this.pnl_Menu.Size = new System.Drawing.Size(1595, 63);
             this.pnl_Menu.TabIndex = 3;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 15;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.Controls.Add(this.btn_ClearRecord, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBox_CamList, 8, 1);
+            this.tableLayoutPanel1.Controls.Add(this.button_DelaySub, 9, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btn_TrainModeAll, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_ConnAll, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_LearnAll, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_DisConnAll, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tb_ROISize, 6, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lbl_ROISize, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnCancelAlarm, 14, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label_ROITitle, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_TestLoad, 11, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_TestAll, 11, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btn_FrmTestStop, 12, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_Settings, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 8, 0);
+            this.tableLayoutPanel1.Controls.Add(this.button_DelayPlus, 10, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label_TriggerDelay, 9, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1595, 63);
+            this.tableLayoutPanel1.TabIndex = 5;
             // 
             // btnCancelAlarm
             // 
@@ -109,30 +222,6 @@ namespace SmartVEye
             this.btnCancelAlarm.UseVisualStyleBackColor = false;
             this.btnCancelAlarm.Click += new System.EventHandler(this.btnCancelAlarm_Click);
             // 
-            // lbl_ROISize
-            // 
-            this.lbl_ROISize.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lbl_ROISize.AutoSize = true;
-            this.lbl_ROISize.Font = new System.Drawing.Font("宋体", 18F);
-            this.lbl_ROISize.Location = new System.Drawing.Point(898, 3);
-            this.lbl_ROISize.Name = "lbl_ROISize";
-            this.lbl_ROISize.Size = new System.Drawing.Size(34, 24);
-            this.lbl_ROISize.TabIndex = 9;
-            this.lbl_ROISize.Text = "50";
-            this.lbl_ROISize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_ROITitle
-            // 
-            this.label_ROITitle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label_ROITitle.AutoSize = true;
-            this.label_ROITitle.Font = new System.Drawing.Font("宋体", 18F);
-            this.label_ROITitle.Location = new System.Drawing.Point(724, 3);
-            this.label_ROITitle.Name = "label_ROITitle";
-            this.label_ROITitle.Size = new System.Drawing.Size(142, 24);
-            this.label_ROITitle.TabIndex = 10;
-            this.label_ROITitle.Text = "ROI增减幅度";
-            this.label_ROITitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // tb_ROISize
             // 
             this.tb_ROISize.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -147,39 +236,6 @@ namespace SmartVEye
             this.tb_ROISize.TickStyle = System.Windows.Forms.TickStyle.None;
             this.tb_ROISize.Value = 50;
             this.tb_ROISize.Scroll += new System.EventHandler(this.tb_ROIStep_Scroll);
-            // 
-            // btn_FrmTestStop
-            // 
-            this.btn_FrmTestStop.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_FrmTestStop.Location = new System.Drawing.Point(1452, 3);
-            this.btn_FrmTestStop.Name = "btn_FrmTestStop";
-            this.btn_FrmTestStop.Size = new System.Drawing.Size(75, 25);
-            this.btn_FrmTestStop.TabIndex = 2;
-            this.btn_FrmTestStop.Text = "停止测试";
-            this.btn_FrmTestStop.UseVisualStyleBackColor = true;
-            this.btn_FrmTestStop.Click += new System.EventHandler(this.btn_FrmTestStop_Click);
-            // 
-            // btn_TestAll
-            // 
-            this.btn_TestAll.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_TestAll.Location = new System.Drawing.Point(1332, 34);
-            this.btn_TestAll.Name = "btn_TestAll";
-            this.btn_TestAll.Size = new System.Drawing.Size(75, 26);
-            this.btn_TestAll.TabIndex = 2;
-            this.btn_TestAll.Text = "连续测试";
-            this.btn_TestAll.UseVisualStyleBackColor = true;
-            this.btn_TestAll.Click += new System.EventHandler(this.btn_TestAll_Click);
-            // 
-            // btn_TestLoad
-            // 
-            this.btn_TestLoad.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_TestLoad.Location = new System.Drawing.Point(1332, 3);
-            this.btn_TestLoad.Name = "btn_TestLoad";
-            this.btn_TestLoad.Size = new System.Drawing.Size(75, 25);
-            this.btn_TestLoad.TabIndex = 1;
-            this.btn_TestLoad.Text = "加载图像";
-            this.btn_TestLoad.UseVisualStyleBackColor = true;
-            this.btn_TestLoad.Click += new System.EventHandler(this.btn_TestLoad_Click);
             // 
             // btn_DisConnAll
             // 
@@ -266,117 +322,91 @@ namespace SmartVEye
             this.btn_ClearRecord.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseDown);
             this.btn_ClearRecord.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseUp);
             // 
-            // tb_InfoBox
+            // comboBox_CamList
             // 
-            this.tb_InfoBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tb_InfoBox.Location = new System.Drawing.Point(3, 0);
-            this.tb_InfoBox.Name = "tb_InfoBox";
-            this.tb_InfoBox.Size = new System.Drawing.Size(1131, 30);
-            this.tb_InfoBox.TabIndex = 0;
-            this.tb_InfoBox.Text = "          ";
-            this.tb_InfoBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.comboBox_CamList.BackColor = System.Drawing.Color.Aqua;
+            this.comboBox_CamList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox_CamList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_CamList.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox_CamList.FormattingEnabled = true;
+            this.comboBox_CamList.Location = new System.Drawing.Point(960, 31);
+            this.comboBox_CamList.Margin = new System.Windows.Forms.Padding(0);
+            this.comboBox_CamList.Name = "comboBox_CamList";
+            this.comboBox_CamList.Size = new System.Drawing.Size(170, 28);
+            this.comboBox_CamList.TabIndex = 6;
+            this.comboBox_CamList.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // lbl_Phone
+            // button_DelaySub
             // 
-            this.lbl_Phone.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lbl_Phone.AutoSize = true;
-            this.lbl_Phone.Location = new System.Drawing.Point(1230, 8);
-            this.lbl_Phone.Name = "lbl_Phone";
-            this.lbl_Phone.Size = new System.Drawing.Size(63, 14);
-            this.lbl_Phone.TabIndex = 5;
-            this.lbl_Phone.TabStop = true;
-            this.lbl_Phone.Text = "        ";
+            this.button_DelaySub.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button_DelaySub.BackColor = System.Drawing.Color.Aqua;
+            this.button_DelaySub.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_DelaySub.Font = new System.Drawing.Font("黑体", 15.75F, System.Drawing.FontStyle.Bold);
+            this.button_DelaySub.Location = new System.Drawing.Point(1130, 31);
+            this.button_DelaySub.Margin = new System.Windows.Forms.Padding(0);
+            this.button_DelaySub.Name = "button_DelaySub";
+            this.button_DelaySub.Size = new System.Drawing.Size(90, 32);
+            this.button_DelaySub.TabIndex = 0;
+            this.button_DelaySub.Text = "-";
+            this.button_DelaySub.UseVisualStyleBackColor = false;
+            this.button_DelaySub.Click += new System.EventHandler(this.button_DelaySub_Click);
             // 
-            // lbl_CurVersion
+            // lbl_ROISize
             // 
-            this.lbl_CurVersion.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lbl_CurVersion.AutoSize = true;
-            this.lbl_CurVersion.LinkColor = System.Drawing.Color.Blue;
-            this.lbl_CurVersion.Location = new System.Drawing.Point(1401, 8);
-            this.lbl_CurVersion.Name = "lbl_CurVersion";
-            this.lbl_CurVersion.Size = new System.Drawing.Size(91, 14);
-            this.lbl_CurVersion.TabIndex = 4;
-            this.lbl_CurVersion.TabStop = true;
-            this.lbl_CurVersion.Text = "Ver: 1.0.0.0";
-            this.lbl_CurVersion.DoubleClick += new System.EventHandler(this.lbl_CurVersion_DoubleClick);
+            this.lbl_ROISize.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbl_ROISize.AutoSize = true;
+            this.lbl_ROISize.Font = new System.Drawing.Font("宋体", 18F);
+            this.lbl_ROISize.Location = new System.Drawing.Point(898, 3);
+            this.lbl_ROISize.Name = "lbl_ROISize";
+            this.lbl_ROISize.Size = new System.Drawing.Size(34, 24);
+            this.lbl_ROISize.TabIndex = 9;
+            this.lbl_ROISize.Text = "50";
+            this.lbl_ROISize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbl_WinMode
+            // label_ROITitle
             // 
-            this.lbl_WinMode.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lbl_WinMode.AutoSize = true;
-            this.lbl_WinMode.ForeColor = System.Drawing.Color.Blue;
-            this.lbl_WinMode.Location = new System.Drawing.Point(1519, 8);
-            this.lbl_WinMode.Name = "lbl_WinMode";
-            this.lbl_WinMode.Size = new System.Drawing.Size(56, 14);
-            this.lbl_WinMode.TabIndex = 7;
-            this.lbl_WinMode.Text = "  Win:1";
-            this.lbl_WinMode.DoubleClick += new System.EventHandler(this.lbl_WinMode_DoubleClick);
+            this.label_ROITitle.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label_ROITitle.AutoSize = true;
+            this.label_ROITitle.Font = new System.Drawing.Font("宋体", 18F);
+            this.label_ROITitle.Location = new System.Drawing.Point(724, 3);
+            this.label_ROITitle.Name = "label_ROITitle";
+            this.label_ROITitle.Size = new System.Drawing.Size(142, 24);
+            this.label_ROITitle.TabIndex = 10;
+            this.label_ROITitle.Text = "ROI增减幅度";
+            this.label_ROITitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tableLayoutPanel1
+            // btn_TestLoad
             // 
-            this.tableLayoutPanel1.ColumnCount = 15;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.Controls.Add(this.btn_ClearRecord, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 8, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button_DelaySub, 9, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btn_TrainModeAll, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btn_ConnAll, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btn_LearnAll, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btn_DisConnAll, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tb_ROISize, 6, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lbl_ROISize, 7, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnCancelAlarm, 14, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label_ROITitle, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btn_TestLoad, 11, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btn_TestAll, 11, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btn_FrmTestStop, 12, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btn_Settings, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 8, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button_DelayPlus, 10, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label_TriggerDelay, 9, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1595, 63);
-            this.tableLayoutPanel1.TabIndex = 5;
+            this.btn_TestLoad.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_TestLoad.Location = new System.Drawing.Point(1332, 3);
+            this.btn_TestLoad.Name = "btn_TestLoad";
+            this.btn_TestLoad.Size = new System.Drawing.Size(75, 25);
+            this.btn_TestLoad.TabIndex = 1;
+            this.btn_TestLoad.Text = "加载图像";
+            this.btn_TestLoad.UseVisualStyleBackColor = true;
+            this.btn_TestLoad.Click += new System.EventHandler(this.btn_TestLoad_Click);
             // 
-            // tableLayoutPanel_Bottom
+            // btn_TestAll
             // 
-            this.tableLayoutPanel_Bottom.ColumnCount = 4;
-            this.tlp_MainContainer.SetColumnSpan(this.tableLayoutPanel_Bottom, 3);
-            this.tableLayoutPanel_Bottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel_Bottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.tableLayoutPanel_Bottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel_Bottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel_Bottom.Controls.Add(this.tb_InfoBox, 0, 0);
-            this.tableLayoutPanel_Bottom.Controls.Add(this.lbl_WinMode, 3, 0);
-            this.tableLayoutPanel_Bottom.Controls.Add(this.lbl_Phone, 1, 0);
-            this.tableLayoutPanel_Bottom.Controls.Add(this.lbl_CurVersion, 2, 0);
-            this.tableLayoutPanel_Bottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel_Bottom.Location = new System.Drawing.Point(4, 614);
-            this.tableLayoutPanel_Bottom.Name = "tableLayoutPanel_Bottom";
-            this.tableLayoutPanel_Bottom.RowCount = 1;
-            this.tableLayoutPanel_Bottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel_Bottom.Size = new System.Drawing.Size(1587, 30);
-            this.tableLayoutPanel_Bottom.TabIndex = 5;
+            this.btn_TestAll.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_TestAll.Location = new System.Drawing.Point(1332, 34);
+            this.btn_TestAll.Name = "btn_TestAll";
+            this.btn_TestAll.Size = new System.Drawing.Size(75, 26);
+            this.btn_TestAll.TabIndex = 2;
+            this.btn_TestAll.Text = "连续测试";
+            this.btn_TestAll.UseVisualStyleBackColor = true;
+            this.btn_TestAll.Click += new System.EventHandler(this.btn_TestAll_Click);
+            // 
+            // btn_FrmTestStop
+            // 
+            this.btn_FrmTestStop.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_FrmTestStop.Location = new System.Drawing.Point(1452, 3);
+            this.btn_FrmTestStop.Name = "btn_FrmTestStop";
+            this.btn_FrmTestStop.Size = new System.Drawing.Size(75, 25);
+            this.btn_FrmTestStop.TabIndex = 2;
+            this.btn_FrmTestStop.Text = "停止测试";
+            this.btn_FrmTestStop.UseVisualStyleBackColor = true;
+            this.btn_FrmTestStop.Click += new System.EventHandler(this.btn_FrmTestStop_Click);
             // 
             // btn_Settings
             // 
@@ -395,10 +425,6 @@ namespace SmartVEye
             this.btn_Settings.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseDown);
             this.btn_Settings.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseUp);
             // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.SelectedPath = "C:\\Users\\Administrator\\Desktop";
-            // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -408,36 +434,8 @@ namespace SmartVEye
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 24);
             this.label1.TabIndex = 10;
-            this.label1.Text = "延迟触发us";
+            this.label1.Text = "延迟触发ms";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.BackColor = System.Drawing.Color.Aqua;
-            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(960, 31);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(170, 28);
-            this.comboBox1.TabIndex = 6;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // button_DelaySub
-            // 
-            this.button_DelaySub.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button_DelaySub.BackColor = System.Drawing.Color.Aqua;
-            this.button_DelaySub.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_DelaySub.Font = new System.Drawing.Font("黑体", 15.75F, System.Drawing.FontStyle.Bold);
-            this.button_DelaySub.Location = new System.Drawing.Point(1130, 31);
-            this.button_DelaySub.Margin = new System.Windows.Forms.Padding(0);
-            this.button_DelaySub.Name = "button_DelaySub";
-            this.button_DelaySub.Size = new System.Drawing.Size(90, 32);
-            this.button_DelaySub.TabIndex = 0;
-            this.button_DelaySub.Text = "-";
-            this.button_DelaySub.UseVisualStyleBackColor = false;
-            this.button_DelaySub.Click += new System.EventHandler(this.btn_Settings_Click);
             // 
             // button_DelayPlus
             // 
@@ -452,7 +450,7 @@ namespace SmartVEye
             this.button_DelayPlus.TabIndex = 0;
             this.button_DelayPlus.Text = "+";
             this.button_DelayPlus.UseVisualStyleBackColor = false;
-            this.button_DelayPlus.Click += new System.EventHandler(this.btn_Settings_Click);
+            this.button_DelayPlus.Click += new System.EventHandler(this.button_DelayPlus_Click);
             // 
             // label_TriggerDelay
             // 
@@ -466,6 +464,15 @@ namespace SmartVEye
             this.label_TriggerDelay.TabIndex = 9;
             this.label_TriggerDelay.Text = "0";
             this.label_TriggerDelay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.SelectedPath = "C:\\Users\\Administrator\\Desktop";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "BMP 文件 (*.bmp)|*.bmp";
             // 
             // FrmMain
             // 
@@ -483,12 +490,12 @@ namespace SmartVEye
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Shown += new System.EventHandler(this.FrmMain_Shown);
             this.tlp_MainContainer.ResumeLayout(false);
-            this.pnl_Menu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tb_ROISize)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel_Bottom.ResumeLayout(false);
             this.tableLayoutPanel_Bottom.PerformLayout();
+            this.pnl_Menu.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tb_ROISize)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -516,11 +523,12 @@ namespace SmartVEye
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_Bottom;
         private System.Windows.Forms.Button btn_Settings;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox_CamList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_DelaySub;
         private System.Windows.Forms.Button button_DelayPlus;
         private System.Windows.Forms.Label label_TriggerDelay;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

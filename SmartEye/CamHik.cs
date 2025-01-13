@@ -216,12 +216,13 @@ namespace SmartVEye
             if (curCamera != null)
             {
                 var delay = new MyCamera.MVCC_FLOATVALUE();
-                var nRet = curCamera.MV_CC_GetFloatValue_NET("TriggerDelayAbs", ref delay);
+                var nRet = curCamera.MV_CC_GetTriggerDelay_NET(ref delay);
+                //curCamera.MV_CC_GetFloatValue_NET("TriggerDelay", ref delay);
                 return MyCamera.MV_OK == nRet ? Response<float>.Ok(delay.fCurValue) : Response<float>.Fail("相机触发延迟获取失败");
             }
             else
             {
-                return Response<float>.Fail("相机增益获取失败,相机为空!");
+                return Response<float>.Fail("相机触发延迟获取失败,相机为空!");
             }
         }
 
@@ -229,11 +230,18 @@ namespace SmartVEye
         /// 设置触发延迟，单位us
         /// </summary>
         /// <param name="time">单位us</param>
-        public void SetTriggerDelay(float delay)
+        public Response SetTriggerDelay(float delay)
         {
-            if (curCamera == null) throw new Exception("相机对象为空！");
-
-            curCamera.MV_CC_SetFloatValue_NET("TriggerDelayAbs", delay);
+            if (curCamera != null)
+            {
+                var nRet = curCamera.MV_CC_SetTriggerDelay_NET(delay);
+                //curCamera.MV_CC_SetFloatValue_NET("TriggerDelay", delay);
+                return MyCamera.MV_OK == nRet ? Response.Ok() : Response.Fail("设置相机触发延迟时间失败");
+            }
+            else
+            {
+                return Response.Fail("设置相机触发延迟时间失败,相机为空!");
+            }
         }
 
         /// <summary>
@@ -241,7 +249,6 @@ namespace SmartVEye
         /// </summary>
         public Response SetExposTime(float val)
         {
-
             if (curCamera != null)
             {
                 var nRet = curCamera.MV_CC_SetFloatValue_NET("ExposureTime", val);

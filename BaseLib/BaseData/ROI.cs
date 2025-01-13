@@ -32,7 +32,7 @@ namespace BaseData
         /// <summary>
         /// ROI线宽
         /// </summary>
-        public HTuple roiLineWidth = 3;
+        public HTuple roiLineWidth = 1;
 
         /// <summary>
         /// ROI类型 直线ROI

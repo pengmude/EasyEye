@@ -49,13 +49,31 @@ namespace SmartVEye
             WinCtrl.InitWindow();
             WinCtrl.WinMouseDownEvent += new HMouseEventHandler(VisWinMouseDown);
             WinCtrl.WinMouseMoveEvent += new HMouseEventHandler(VisWinMouseMove);
+            WinCtrl.WinMouseUpEvent += new HMouseEventHandler(VisWinMouseUp);
         }
+
         ~VisCtrlV2()
         {
             WinCtrl.WinMouseDownEvent -= new HMouseEventHandler(VisWinMouseDown);
             WinCtrl.WinMouseMoveEvent -= new HMouseEventHandler(VisWinMouseMove);
+            WinCtrl.WinMouseUpEvent -= new HMouseEventHandler(VisWinMouseUp);
+        }
+        private bool IsContainsPoint(HMouseEventArgs e, ROI roi)
+        {
+            // 创建 HTuple 类型的坐标
+            HTuple row = e.Y;
+            HTuple column = e.X;
+
+            // 使用 test_region_point 操作符判断点是否在区域内
+            HTuple isInside;
+
+            HOperatorSet.TestRegionPoint(roi.getRegion(), row, column, out isInside);
+
+            // 将鼠标按下点是否在ROI内的结果转换为布尔值并输出
+            return isInside == 1;
         }
 
+        bool IsMouseDown = false;
         /// <summary>
         /// 鼠标按下
         /// </summary>
@@ -65,11 +83,19 @@ namespace SmartVEye
         {
             try
             {
-                if (!IsTrainMode) return;
-                WinCtrl.Ctrl_DelAllROI();
-                WinCtrl.Ctrl_CreateRectROI(e.Y, e.X, TrainROIWidth, TrainROIHeight);
-                TrainROIRow = e.Y;
-                TrainROICol = e.X;
+                //if(IsContainsPoint(e, WinCtrl.GetActiveROI().Data))
+                //    IsMouseDown = true;
+                //else
+                //{
+                //    if (!IsTrainMode) return;
+                //    WinCtrl.Ctrl_DelAllROI();
+                //    WinCtrl.Ctrl_CreateRectROI(e.Y, e.X, TrainROIWidth, TrainROIHeight);
+                //    TrainROIRow = e.Y;
+                //    TrainROICol = e.X;
+                //}
+
+                IsMouseDown = true;
+
             }
             catch (Exception ex)
             {
@@ -85,15 +111,30 @@ namespace SmartVEye
         {
             try
             {
-                if (!IsTrainMode) return;
-                WinCtrl.Ctrl_DelAllROI();
-                WinCtrl.Ctrl_CreateRectROI(e.Y, e.X, TrainROIWidth, TrainROIHeight);
-                TrainROIRow = e.Y;
-                TrainROICol = e.X;
+                if (IsMouseDown)
+                {
+                    if (!IsTrainMode) return;
+                    WinCtrl.Ctrl_DelAllROI();
+                    WinCtrl.Ctrl_CreateRectROI(e.Y, e.X, TrainROIWidth, TrainROIHeight);
+                    TrainROIRow = e.Y;
+                    TrainROICol = e.X;
+                }
             }
             catch (Exception ex)
             {
                 _logger.Error($"鼠标点击移动ROI异常!{ex.Message}");
+            }
+        }
+
+        private void VisWinMouseUp(object sender, HMouseEventArgs e)
+        {
+            try
+            {
+                IsMouseDown = false;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"鼠标点击弹起ROI异常!{ex.Message}");
             }
         }
 
@@ -107,18 +148,48 @@ namespace SmartVEye
             IsContinueSnap = false;
         }
 
-        public void SetTriggerDelay()
+        /// <summary>
+        /// 设置触发延迟，单位ms
+        /// </summary>
+        /// <param name="delay"></param>
+        public void SetTriggerDelay(double delay)
         {
-
+            try
+            {
+                if (CurHikCam == null && CurBaslerCam == null)
+                    throw new Exception("相机对象为空，请检查相机是否连接！");
+                if (CommonData.CameraType == 0)
+                    CurHikCam.SetTriggerDelay(float.Parse((delay * 1000).ToString()));
+                else
+                    CurBaslerCam.SetTriggerDelay(delay * 1000);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public float GetTriggerDelay()
+        public double GetTriggerDelay()
         {
-            if (CommonData.CameraType == 0)
-                return CurHikCam.GetTriggerDelay().Data;
-            else
-                return CurBaslerCam.GetExposTime().Data;
+            try
+            {
+                double res;
+                if (CurHikCam == null && CurBaslerCam == null)
+                    throw new Exception("相机对象为空，请检查相机是否连接！");
+                if (CommonData.CameraType == 0)
+                    res = ((double)CurHikCam.GetTriggerDelay().Data) / 1000;
+                else
+                    res = (CurBaslerCam.GetTriggerDelay().Data)/1000;
+                return res;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
+        //相机打开事件
+        public static EventHandler CameraOpenEvent;
 
         public Response InitCamera(string CamName)
         {
@@ -137,7 +208,6 @@ namespace SmartVEye
                     CurHikCam.SetExposTime(Exposure);
                 }
                 CurHikCam.SetGain(Gain);
-                CurHikCam.SetTriggerDelay(TriggerDelay);
                 CurHikCam.PostFrameEvent += CurCam_PostFrameEvent;
                 CommonData.PostReadFrameEvent += CurCam_PostFrameEvent;
                 if (!ret) return ret;
@@ -159,13 +229,13 @@ namespace SmartVEye
                     CurBaslerCam.SetExposTime(Exposure);
                 }
                 CurBaslerCam.SetGain(Gain);
-                CurBaslerCam.settrr(TriggerDelay);
                 CurBaslerCam.PostFrameEvent += CurCam_PostFrameEvent;
                 CommonData.PostReadFrameEvent += CurCam_PostFrameEvent;
                 if (!ret) return ret;
                 ret = CurBaslerCam.StartGrab();
                 if (!ret) return ret;
             }
+            CameraOpenEvent?.Invoke(this, EventArgs.Empty);
             return Response.Ok();
         }
         public void UnInitCamera()
@@ -345,7 +415,8 @@ namespace SmartVEye
                                     //设置显示结果为NG
                                     SetRes(false);
                                     RecordNG += 1;
-                                    UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(grabImage));//更新NG图片的显示
+                                    //UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(grabImage));//更新NG图片的显示
+                                    previewWin1.AddImage(grabImage);
                                 }
                             }
                             else
@@ -371,7 +442,8 @@ namespace SmartVEye
                                     //设置显示结果为NG
                                     SetRes(false);
                                     RecordNG += 1;
-                                    UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(grabImage));//更新NG图片的显示
+                                    //UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(grabImage));//更新NG图片的显示
+                                    previewWin1.AddImage(grabImage);
                                 }
                             }
                             else
@@ -397,7 +469,8 @@ namespace SmartVEye
                                     //设置显示结果为NG
                                     SetRes(false);
                                     RecordNG += 1;
-                                    UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(grabImage));//更新NG图片的显示
+                                    //UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(grabImage));//更新NG图片的显示
+                                    previewWin1.AddImage(grabImage);
                                 }
                             }
                             else
@@ -425,78 +498,78 @@ namespace SmartVEye
             }
         }
 
-        [DllImport("kernel32.dll")]
-        public static extern void CopyMemory(int Destination, int add, int Length);
+        //[DllImport("kernel32.dll")]
+        //public static extern void CopyMemory(int Destination, int add, int Length);
 
-        /// <summary>
-        /// HObject转8位Bitmap(单通道)
-        /// </summary>
-        /// <param name="image"></param>
-        /// <param name="res"></param>
+        ///// <summary>
+        ///// HObject转8位Bitmap(单通道)
+        ///// </summary>
+        ///// <param name="image"></param>
+        ///// <param name="res"></param>
 
-        public static Bitmap HObject2Bitmap8(HObject image)
-        {
-            Bitmap res;
-            HTuple hpoint, type, width, height;
-            const int Alpha = 255;
-            HOperatorSet.GetImagePointer1(image, out hpoint, out type, out width, out height);
-            res = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
-            ColorPalette pal = res.Palette;
-            for (int i = 0; i <= 255; i++)
-            { pal.Entries[i] = Color.FromArgb(Alpha, i, i, i); }
+        //public static Bitmap HObject2Bitmap8(HObject image)
+        //{
+        //    Bitmap res;
+        //    HTuple hpoint, type, width, height;
+        //    const int Alpha = 255;
+        //    HOperatorSet.GetImagePointer1(image, out hpoint, out type, out width, out height);
+        //    res = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
+        //    ColorPalette pal = res.Palette;
+        //    for (int i = 0; i <= 255; i++)
+        //    { pal.Entries[i] = Color.FromArgb(Alpha, i, i, i); }
 
-            res.Palette = pal; Rectangle rect = new Rectangle(0, 0, width, height);
-            BitmapData bitmapData = res.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
-            int PixelSize = Bitmap.GetPixelFormatSize(bitmapData.PixelFormat) / 8;
-            IntPtr ptr1 = bitmapData.Scan0;
-            IntPtr ptr2 = hpoint; int bytes = width * height;
-            byte[] rgbvalues = new byte[bytes];
-            System.Runtime.InteropServices.Marshal.Copy(ptr2, rgbvalues, 0, bytes);
-            System.Runtime.InteropServices.Marshal.Copy(rgbvalues, 0, ptr1, bytes);
-            res.UnlockBits(bitmapData);
-            return res;
+        //    res.Palette = pal; Rectangle rect = new Rectangle(0, 0, width, height);
+        //    BitmapData bitmapData = res.LockBits(rect, ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
+        //    int PixelSize = Bitmap.GetPixelFormatSize(bitmapData.PixelFormat) / 8;
+        //    IntPtr ptr1 = bitmapData.Scan0;
+        //    IntPtr ptr2 = hpoint; int bytes = width * height;
+        //    byte[] rgbvalues = new byte[bytes];
+        //    System.Runtime.InteropServices.Marshal.Copy(ptr2, rgbvalues, 0, bytes);
+        //    System.Runtime.InteropServices.Marshal.Copy(rgbvalues, 0, ptr1, bytes);
+        //    res.UnlockBits(bitmapData);
+        //    return res;
 
-        }
+        //}
 
-        /// <summary>
-        /// 更新NG图像队列
-        /// </summary>
-        /// <param name="newImage"></param>
-        private void UpdateImageQueueAndPictureBoxes(Image newImage)
-        {
-            // 如果队列已满，则移除最旧的图像
-            if (imageQueue.Count == 3)
-            {
-                Image oldestImage = imageQueue.Dequeue();
-                oldestImage.Dispose(); // 释放不再使用的图像资源
-            }
+        ///// <summary>
+        ///// 更新NG图像队列
+        ///// </summary>
+        ///// <param name="newImage"></param>
+        //private void UpdateImageQueueAndPictureBoxes(Image newImage)
+        //{
+        //    // 如果队列已满，则移除最旧的图像
+        //    if (imageQueue.Count == 3)
+        //    {
+        //        Image oldestImage = imageQueue.Dequeue();
+        //        oldestImage.Dispose(); // 释放不再使用的图像资源
+        //    }
 
-            // 添加新图像到队列
-            imageQueue.Enqueue(newImage);
+        //    // 添加新图像到队列
+        //    imageQueue.Enqueue(newImage);
 
-            // 更新 PictureBox 控件以显示最新的三张图像
-            UpdatePictureBoxesFromQueue();
-        }
+        //    // 更新 PictureBox 控件以显示最新的三张图像
+        //    UpdatePictureBoxesFromQueue();
+        //}
 
 
-        /// <summary>
-        /// 使用NG图片队列更新当前NG图的显示
-        /// </summary>
-        private void UpdatePictureBoxesFromQueue()
-        {
-            // 获取队列中的所有图像
-            List<Image> images = imageQueue.ToList();
+        ///// <summary>
+        ///// 使用NG图片队列更新当前NG图的显示
+        ///// </summary>
+        //private void UpdatePictureBoxesFromQueue()
+        //{
+        //    // 获取队列中的所有图像
+        //    List<Image> images = imageQueue.ToList();
 
-            // 根据队列中的图像数量更新 PictureBox 控件
-            pictureBox1.Image = images.ElementAtOrDefault(0);
-            pictureBox2.Image = images.ElementAtOrDefault(1);
-            pictureBox3.Image = images.ElementAtOrDefault(2);
+        //    // 根据队列中的图像数量更新 PictureBox 控件
+        //    pictureBox1.Image = images.ElementAtOrDefault(0);
+        //    pictureBox2.Image = images.ElementAtOrDefault(1);
+        //    pictureBox3.Image = images.ElementAtOrDefault(2);
 
-            // 确保 PictureBox 的大小模式适应图像
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-        }
+        //    // 确保 PictureBox 的大小模式适应图像
+        //    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+        //    pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+        //    pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+        //}
 
         public Response ReadModel()
         {
@@ -529,7 +602,6 @@ namespace SmartVEye
                 PageWBContourNum = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "wbcontour", 1);
                 ImgLight = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "imglight", 255);
                 ImgDark = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "imgdark", 0);
-                TriggerDelay = IniFileHelper.ReadINI(CommonData.SetFilePath, CamName, "triggerdelay", 0);// 新增相机触发延迟
 
                 //设置检测模式
                 if (comboBox_RunMode.IsHandleCreated)
@@ -607,7 +679,6 @@ namespace SmartVEye
                 IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "whitePageExposure", WhitePageExposure);   //lcl 白页检测曝光
                 IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "imgscore", ImgScore);   //lcl 图片相似度
                 IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "imagecheckmode", ImageCheckMode);   //lcl 图像检测模式，0轮廓对比，1图像对比
-                IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "triggerdelay", TriggerDelay);   //相机触发延迟
 
                 //要求每次打开软件记录都为0
                 RecordOK = 0;
@@ -1539,5 +1610,6 @@ namespace SmartVEye
             }
             IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "imgscore", ImgScore);   //lcl 当前图片相似度
         }
+
     }
 }
