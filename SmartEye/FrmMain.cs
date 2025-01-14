@@ -799,7 +799,7 @@ namespace SmartVEye
             {
                 if (VisCtrlList.Find((item) => item.CamName == comboBox_CamList.Text) is VisCtrlV2 visCtrl)
                 {
-                    if (curVal <= 100)
+                    if (curVal < 100)
                         throw new Exception("最多减到0");
                     curVal -= 100;
                     visCtrl.SetTriggerDelay(curVal);

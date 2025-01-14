@@ -38,16 +38,16 @@ namespace SmartVEye
             this.lbl_CurVersion = new System.Windows.Forms.LinkLabel();
             this.pnl_Menu = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnCancelAlarm = new System.Windows.Forms.Button();
-            this.tb_ROISize = new System.Windows.Forms.TrackBar();
-            this.btn_DisConnAll = new System.Windows.Forms.Button();
-            this.btn_ConnAll = new System.Windows.Forms.Button();
-            this.btn_TrainModeAll = new System.Windows.Forms.Button();
-            this.btn_LearnAll = new System.Windows.Forms.Button();
             this.btn_ClearRecord = new System.Windows.Forms.Button();
             this.comboBox_CamList = new System.Windows.Forms.ComboBox();
             this.button_DelaySub = new System.Windows.Forms.Button();
+            this.btn_TrainModeAll = new System.Windows.Forms.Button();
+            this.btn_ConnAll = new System.Windows.Forms.Button();
+            this.btn_LearnAll = new System.Windows.Forms.Button();
+            this.btn_DisConnAll = new System.Windows.Forms.Button();
+            this.tb_ROISize = new System.Windows.Forms.TrackBar();
             this.lbl_ROISize = new System.Windows.Forms.Label();
+            this.btnCancelAlarm = new System.Windows.Forms.Button();
             this.label_ROITitle = new System.Windows.Forms.Label();
             this.btn_TestLoad = new System.Windows.Forms.Button();
             this.btn_TestAll = new System.Windows.Forms.Button();
@@ -207,104 +207,6 @@ namespace SmartVEye
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1595, 63);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
-            // btnCancelAlarm
-            // 
-            this.btnCancelAlarm.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCancelAlarm.BackColor = System.Drawing.Color.Aqua;
-            this.btnCancelAlarm.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancelAlarm.Font = new System.Drawing.Font("黑体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancelAlarm.Location = new System.Drawing.Point(1478, 3);
-            this.btnCancelAlarm.Name = "btnCancelAlarm";
-            this.tableLayoutPanel1.SetRowSpan(this.btnCancelAlarm, 2);
-            this.btnCancelAlarm.Size = new System.Drawing.Size(114, 57);
-            this.btnCancelAlarm.TabIndex = 11;
-            this.btnCancelAlarm.Text = "取消告警";
-            this.btnCancelAlarm.UseVisualStyleBackColor = false;
-            this.btnCancelAlarm.Click += new System.EventHandler(this.btnCancelAlarm_Click);
-            // 
-            // tb_ROISize
-            // 
-            this.tb_ROISize.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tb_ROISize.AutoSize = false;
-            this.tableLayoutPanel1.SetColumnSpan(this.tb_ROISize, 2);
-            this.tb_ROISize.Location = new System.Drawing.Point(731, 34);
-            this.tb_ROISize.Maximum = 100;
-            this.tb_ROISize.Minimum = 2;
-            this.tb_ROISize.Name = "tb_ROISize";
-            this.tb_ROISize.Size = new System.Drawing.Size(217, 26);
-            this.tb_ROISize.TabIndex = 8;
-            this.tb_ROISize.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tb_ROISize.Value = 50;
-            this.tb_ROISize.Scroll += new System.EventHandler(this.tb_ROIStep_Scroll);
-            // 
-            // btn_DisConnAll
-            // 
-            this.btn_DisConnAll.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_DisConnAll.BackColor = System.Drawing.Color.Aqua;
-            this.btn_DisConnAll.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_DisConnAll.Font = new System.Drawing.Font("黑体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_DisConnAll.Location = new System.Drawing.Point(483, 4);
-            this.btn_DisConnAll.Name = "btn_DisConnAll";
-            this.tableLayoutPanel1.SetRowSpan(this.btn_DisConnAll, 2);
-            this.btn_DisConnAll.Size = new System.Drawing.Size(114, 54);
-            this.btn_DisConnAll.TabIndex = 0;
-            this.btn_DisConnAll.Text = "一键脱机";
-            this.btn_DisConnAll.UseVisualStyleBackColor = false;
-            this.btn_DisConnAll.Click += new System.EventHandler(this.btn_DisConnAll_Click);
-            this.btn_DisConnAll.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseDown);
-            this.btn_DisConnAll.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseUp);
-            // 
-            // btn_ConnAll
-            // 
-            this.btn_ConnAll.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_ConnAll.BackColor = System.Drawing.Color.Aqua;
-            this.btn_ConnAll.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_ConnAll.Font = new System.Drawing.Font("黑体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_ConnAll.Location = new System.Drawing.Point(363, 4);
-            this.btn_ConnAll.Name = "btn_ConnAll";
-            this.tableLayoutPanel1.SetRowSpan(this.btn_ConnAll, 2);
-            this.btn_ConnAll.Size = new System.Drawing.Size(114, 54);
-            this.btn_ConnAll.TabIndex = 0;
-            this.btn_ConnAll.Text = "一键联机";
-            this.btn_ConnAll.UseVisualStyleBackColor = false;
-            this.btn_ConnAll.Click += new System.EventHandler(this.btn_ConnAll_Click);
-            this.btn_ConnAll.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseDown);
-            this.btn_ConnAll.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseUp);
-            // 
-            // btn_TrainModeAll
-            // 
-            this.btn_TrainModeAll.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_TrainModeAll.BackColor = System.Drawing.Color.Aqua;
-            this.btn_TrainModeAll.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_TrainModeAll.Font = new System.Drawing.Font("黑体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_TrainModeAll.Location = new System.Drawing.Point(123, 4);
-            this.btn_TrainModeAll.Name = "btn_TrainModeAll";
-            this.tableLayoutPanel1.SetRowSpan(this.btn_TrainModeAll, 2);
-            this.btn_TrainModeAll.Size = new System.Drawing.Size(114, 54);
-            this.btn_TrainModeAll.TabIndex = 0;
-            this.btn_TrainModeAll.Text = "一键建模";
-            this.btn_TrainModeAll.UseVisualStyleBackColor = false;
-            this.btn_TrainModeAll.Click += new System.EventHandler(this.btn_TrainModeAll_Click);
-            this.btn_TrainModeAll.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseDown);
-            this.btn_TrainModeAll.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseUp);
-            // 
-            // btn_LearnAll
-            // 
-            this.btn_LearnAll.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_LearnAll.BackColor = System.Drawing.Color.Aqua;
-            this.btn_LearnAll.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_LearnAll.Font = new System.Drawing.Font("黑体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_LearnAll.Location = new System.Drawing.Point(243, 4);
-            this.btn_LearnAll.Name = "btn_LearnAll";
-            this.tableLayoutPanel1.SetRowSpan(this.btn_LearnAll, 2);
-            this.btn_LearnAll.Size = new System.Drawing.Size(114, 54);
-            this.btn_LearnAll.TabIndex = 0;
-            this.btn_LearnAll.Text = "一键学习";
-            this.btn_LearnAll.UseVisualStyleBackColor = false;
-            this.btn_LearnAll.Click += new System.EventHandler(this.btn_LearnAll_Click);
-            this.btn_LearnAll.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseDown);
-            this.btn_LearnAll.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseUp);
-            // 
             // btn_ClearRecord
             // 
             this.btn_ClearRecord.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -351,6 +253,89 @@ namespace SmartVEye
             this.button_DelaySub.UseVisualStyleBackColor = false;
             this.button_DelaySub.Click += new System.EventHandler(this.button_DelaySub_Click);
             // 
+            // btn_TrainModeAll
+            // 
+            this.btn_TrainModeAll.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_TrainModeAll.BackColor = System.Drawing.Color.Aqua;
+            this.btn_TrainModeAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_TrainModeAll.Font = new System.Drawing.Font("黑体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_TrainModeAll.Location = new System.Drawing.Point(123, 4);
+            this.btn_TrainModeAll.Name = "btn_TrainModeAll";
+            this.tableLayoutPanel1.SetRowSpan(this.btn_TrainModeAll, 2);
+            this.btn_TrainModeAll.Size = new System.Drawing.Size(114, 54);
+            this.btn_TrainModeAll.TabIndex = 0;
+            this.btn_TrainModeAll.Text = "一键建模";
+            this.btn_TrainModeAll.UseVisualStyleBackColor = false;
+            this.btn_TrainModeAll.Click += new System.EventHandler(this.btn_TrainModeAll_Click);
+            this.btn_TrainModeAll.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseDown);
+            this.btn_TrainModeAll.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseUp);
+            // 
+            // btn_ConnAll
+            // 
+            this.btn_ConnAll.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_ConnAll.BackColor = System.Drawing.Color.Aqua;
+            this.btn_ConnAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_ConnAll.Font = new System.Drawing.Font("黑体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_ConnAll.Location = new System.Drawing.Point(363, 4);
+            this.btn_ConnAll.Name = "btn_ConnAll";
+            this.tableLayoutPanel1.SetRowSpan(this.btn_ConnAll, 2);
+            this.btn_ConnAll.Size = new System.Drawing.Size(114, 54);
+            this.btn_ConnAll.TabIndex = 0;
+            this.btn_ConnAll.Text = "一键联机";
+            this.btn_ConnAll.UseVisualStyleBackColor = false;
+            this.btn_ConnAll.Click += new System.EventHandler(this.btn_ConnAll_Click);
+            this.btn_ConnAll.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseDown);
+            this.btn_ConnAll.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseUp);
+            // 
+            // btn_LearnAll
+            // 
+            this.btn_LearnAll.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_LearnAll.BackColor = System.Drawing.Color.Aqua;
+            this.btn_LearnAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_LearnAll.Font = new System.Drawing.Font("黑体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_LearnAll.Location = new System.Drawing.Point(243, 4);
+            this.btn_LearnAll.Name = "btn_LearnAll";
+            this.tableLayoutPanel1.SetRowSpan(this.btn_LearnAll, 2);
+            this.btn_LearnAll.Size = new System.Drawing.Size(114, 54);
+            this.btn_LearnAll.TabIndex = 0;
+            this.btn_LearnAll.Text = "一键学习";
+            this.btn_LearnAll.UseVisualStyleBackColor = false;
+            this.btn_LearnAll.Click += new System.EventHandler(this.btn_LearnAll_Click);
+            this.btn_LearnAll.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseDown);
+            this.btn_LearnAll.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseUp);
+            // 
+            // btn_DisConnAll
+            // 
+            this.btn_DisConnAll.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_DisConnAll.BackColor = System.Drawing.Color.Aqua;
+            this.btn_DisConnAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_DisConnAll.Font = new System.Drawing.Font("黑体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_DisConnAll.Location = new System.Drawing.Point(483, 4);
+            this.btn_DisConnAll.Name = "btn_DisConnAll";
+            this.tableLayoutPanel1.SetRowSpan(this.btn_DisConnAll, 2);
+            this.btn_DisConnAll.Size = new System.Drawing.Size(114, 54);
+            this.btn_DisConnAll.TabIndex = 0;
+            this.btn_DisConnAll.Text = "一键脱机";
+            this.btn_DisConnAll.UseVisualStyleBackColor = false;
+            this.btn_DisConnAll.Click += new System.EventHandler(this.btn_DisConnAll_Click);
+            this.btn_DisConnAll.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseDown);
+            this.btn_DisConnAll.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Function_MouseUp);
+            // 
+            // tb_ROISize
+            // 
+            this.tb_ROISize.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tb_ROISize.AutoSize = false;
+            this.tableLayoutPanel1.SetColumnSpan(this.tb_ROISize, 2);
+            this.tb_ROISize.Location = new System.Drawing.Point(731, 34);
+            this.tb_ROISize.Maximum = 100;
+            this.tb_ROISize.Minimum = 2;
+            this.tb_ROISize.Name = "tb_ROISize";
+            this.tb_ROISize.Size = new System.Drawing.Size(217, 26);
+            this.tb_ROISize.TabIndex = 8;
+            this.tb_ROISize.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tb_ROISize.Value = 50;
+            this.tb_ROISize.Scroll += new System.EventHandler(this.tb_ROIStep_Scroll);
+            // 
             // lbl_ROISize
             // 
             this.lbl_ROISize.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -362,6 +347,21 @@ namespace SmartVEye
             this.lbl_ROISize.TabIndex = 9;
             this.lbl_ROISize.Text = "50";
             this.lbl_ROISize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnCancelAlarm
+            // 
+            this.btnCancelAlarm.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCancelAlarm.BackColor = System.Drawing.Color.Aqua;
+            this.btnCancelAlarm.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancelAlarm.Font = new System.Drawing.Font("黑体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancelAlarm.Location = new System.Drawing.Point(1478, 3);
+            this.btnCancelAlarm.Name = "btnCancelAlarm";
+            this.tableLayoutPanel1.SetRowSpan(this.btnCancelAlarm, 2);
+            this.btnCancelAlarm.Size = new System.Drawing.Size(114, 57);
+            this.btnCancelAlarm.TabIndex = 11;
+            this.btnCancelAlarm.Text = "取消告警";
+            this.btnCancelAlarm.UseVisualStyleBackColor = false;
+            this.btnCancelAlarm.Click += new System.EventHandler(this.btnCancelAlarm_Click);
             // 
             // label_ROITitle
             // 
@@ -384,6 +384,7 @@ namespace SmartVEye
             this.btn_TestLoad.TabIndex = 1;
             this.btn_TestLoad.Text = "加载图像";
             this.btn_TestLoad.UseVisualStyleBackColor = true;
+            this.btn_TestLoad.Visible = false;
             this.btn_TestLoad.Click += new System.EventHandler(this.btn_TestLoad_Click);
             // 
             // btn_TestAll
@@ -395,6 +396,7 @@ namespace SmartVEye
             this.btn_TestAll.TabIndex = 2;
             this.btn_TestAll.Text = "连续测试";
             this.btn_TestAll.UseVisualStyleBackColor = true;
+            this.btn_TestAll.Visible = false;
             this.btn_TestAll.Click += new System.EventHandler(this.btn_TestAll_Click);
             // 
             // btn_FrmTestStop
@@ -406,6 +408,7 @@ namespace SmartVEye
             this.btn_FrmTestStop.TabIndex = 2;
             this.btn_FrmTestStop.Text = "停止测试";
             this.btn_FrmTestStop.UseVisualStyleBackColor = true;
+            this.btn_FrmTestStop.Visible = false;
             this.btn_FrmTestStop.Click += new System.EventHandler(this.btn_FrmTestStop_Click);
             // 
             // btn_Settings
