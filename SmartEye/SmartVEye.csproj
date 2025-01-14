@@ -144,6 +144,18 @@
     <Compile Include="Helper\Registe\Util.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisCtrl\PreviewWinRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VisCtrl\PreviewWinRow.Designer.cs">
+      <DependentUpon>PreviewWinRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VisCtrl\VisCtrlV3.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VisCtrl\VisCtrlV3.Designer.cs">
+      <DependentUpon>VisCtrlV3.cs</DependentUpon>
+    </Compile>
     <Compile Include="VisCtrl\FormPreview.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,11 +163,11 @@
       <DependentUpon>FormPreview.cs</DependentUpon>
     </Compile>
     <Compile Include="VisCtrl\IVisCtrl.cs" />
-    <Compile Include="VisCtrl\PreviewWin.cs">
+    <Compile Include="VisCtrl\PreviewWinCol.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="VisCtrl\PreviewWin.Designer.cs">
-      <DependentUpon>PreviewWin.cs</DependentUpon>
+    <Compile Include="VisCtrl\PreviewWinCol.Designer.cs">
+      <DependentUpon>PreviewWinCol.cs</DependentUpon>
     </Compile>
     <Compile Include="VisCtrl\VisCtrlBase.cs">
       <SubType>UserControl</SubType>
@@ -163,30 +175,12 @@
     <Compile Include="VisCtrl\VisCtrlBase.Designer.cs">
       <DependentUpon>VisCtrlBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="VisCtrl\VisCtrlV1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="VisCtrl\VisCtrlV1.Designer.cs">
-      <DependentUpon>VisCtrlV1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VisCtrl\VisCtrlV4.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="VisCtrl\VisCtrlV4.Designer.cs">
-      <DependentUpon>VisCtrlV4.cs</DependentUpon>
-    </Compile>
     <Compile Include="VisCtrl\VisCtrlHelper.cs" />
-    <Compile Include="VisCtrl\VisCtrlV3.cs">
+    <Compile Include="VisCtrl\VisCtrlV124.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="VisCtrl\VisCtrlV3.Designer.cs">
-      <DependentUpon>VisCtrlV3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VisCtrl\VisCtrlV2.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="VisCtrl\VisCtrlV2.Designer.cs">
-      <DependentUpon>VisCtrlV2.cs</DependentUpon>
+    <Compile Include="VisCtrl\VisCtrlV124.Designer.cs">
+      <DependentUpon>VisCtrlV124.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FrmAuthority.resx">
       <DependentUpon>FrmAuthority.cs</DependentUpon>
@@ -217,26 +211,21 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="VisCtrl\FormPreview.resx">
-      <DependentUpon>FormPreview.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VisCtrl\PreviewWin.resx">
-      <DependentUpon>PreviewWin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VisCtrl\VisCtrlV1.resx">
-      <DependentUpon>VisCtrlV1.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VisCtrl\VisCtrlV4.resx">
-      <DependentUpon>VisCtrlV4.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="VisCtrl\PreviewWinRow.resx">
+      <DependentUpon>PreviewWinRow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VisCtrl\VisCtrlV3.resx">
       <DependentUpon>VisCtrlV3.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="VisCtrl\VisCtrlV2.resx">
-      <DependentUpon>VisCtrlV2.cs</DependentUpon>
+    <EmbeddedResource Include="VisCtrl\FormPreview.resx">
+      <DependentUpon>FormPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisCtrl\PreviewWinCol.resx">
+      <DependentUpon>PreviewWinCol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisCtrl\VisCtrlV124.resx">
+      <DependentUpon>VisCtrlV124.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="NLog.config">

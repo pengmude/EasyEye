@@ -1,6 +1,6 @@
 ﻿namespace SmartVEye.VisCtrl
 {
-    partial class PreviewWin
+    partial class PreviewWinCol
     {
         /// <summary> 
         /// 必需的设计器变量。

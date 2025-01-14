@@ -13,11 +13,11 @@ using System.Windows.Forms;
 
 namespace SmartVEye.VisCtrl
 {
-    public partial class PreviewWin : UserControl
+    public partial class PreviewWinCol : UserControl
     {
         private Queue<Image> imageQueue = new Queue<Image>(3);// 定义一个只能存放三张NG图像的队列
 
-        public PreviewWin()
+        public PreviewWinCol()
         {
             InitializeComponent();
         }

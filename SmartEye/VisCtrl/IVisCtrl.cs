@@ -55,6 +55,7 @@ namespace SmartVEye
         void UnInitCamera();
         void TrainModeIn();
         void TrainOperateBtn();    //进行按钮操作
-
+        void SetTriggerDelay(double delay);
+        double GetTriggerDelay();
     }
 }

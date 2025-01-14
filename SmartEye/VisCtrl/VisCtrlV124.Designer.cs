@@ -1,7 +1,7 @@
 ﻿
 namespace SmartVEye
 {
-    partial class VisCtrlV2
+    partial class VisCtrlV124
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -51,7 +51,7 @@ namespace SmartVEye
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_WidthSub = new System.Windows.Forms.Button();
             this.btn_HighSub = new System.Windows.Forms.Button();
-            this.previewWin1 = new SmartVEye.VisCtrl.PreviewWin();
+            this.previewWin1 = new SmartVEye.VisCtrl.PreviewWinCol();
             this.tableLayoutPanel_Result = new System.Windows.Forms.TableLayoutPanel();
             this.panel_View = new System.Windows.Forms.Panel();
             this.panel_Top = new System.Windows.Forms.Panel();
@@ -477,6 +477,6 @@ namespace SmartVEye
         private System.Windows.Forms.Panel panel_Top;
         private System.Windows.Forms.Button btn_WidthSub;
         private System.Windows.Forms.Button btn_HighSub;
-        private VisCtrl.PreviewWin previewWin1;
+        private VisCtrl.PreviewWinCol previewWin1;
     }
 }

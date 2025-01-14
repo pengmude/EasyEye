@@ -16,7 +16,7 @@ namespace SmartVEye
     {
         private static readonly ILogger _logger = LogManager.GetCurrentClassLogger();
         string[] SetNameList = { "相机数量", "模板路径", "软件名称", "公司名称", "排废输出时间", "是否保存日志","是否保存图像",
-            "显示销售电话","IO测试工具","销售电话","视频模式触发间隔","启用相机探包" ,"脱机是否需要密码","是否手动联机"};
+            "显示销售电话","IO测试工具","销售电话","视频模式触发间隔","启用相机探包" ,"脱机是否需要密码","是否手动联机","清除计数是否需要密码"};
         string[] CamNameList = { "起始角度", "终止角度", "最小缩小倍数", "最大放大倍数","相似分数值", "模板色差" ,"相机曝光时间","相机增益",
             "是否启用相机","相机编号","ROI宽度","ROI高度","白页检测阈值","黑页检测阈值","训练ROI横坐标","训练ROI纵坐标","训练ROI宽度",
             "训练ROI高度", "检测模式","黑白页检测轮廓数量","数值减小图像变亮","数值增大图像变暗","筛选轮廓最小值","高精度模板色差",
@@ -63,6 +63,15 @@ namespace SmartVEye
             }
         }
 
+        /// <summary>
+        /// 给主界面判断是否需要密码
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsNeedPasswoed()
+        {
+            return IniFileHelper.ReadINI(CommonData.SetFilePath, "set", "showpassword", "1") == "1" ? true : false;
+        }
+
         private void cb_CamList_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -104,6 +113,7 @@ namespace SmartVEye
                 }
                 CommonData.CamReadModel(cb_CamList.SelectedIndex);
                 MessageBox.Show("参数保存成功!");
+                this.Hide();
             }
             catch (Exception ex)
             {

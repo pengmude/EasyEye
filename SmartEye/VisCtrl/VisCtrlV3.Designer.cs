@@ -29,112 +29,75 @@ namespace SmartVEye
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btn_WidthPlus = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lb_ImgSimilarScore = new System.Windows.Forms.Label();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv_ProRecord = new System.Windows.Forms.DataGridView();
             this.tb_RecVal1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tb_RecVal2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cb_CamEnable = new System.Windows.Forms.CheckBox();
-            this.btn_HighPlus = new System.Windows.Forms.Button();
-            this.btn_TrainMode = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.cb_WorkOnLine = new System.Windows.Forms.CheckBox();
+            this.cb_RealImg = new System.Windows.Forms.CheckBox();
+            this.lb_ImgSimilarScore = new System.Windows.Forms.Label();
             this.lbl_Res = new System.Windows.Forms.Label();
             this.lbl_CamIndex = new System.Windows.Forms.Label();
-            this.cb_RealImg = new System.Windows.Forms.CheckBox();
-            this.cb_WhitePage = new System.Windows.Forms.CheckBox();
-            this.cb_BlackPage = new System.Windows.Forms.CheckBox();
-            this.cb_FindByte = new System.Windows.Forms.CheckBox();
+            this.comboBox_RunMode = new System.Windows.Forms.ComboBox();
+            this.btn_HighPlus = new System.Windows.Forms.Button();
+            this.btn_WidthPlus = new System.Windows.Forms.Button();
+            this.WinCtrl = new SmartLib.DisplayCtrl();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.comboBox_DetectAccuracy = new System.Windows.Forms.ComboBox();
+            this.btn_TrainMode = new System.Windows.Forms.Button();
+            this.btn_Train = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_WidthSub = new System.Windows.Forms.Button();
             this.btn_HighSub = new System.Windows.Forms.Button();
-            this.cb_WorkOnLine = new System.Windows.Forms.CheckBox();
-            this.cb_Accuracy = new System.Windows.Forms.ComboBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btn_Train = new System.Windows.Forms.Button();
-            this.WinCtrl = new SmartLib.DisplayCtrl();
-            this.panel1.SuspendLayout();
+            this.tableLayoutPanel_Result = new System.Windows.Forms.TableLayoutPanel();
+            this.previewWin1 = new SmartVEye.VisCtrl.PreviewWinRow();
+            this.tableLayoutPanel_Base = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProRecord)).BeginInit();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel_Result.SuspendLayout();
+            this.tableLayoutPanel_Base.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btn_WidthPlus
-            // 
-            this.btn_WidthPlus.BackColor = System.Drawing.Color.Aqua;
-            this.btn_WidthPlus.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_WidthPlus.Font = new System.Drawing.Font("黑体", 20F, System.Drawing.FontStyle.Bold);
-            this.btn_WidthPlus.Location = new System.Drawing.Point(55, 221);
-            this.btn_WidthPlus.Name = "btn_WidthPlus";
-            this.btn_WidthPlus.Size = new System.Drawing.Size(76, 41);
-            this.btn_WidthPlus.TabIndex = 5;
-            this.btn_WidthPlus.Text = "宽+";
-            this.btn_WidthPlus.UseVisualStyleBackColor = false;
-            this.btn_WidthPlus.Click += new System.EventHandler(this.btn_WidthPlus_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.lb_ImgSimilarScore);
-            this.panel1.Controls.Add(this.dgv_ProRecord);
-            this.panel1.Controls.Add(this.cb_CamEnable);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.panel1.Size = new System.Drawing.Size(482, 46);
-            this.panel1.TabIndex = 10;
-            // 
-            // lb_ImgSimilarScore
-            // 
-            this.lb_ImgSimilarScore.BackColor = System.Drawing.Color.LightGray;
-            this.lb_ImgSimilarScore.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lb_ImgSimilarScore.Font = new System.Drawing.Font("黑体", 18F, System.Drawing.FontStyle.Bold);
-            this.lb_ImgSimilarScore.ForeColor = System.Drawing.Color.Black;
-            this.lb_ImgSimilarScore.Location = new System.Drawing.Point(322, 0);
-            this.lb_ImgSimilarScore.Margin = new System.Windows.Forms.Padding(0);
-            this.lb_ImgSimilarScore.Name = "lb_ImgSimilarScore";
-            this.lb_ImgSimilarScore.Size = new System.Drawing.Size(160, 45);
-            this.lb_ImgSimilarScore.TabIndex = 9;
-            this.lb_ImgSimilarScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dgv_ProRecord
             // 
             this.dgv_ProRecord.AllowUserToAddRows = false;
             this.dgv_ProRecord.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_ProRecord.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_ProRecord.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_ProRecord.ColumnHeadersHeight = 22;
             this.dgv_ProRecord.ColumnHeadersVisible = false;
             this.dgv_ProRecord.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.tb_RecVal1,
             this.tb_RecVal2});
             this.dgv_ProRecord.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_ProRecord.Location = new System.Drawing.Point(0, 0);
+            this.dgv_ProRecord.Location = new System.Drawing.Point(657, 47);
             this.dgv_ProRecord.Margin = new System.Windows.Forms.Padding(0);
             this.dgv_ProRecord.MultiSelect = false;
             this.dgv_ProRecord.Name = "dgv_ProRecord";
             this.dgv_ProRecord.ReadOnly = true;
             this.dgv_ProRecord.RowHeadersVisible = false;
             this.dgv_ProRecord.RowHeadersWidth = 82;
+            this.tableLayoutPanel1.SetRowSpan(this.dgv_ProRecord, 2);
             this.dgv_ProRecord.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_ProRecord.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgv_ProRecord.Size = new System.Drawing.Size(482, 45);
-            this.dgv_ProRecord.TabIndex = 4;
+            this.dgv_ProRecord.Size = new System.Drawing.Size(221, 97);
+            this.dgv_ProRecord.TabIndex = 2;
             // 
             // tb_RecVal1
             // 
             this.tb_RecVal1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("黑体", 15F);
-            this.tb_RecVal1.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("黑体", 12F);
+            this.tb_RecVal1.DefaultCellStyle = dataGridViewCellStyle2;
             this.tb_RecVal1.HeaderText = "RecVal1";
             this.tb_RecVal1.MinimumWidth = 10;
             this.tb_RecVal1.Name = "tb_RecVal1";
@@ -145,9 +108,9 @@ namespace SmartVEye
             // tb_RecVal2
             // 
             this.tb_RecVal2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("黑体", 15F);
-            this.tb_RecVal2.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("黑体", 12F);
+            this.tb_RecVal2.DefaultCellStyle = dataGridViewCellStyle3;
             this.tb_RecVal2.HeaderText = "RecVal2";
             this.tb_RecVal2.MinimumWidth = 10;
             this.tb_RecVal2.Name = "tb_RecVal2";
@@ -155,64 +118,48 @@ namespace SmartVEye
             this.tb_RecVal2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.tb_RecVal2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // cb_CamEnable
+            // cb_WorkOnLine
             // 
-            this.cb_CamEnable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.cb_CamEnable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.cb_CamEnable.Checked = true;
-            this.cb_CamEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_CamEnable.Font = new System.Drawing.Font("黑体", 20F);
-            this.cb_CamEnable.Location = new System.Drawing.Point(17, 2);
-            this.cb_CamEnable.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_CamEnable.Name = "cb_CamEnable";
-            this.cb_CamEnable.Size = new System.Drawing.Size(147, 33);
-            this.cb_CamEnable.TabIndex = 4;
-            this.cb_CamEnable.Text = "启用";
-            this.cb_CamEnable.UseVisualStyleBackColor = false;
-            this.cb_CamEnable.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cb_CamEnable_MouseUp);
+            this.cb_WorkOnLine.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cb_WorkOnLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.cb_WorkOnLine.Font = new System.Drawing.Font("黑体", 15F);
+            this.cb_WorkOnLine.Location = new System.Drawing.Point(39, 96);
+            this.cb_WorkOnLine.Margin = new System.Windows.Forms.Padding(2);
+            this.cb_WorkOnLine.Name = "cb_WorkOnLine";
+            this.cb_WorkOnLine.Size = new System.Drawing.Size(140, 45);
+            this.cb_WorkOnLine.TabIndex = 4;
+            this.cb_WorkOnLine.Text = "联机";
+            this.cb_WorkOnLine.UseVisualStyleBackColor = false;
+            this.cb_WorkOnLine.CheckedChanged += new System.EventHandler(this.cb_WorkOnLine_CheckedChanged);
+            this.cb_WorkOnLine.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cb_WorkOnLine_MouseUp);
             // 
-            // btn_HighPlus
+            // cb_RealImg
             // 
-            this.btn_HighPlus.BackColor = System.Drawing.Color.Aqua;
-            this.btn_HighPlus.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_HighPlus.Font = new System.Drawing.Font("黑体", 20F, System.Drawing.FontStyle.Bold);
-            this.btn_HighPlus.Location = new System.Drawing.Point(135, 52);
-            this.btn_HighPlus.Name = "btn_HighPlus";
-            this.btn_HighPlus.Size = new System.Drawing.Size(76, 41);
-            this.btn_HighPlus.TabIndex = 5;
-            this.btn_HighPlus.Text = "高+";
-            this.btn_HighPlus.UseVisualStyleBackColor = false;
-            this.btn_HighPlus.Click += new System.EventHandler(this.btn_HighPlus_Click);
+            this.cb_RealImg.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cb_RealImg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.cb_RealImg.Font = new System.Drawing.Font("黑体", 15F);
+            this.cb_RealImg.Location = new System.Drawing.Point(258, 96);
+            this.cb_RealImg.Margin = new System.Windows.Forms.Padding(2);
+            this.cb_RealImg.Name = "cb_RealImg";
+            this.cb_RealImg.Size = new System.Drawing.Size(140, 45);
+            this.cb_RealImg.TabIndex = 4;
+            this.cb_RealImg.Text = "视频";
+            this.cb_RealImg.UseVisualStyleBackColor = false;
+            this.cb_RealImg.CheckedChanged += new System.EventHandler(this.cb_RealImg_CheckedChanged);
+            this.cb_RealImg.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cb_RealImg_MouseUp);
             // 
-            // btn_TrainMode
+            // lb_ImgSimilarScore
             // 
-            this.btn_TrainMode.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btn_TrainMode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_TrainMode.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_TrainMode.Font = new System.Drawing.Font("黑体", 25F, System.Drawing.FontStyle.Bold);
-            this.btn_TrainMode.Image = global::SmartVEye.Properties.Resources.no;
-            this.btn_TrainMode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_TrainMode.Location = new System.Drawing.Point(0, 0);
-            this.btn_TrainMode.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.btn_TrainMode.Name = "btn_TrainMode";
-            this.btn_TrainMode.Size = new System.Drawing.Size(165, 75);
-            this.btn_TrainMode.TabIndex = 3;
-            this.btn_TrainMode.Text = "建模";
-            this.btn_TrainMode.UseVisualStyleBackColor = false;
-            this.btn_TrainMode.Click += new System.EventHandler(this.btn_TrainMode_Click);
-            this.btn_TrainMode.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Train_MouseDown);
-            this.btn_TrainMode.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Train_MouseUp);
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.lbl_Res);
-            this.panel3.Controls.Add(this.lbl_CamIndex);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(0, 46);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(55, 371);
-            this.panel3.TabIndex = 6;
+            this.lb_ImgSimilarScore.BackColor = System.Drawing.Color.LightGray;
+            this.lb_ImgSimilarScore.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lb_ImgSimilarScore.Font = new System.Drawing.Font("黑体", 18F, System.Drawing.FontStyle.Bold);
+            this.lb_ImgSimilarScore.ForeColor = System.Drawing.Color.Black;
+            this.lb_ImgSimilarScore.Location = new System.Drawing.Point(584, 0);
+            this.lb_ImgSimilarScore.Margin = new System.Windows.Forms.Padding(0);
+            this.lb_ImgSimilarScore.Name = "lb_ImgSimilarScore";
+            this.lb_ImgSimilarScore.Size = new System.Drawing.Size(294, 44);
+            this.lb_ImgSimilarScore.TabIndex = 5;
+            this.lb_ImgSimilarScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_Res
             // 
@@ -220,10 +167,10 @@ namespace SmartVEye
             this.lbl_Res.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_Res.Font = new System.Drawing.Font("宋体", 25F, System.Drawing.FontStyle.Bold);
             this.lbl_Res.ForeColor = System.Drawing.Color.Black;
-            this.lbl_Res.Location = new System.Drawing.Point(0, 42);
+            this.lbl_Res.Location = new System.Drawing.Point(292, 0);
             this.lbl_Res.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Res.Name = "lbl_Res";
-            this.lbl_Res.Size = new System.Drawing.Size(55, 329);
+            this.lbl_Res.Size = new System.Drawing.Size(292, 44);
             this.lbl_Res.TabIndex = 4;
             this.lbl_Res.Text = "OK";
             this.lbl_Res.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -231,219 +178,293 @@ namespace SmartVEye
             // lbl_CamIndex
             // 
             this.lbl_CamIndex.BackColor = System.Drawing.Color.LightGray;
-            this.lbl_CamIndex.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lbl_CamIndex.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_CamIndex.Font = new System.Drawing.Font("黑体", 25F, System.Drawing.FontStyle.Bold);
             this.lbl_CamIndex.ForeColor = System.Drawing.Color.Black;
             this.lbl_CamIndex.Location = new System.Drawing.Point(0, 0);
             this.lbl_CamIndex.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_CamIndex.Name = "lbl_CamIndex";
-            this.lbl_CamIndex.Size = new System.Drawing.Size(55, 42);
+            this.lbl_CamIndex.Size = new System.Drawing.Size(292, 44);
             this.lbl_CamIndex.TabIndex = 4;
             this.lbl_CamIndex.Text = "1";
             this.lbl_CamIndex.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cb_RealImg
+            // comboBox_RunMode
             // 
-            this.cb_RealImg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.cb_RealImg.Font = new System.Drawing.Font("黑体", 20F);
-            this.cb_RealImg.Location = new System.Drawing.Point(5, 202);
-            this.cb_RealImg.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_RealImg.Name = "cb_RealImg";
-            this.cb_RealImg.Size = new System.Drawing.Size(147, 33);
-            this.cb_RealImg.TabIndex = 4;
-            this.cb_RealImg.Text = "视频";
-            this.cb_RealImg.UseVisualStyleBackColor = false;
-            this.cb_RealImg.CheckedChanged += new System.EventHandler(this.cb_RealImg_CheckedChanged);
-            this.cb_RealImg.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cb_RealImg_MouseUp);
+            this.comboBox_RunMode.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBox_RunMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.comboBox_RunMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_RunMode.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox_RunMode.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.comboBox_RunMode.FormattingEnabled = true;
+            this.comboBox_RunMode.Items.AddRange(new object[] {
+            "图文检测",
+            "白页检测",
+            "黑页检测"});
+            this.comboBox_RunMode.Location = new System.Drawing.Point(454, 54);
+            this.comboBox_RunMode.Name = "comboBox_RunMode";
+            this.comboBox_RunMode.Size = new System.Drawing.Size(187, 32);
+            this.comboBox_RunMode.TabIndex = 6;
+            this.comboBox_RunMode.SelectedIndexChanged += new System.EventHandler(this.comboBox_RunMode_SelectedIndexChanged);
             // 
-            // cb_WhitePage
+            // btn_HighPlus
             // 
-            this.cb_WhitePage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.cb_WhitePage.Font = new System.Drawing.Font("黑体", 20F);
-            this.cb_WhitePage.Location = new System.Drawing.Point(5, 290);
-            this.cb_WhitePage.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_WhitePage.Name = "cb_WhitePage";
-            this.cb_WhitePage.Size = new System.Drawing.Size(147, 33);
-            this.cb_WhitePage.TabIndex = 4;
-            this.cb_WhitePage.Text = "白页检测";
-            this.cb_WhitePage.UseVisualStyleBackColor = false;
-            this.cb_WhitePage.CheckedChanged += new System.EventHandler(this.cb_WhitePage_CheckedChanged);
-            this.cb_WhitePage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cb_WhitePage_MouseUp);
+            this.btn_HighPlus.BackColor = System.Drawing.Color.Aqua;
+            this.btn_HighPlus.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_HighPlus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_HighPlus.Font = new System.Drawing.Font("黑体", 18F, System.Drawing.FontStyle.Bold);
+            this.btn_HighPlus.Location = new System.Drawing.Point(438, 0);
+            this.btn_HighPlus.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_HighPlus.Name = "btn_HighPlus";
+            this.btn_HighPlus.Size = new System.Drawing.Size(219, 47);
+            this.btn_HighPlus.TabIndex = 5;
+            this.btn_HighPlus.Text = "高+";
+            this.btn_HighPlus.UseVisualStyleBackColor = false;
+            this.btn_HighPlus.Visible = false;
+            this.btn_HighPlus.Click += new System.EventHandler(this.btn_HighPlus_Click);
             // 
-            // cb_BlackPage
+            // btn_WidthPlus
             // 
-            this.cb_BlackPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.cb_BlackPage.Font = new System.Drawing.Font("黑体", 20F);
-            this.cb_BlackPage.Location = new System.Drawing.Point(5, 333);
-            this.cb_BlackPage.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_BlackPage.Name = "cb_BlackPage";
-            this.cb_BlackPage.Size = new System.Drawing.Size(147, 33);
-            this.cb_BlackPage.TabIndex = 4;
-            this.cb_BlackPage.Text = "黑页检测";
-            this.cb_BlackPage.UseVisualStyleBackColor = false;
-            this.cb_BlackPage.CheckedChanged += new System.EventHandler(this.cb_BlackPage_CheckedChanged);
-            this.cb_BlackPage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cb_BlackPage_MouseUp);
+            this.btn_WidthPlus.BackColor = System.Drawing.Color.Aqua;
+            this.btn_WidthPlus.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_WidthPlus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_WidthPlus.Font = new System.Drawing.Font("黑体", 18F, System.Drawing.FontStyle.Bold);
+            this.btn_WidthPlus.Location = new System.Drawing.Point(0, 0);
+            this.btn_WidthPlus.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_WidthPlus.Name = "btn_WidthPlus";
+            this.btn_WidthPlus.Size = new System.Drawing.Size(219, 47);
+            this.btn_WidthPlus.TabIndex = 5;
+            this.btn_WidthPlus.Text = "宽+";
+            this.btn_WidthPlus.UseVisualStyleBackColor = false;
+            this.btn_WidthPlus.Visible = false;
+            this.btn_WidthPlus.Click += new System.EventHandler(this.btn_WidthPlus_Click);
             // 
-            // cb_FindByte
+            // WinCtrl
             // 
-            this.cb_FindByte.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.cb_FindByte.Checked = true;
-            this.cb_FindByte.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_FindByte.Font = new System.Drawing.Font("黑体", 20F);
-            this.cb_FindByte.Location = new System.Drawing.Point(5, 246);
-            this.cb_FindByte.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_FindByte.Name = "cb_FindByte";
-            this.cb_FindByte.Size = new System.Drawing.Size(147, 33);
-            this.cb_FindByte.TabIndex = 4;
-            this.cb_FindByte.Text = "图文检测";
-            this.cb_FindByte.UseVisualStyleBackColor = false;
-            this.cb_FindByte.CheckedChanged += new System.EventHandler(this.cb_FindByte_CheckedChanged);
-            this.cb_FindByte.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cb_FindByte_MouseUp);
+            this.tableLayoutPanel2.SetColumnSpan(this.WinCtrl, 4);
+            this.WinCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WinCtrl.Location = new System.Drawing.Point(3, 3);
+            this.WinCtrl.Name = "WinCtrl";
+            this.WinCtrl.Size = new System.Drawing.Size(872, 443);
+            this.WinCtrl.TabIndex = 8;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Controls.Add(this.btn_WidthPlus, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBox_DetectAccuracy, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btn_HighSub, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_WidthSub, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_HighPlus, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBox_RunMode, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dgv_ProRecord, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btn_TrainMode, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btn_Train, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cb_RealImg, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.cb_WorkOnLine, 0, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 701);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(878, 144);
+            this.tableLayoutPanel1.TabIndex = 11;
+            // 
+            // comboBox_DetectAccuracy
+            // 
+            this.comboBox_DetectAccuracy.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBox_DetectAccuracy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.comboBox_DetectAccuracy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_DetectAccuracy.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox_DetectAccuracy.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.comboBox_DetectAccuracy.FormattingEnabled = true;
+            this.comboBox_DetectAccuracy.Items.AddRange(new object[] {
+            "高精度",
+            "中精度",
+            "低精度"});
+            this.comboBox_DetectAccuracy.Location = new System.Drawing.Point(455, 103);
+            this.comboBox_DetectAccuracy.Name = "comboBox_DetectAccuracy";
+            this.comboBox_DetectAccuracy.Size = new System.Drawing.Size(184, 32);
+            this.comboBox_DetectAccuracy.TabIndex = 6;
+            this.comboBox_DetectAccuracy.SelectedIndexChanged += new System.EventHandler(this.comboBox_DetectAccuracy_SelectionChangeCommitted);
+            // 
+            // btn_TrainMode
+            // 
+            this.btn_TrainMode.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_TrainMode.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btn_TrainMode.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_TrainMode.Font = new System.Drawing.Font("黑体", 25F, System.Drawing.FontStyle.Bold);
+            this.btn_TrainMode.Image = global::SmartVEye.Properties.Resources.no;
+            this.btn_TrainMode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_TrainMode.Location = new System.Drawing.Point(39, 47);
+            this.btn_TrainMode.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.btn_TrainMode.Name = "btn_TrainMode";
+            this.btn_TrainMode.Size = new System.Drawing.Size(140, 45);
+            this.btn_TrainMode.TabIndex = 5;
+            this.btn_TrainMode.Text = "建模";
+            this.btn_TrainMode.UseVisualStyleBackColor = false;
+            this.btn_TrainMode.Click += new System.EventHandler(this.btn_TrainMode_Click);
+            // 
+            // btn_Train
+            // 
+            this.btn_Train.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_Train.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btn_Train.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Train.Font = new System.Drawing.Font("黑体", 25F, System.Drawing.FontStyle.Bold);
+            this.btn_Train.Image = global::SmartVEye.Properties.Resources.no;
+            this.btn_Train.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Train.Location = new System.Drawing.Point(258, 48);
+            this.btn_Train.Margin = new System.Windows.Forms.Padding(1);
+            this.btn_Train.Name = "btn_Train";
+            this.btn_Train.Size = new System.Drawing.Size(140, 45);
+            this.btn_Train.TabIndex = 2;
+            this.btn_Train.Text = "学习";
+            this.btn_Train.UseVisualStyleBackColor = false;
+            this.btn_Train.Click += new System.EventHandler(this.btn_Train_Click);
+            this.btn_Train.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Train_MouseDown);
+            this.btn_Train.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Train_MouseUp);
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.BackColor = System.Drawing.SystemColors.Control;
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.Controls.Add(this.previewWin1, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.WinCtrl, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 53);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(878, 642);
+            this.tableLayoutPanel2.TabIndex = 12;
             // 
             // btn_WidthSub
             // 
             this.btn_WidthSub.BackColor = System.Drawing.Color.Aqua;
             this.btn_WidthSub.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_WidthSub.Font = new System.Drawing.Font("黑体", 20F, System.Drawing.FontStyle.Bold);
-            this.btn_WidthSub.Location = new System.Drawing.Point(235, 221);
+            this.btn_WidthSub.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_WidthSub.Font = new System.Drawing.Font("黑体", 18F, System.Drawing.FontStyle.Bold);
+            this.btn_WidthSub.Location = new System.Drawing.Point(219, 0);
+            this.btn_WidthSub.Margin = new System.Windows.Forms.Padding(0);
             this.btn_WidthSub.Name = "btn_WidthSub";
-            this.btn_WidthSub.Size = new System.Drawing.Size(76, 41);
+            this.btn_WidthSub.Size = new System.Drawing.Size(219, 47);
             this.btn_WidthSub.TabIndex = 5;
             this.btn_WidthSub.Text = "宽-";
             this.btn_WidthSub.UseVisualStyleBackColor = false;
+            this.btn_WidthSub.Visible = false;
             this.btn_WidthSub.Click += new System.EventHandler(this.btn_WidthSub_Click);
             // 
             // btn_HighSub
             // 
             this.btn_HighSub.BackColor = System.Drawing.Color.Aqua;
             this.btn_HighSub.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_HighSub.Font = new System.Drawing.Font("黑体", 20F, System.Drawing.FontStyle.Bold);
-            this.btn_HighSub.Location = new System.Drawing.Point(144, 370);
+            this.btn_HighSub.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_HighSub.Font = new System.Drawing.Font("黑体", 18F, System.Drawing.FontStyle.Bold);
+            this.btn_HighSub.Location = new System.Drawing.Point(657, 0);
+            this.btn_HighSub.Margin = new System.Windows.Forms.Padding(0);
             this.btn_HighSub.Name = "btn_HighSub";
-            this.btn_HighSub.Size = new System.Drawing.Size(76, 41);
+            this.btn_HighSub.Size = new System.Drawing.Size(221, 47);
             this.btn_HighSub.TabIndex = 5;
             this.btn_HighSub.Text = "高-";
             this.btn_HighSub.UseVisualStyleBackColor = false;
+            this.btn_HighSub.Visible = false;
             this.btn_HighSub.Click += new System.EventHandler(this.btn_HighSub_Click);
             // 
-            // cb_WorkOnLine
+            // tableLayoutPanel_Result
             // 
-            this.cb_WorkOnLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.cb_WorkOnLine.Font = new System.Drawing.Font("黑体", 20F);
-            this.cb_WorkOnLine.Location = new System.Drawing.Point(5, 160);
-            this.cb_WorkOnLine.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_WorkOnLine.Name = "cb_WorkOnLine";
-            this.cb_WorkOnLine.Size = new System.Drawing.Size(147, 33);
-            this.cb_WorkOnLine.TabIndex = 4;
-            this.cb_WorkOnLine.Text = "联机";
-            this.cb_WorkOnLine.UseVisualStyleBackColor = false;
-            this.cb_WorkOnLine.CheckedChanged += new System.EventHandler(this.cb_WorkOnLine_CheckedChanged);
-            this.cb_WorkOnLine.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cb_WorkOnLine_MouseUp);
+            this.tableLayoutPanel_Result.ColumnCount = 3;
+            this.tableLayoutPanel_Result.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel_Result.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel_Result.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel_Result.Controls.Add(this.lb_ImgSimilarScore, 2, 0);
+            this.tableLayoutPanel_Result.Controls.Add(this.lbl_Res, 1, 0);
+            this.tableLayoutPanel_Result.Controls.Add(this.lbl_CamIndex, 0, 0);
+            this.tableLayoutPanel_Result.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel_Result.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel_Result.Name = "tableLayoutPanel_Result";
+            this.tableLayoutPanel_Result.RowCount = 1;
+            this.tableLayoutPanel_Result.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel_Result.Size = new System.Drawing.Size(878, 44);
+            this.tableLayoutPanel_Result.TabIndex = 13;
             // 
-            // cb_Accuracy
+            // previewWin1
             // 
-            this.cb_Accuracy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_Accuracy.Font = new System.Drawing.Font("黑体", 20F);
-            this.cb_Accuracy.FormattingEnabled = true;
-            this.cb_Accuracy.Items.AddRange(new object[] {
-            "高精度",
-            "中精度",
-            "低精度"});
-            this.cb_Accuracy.Location = new System.Drawing.Point(66, 314);
-            this.cb_Accuracy.Name = "cb_Accuracy";
-            this.cb_Accuracy.Size = new System.Drawing.Size(154, 35);
-            this.cb_Accuracy.TabIndex = 7;
-            this.cb_Accuracy.Visible = false;
-            this.cb_Accuracy.SelectedIndexChanged += new System.EventHandler(this.cb_Accuracy_SelectedIndexChanged);
+            this.tableLayoutPanel2.SetColumnSpan(this.previewWin1, 4);
+            this.previewWin1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.previewWin1.Location = new System.Drawing.Point(3, 452);
+            this.previewWin1.Name = "previewWin1";
+            this.previewWin1.Size = new System.Drawing.Size(872, 187);
+            this.previewWin1.TabIndex = 16;
             // 
-            // panel2
+            // tableLayoutPanel_Base
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.panel2.Controls.Add(this.btn_TrainMode);
-            this.panel2.Controls.Add(this.btn_Train);
-            this.panel2.Controls.Add(this.cb_WorkOnLine);
-            this.panel2.Controls.Add(this.cb_FindByte);
-            this.panel2.Controls.Add(this.cb_BlackPage);
-            this.panel2.Controls.Add(this.cb_WhitePage);
-            this.panel2.Controls.Add(this.cb_RealImg);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(317, 46);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(165, 371);
-            this.panel2.TabIndex = 9;
-            // 
-            // btn_Train
-            // 
-            this.btn_Train.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btn_Train.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Train.Font = new System.Drawing.Font("黑体", 25F, System.Drawing.FontStyle.Bold);
-            this.btn_Train.Image = global::SmartVEye.Properties.Resources.no;
-            this.btn_Train.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Train.Location = new System.Drawing.Point(0, 77);
-            this.btn_Train.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.btn_Train.Name = "btn_Train";
-            this.btn_Train.Size = new System.Drawing.Size(165, 75);
-            this.btn_Train.TabIndex = 6;
-            this.btn_Train.Text = "学习";
-            this.btn_Train.UseVisualStyleBackColor = false;
-            this.btn_Train.Click += new System.EventHandler(this.btn_Train_Click);
-            // 
-            // WinCtrl
-            // 
-            this.WinCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WinCtrl.Location = new System.Drawing.Point(55, 46);
-            this.WinCtrl.Name = "WinCtrl";
-            this.WinCtrl.Size = new System.Drawing.Size(262, 371);
-            this.WinCtrl.TabIndex = 8;
+            this.tableLayoutPanel_Base.ColumnCount = 1;
+            this.tableLayoutPanel_Base.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel_Base.Controls.Add(this.tableLayoutPanel_Result, 0, 0);
+            this.tableLayoutPanel_Base.Controls.Add(this.tableLayoutPanel1, 0, 2);
+            this.tableLayoutPanel_Base.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel_Base.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel_Base.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel_Base.Name = "tableLayoutPanel_Base";
+            this.tableLayoutPanel_Base.RowCount = 3;
+            this.tableLayoutPanel_Base.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel_Base.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel_Base.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel_Base.Size = new System.Drawing.Size(884, 848);
+            this.tableLayoutPanel_Base.TabIndex = 14;
             // 
             // VisCtrlV3
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.WinCtrl);
-            this.Controls.Add(this.cb_Accuracy);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.btn_HighSub);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btn_HighPlus);
-            this.Controls.Add(this.btn_WidthPlus);
-            this.Controls.Add(this.btn_WidthSub);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.tableLayoutPanel_Base);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "VisCtrlV3";
-            this.Size = new System.Drawing.Size(482, 417);
+            this.Size = new System.Drawing.Size(884, 848);
             this.Load += new System.EventHandler(this.VisCtrl_Load);
-            this.panel1.ResumeLayout(false);
+            this.Resize += new System.EventHandler(this.VisCtrlV2_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ProRecord)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel_Result.ResumeLayout(false);
+            this.tableLayoutPanel_Base.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Button btn_WidthPlus;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btn_HighPlus;
-        private System.Windows.Forms.Button btn_TrainMode;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label lbl_Res;
-        private System.Windows.Forms.Label lbl_CamIndex;
-        private System.Windows.Forms.CheckBox cb_RealImg;
-        private System.Windows.Forms.CheckBox cb_WhitePage;
-        private System.Windows.Forms.CheckBox cb_BlackPage;
-        private System.Windows.Forms.CheckBox cb_FindByte;
-        private System.Windows.Forms.Button btn_WidthSub;
-        private System.Windows.Forms.Button btn_HighSub;
-        private System.Windows.Forms.CheckBox cb_WorkOnLine;
-        private System.Windows.Forms.ComboBox cb_Accuracy;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.CheckBox cb_CamEnable;
-        private System.Windows.Forms.Button btn_Train;
         private System.Windows.Forms.DataGridView dgv_ProRecord;
+        private System.Windows.Forms.CheckBox cb_RealImg;
+        private System.Windows.Forms.Label lbl_CamIndex;
+        private System.Windows.Forms.CheckBox cb_WorkOnLine;
+        private System.Windows.Forms.Button btn_Train;
+        private System.Windows.Forms.Button btn_WidthPlus;
+        private System.Windows.Forms.Button btn_HighPlus;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_RecVal1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tb_RecVal2;
+        private System.Windows.Forms.Button btn_TrainMode;
+        private System.Windows.Forms.Label lbl_Res;
         private SmartLib.DisplayCtrl WinCtrl;
         private System.Windows.Forms.Label lb_ImgSimilarScore;
+        private System.Windows.Forms.ComboBox comboBox_RunMode;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ComboBox comboBox_DetectAccuracy;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_Result;
+        private System.Windows.Forms.Button btn_WidthSub;
+        private System.Windows.Forms.Button btn_HighSub;
+        private VisCtrl.PreviewWinRow previewWin1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_Base;
     }
 }

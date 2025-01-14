@@ -26,7 +26,7 @@ namespace SmartVEye
     /// DPI=1
     /// 2 4 6 个相机
     /// </summary>
-    public partial class VisCtrlV2 : VisCtrlBase, IVisCtrl
+    public partial class VisCtrlV124 : VisCtrlBase, IVisCtrl
     {
         #region 参数清单
         public int CtrlNo { get; set; } = 0;//控件编号
@@ -42,7 +42,7 @@ namespace SmartVEye
 
         #endregion
 
-        public VisCtrlV2()
+        public VisCtrlV124()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
@@ -52,7 +52,7 @@ namespace SmartVEye
             WinCtrl.WinMouseUpEvent += new HMouseEventHandler(VisWinMouseUp);
         }
 
-        ~VisCtrlV2()
+        ~VisCtrlV124()
         {
             WinCtrl.WinMouseDownEvent -= new HMouseEventHandler(VisWinMouseDown);
             WinCtrl.WinMouseMoveEvent -= new HMouseEventHandler(VisWinMouseMove);

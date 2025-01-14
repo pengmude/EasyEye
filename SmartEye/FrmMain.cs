@@ -27,6 +27,8 @@ namespace SmartVEye
         bool IsFrmText = false;//界面是否要连续测试
         System.Windows.Forms.Timer AuthorityTimer = new System.Windows.Forms.Timer();//注册码检验定时器
         FrmAuthority frmAuthority = null;//软件注册界面
+        private static FrmSetting frmSetting = new FrmSetting();
+
         public FrmMain()
         {
             SetStyle(ControlStyles.UserPaint, true);
@@ -107,15 +109,25 @@ namespace SmartVEye
 
                 #region 新的控件
 
-                curVisCtrl = new VisCtrlV2();
-                lbl_WinMode.Text = "  Win:2";//用于标识窗体类型
+                // 选择 不同的布局
+                if (CommonData.CameraCount == 1 || CommonData.CameraCount == 2 || CommonData.CameraCount == 4)
+                {
+                    curVisCtrl = new VisCtrlV124();
+                    lbl_WinMode.Text = "  Win:124";//用于标识窗体类型
+                }
+                else
+                {
+                    curVisCtrl = new VisCtrlV3();
+                    lbl_WinMode.Text = "  Win:3";//用于标识窗体类型
+                }
 
                 #endregion
                 curVisCtrl.CamName = "CAM" + (idx + 1);
                 ((UserControl)curVisCtrl).Dock = DockStyle.Fill;
                 VisCtrlList.Add(curVisCtrl);
             }
-            VisCtrlV2.CameraOpenEvent += CameraOpenEvent;
+            VisCtrlV124.CameraOpenEvent += CameraOpenEvent;
+            VisCtrlV3.CameraOpenEvent += CameraOpenEvent;
 
             if (CommonData.CameraCount == 1)
             {
@@ -172,7 +184,7 @@ namespace SmartVEye
         /// <param name="e"></param>
         private void CameraOpenEvent(object sender, EventArgs e)
         {
-            if(sender is VisCtrlV2 visCtrl)
+            if(sender is IVisCtrl visCtrl)
             {
                 try
                 {
@@ -395,16 +407,37 @@ namespace SmartVEye
         {
             try
             {
-                if (MessageBox.Show("是否清除全部相机计数?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                if (FrmSetting.IsNeedPasswoed())
                 {
-                    return;
+                    FrmPassword frmPassword = new FrmPassword();
+                    if (frmPassword.ShowDialog() == DialogResult.OK)
+                    {
+                        frmPassword.Close();
+                        if (MessageBox.Show("是否清除全部相机计数?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                        {
+                            return;
+                        }
+                        for (int idx = 0; idx < VisCtrlList.Count; idx++)
+                        {
+                            VisCtrlList[idx].ClearProRecord();
+                        }
+                        _logger.Info("清除全部相机计数!");
+                        ShowSystemInfo("清除全部相机计数!", 0);
+                    }
                 }
-                for (int idx = 0; idx < VisCtrlList.Count; idx++)
+                else
                 {
-                    VisCtrlList[idx].ClearProRecord();
+                    if (MessageBox.Show("是否清除全部相机计数?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                    {
+                        return;
+                    }
+                    for (int idx = 0; idx < VisCtrlList.Count; idx++)
+                    {
+                        VisCtrlList[idx].ClearProRecord();
+                    }
+                    _logger.Info("清除全部相机计数!");
+                    ShowSystemInfo("清除全部相机计数!", 0);
                 }
-                _logger.Info("清除全部相机计数!");
-                ShowSystemInfo("清除全部相机计数!", 0);
             }
             catch (Exception ex)
             {
@@ -668,19 +701,6 @@ namespace SmartVEye
             }
         }
 
-        private void lbl_Setting_DoubleClick(object sender, EventArgs e)
-        {
-            try
-            {
-                FrmSetting frmSetting = new FrmSetting();
-                frmSetting.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("参数设定界面打开失败!" + ex.Message);
-            }
-        }
-
         private void btn_Function_MouseDown(object sender, MouseEventArgs e)
         {
             Button button = sender as Button;
@@ -763,7 +783,6 @@ namespace SmartVEye
             if (frmPassword.ShowDialog() == DialogResult.OK)
             {
                 frmPassword.Close();
-                FrmSetting frmSetting = new FrmSetting();
                 frmSetting.ShowDialog();
             }
         }
@@ -777,7 +796,7 @@ namespace SmartVEye
         {
             try
             {
-                if (VisCtrlList.Find((item)=>item.CamName == comboBox_CamList.Text) is VisCtrlV2 visCtrl)
+                if (VisCtrlList.Find((item)=>item.CamName == comboBox_CamList.Text) is IVisCtrl visCtrl)
                 {
                     label_TriggerDelay.Text = visCtrl.GetTriggerDelay().ToString();
                 }
@@ -797,7 +816,7 @@ namespace SmartVEye
             double curVal = double.Parse(label_TriggerDelay.Text);
             try
             {
-                if (VisCtrlList.Find((item) => item.CamName == comboBox_CamList.Text) is VisCtrlV2 visCtrl)
+                if (VisCtrlList.Find((item) => item.CamName == comboBox_CamList.Text) is IVisCtrl visCtrl)
                 {
                     if (curVal < 100)
                         throw new Exception("最多减到0");
@@ -824,7 +843,7 @@ namespace SmartVEye
             double curVal = double.Parse(label_TriggerDelay.Text);
             try
             {
-                if (VisCtrlList.Find((item) => item.CamName == comboBox_CamList.Text) is VisCtrlV2 visCtrl)
+                if (VisCtrlList.Find((item) => item.CamName == comboBox_CamList.Text) is IVisCtrl visCtrl)
                 {
                     if (curVal >= double.MaxValue - 100)
                         throw new Exception("不能超过上限！");
