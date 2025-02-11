@@ -67,7 +67,7 @@ namespace BaseData
 		/// <param name="winHandle">提供的halcon窗体</param>
 		public override void draw(HTuple winHandle)
 		{
-			HOperatorSet.SetLineWidth(winHandle, roiLineWidth);
+			HOperatorSet.SetLineWidth(winHandle, roiLineWidth);//设置ROI线宽
 			HOperatorSet.DispRectangle1(winHandle, row1, col1, row2, col2);
 			// 显示四个顶点小矩形
 			//HOperatorSet.DispRectangle2(winHandle, midR, midC, 0, 5, 5);

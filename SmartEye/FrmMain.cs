@@ -807,7 +807,7 @@ namespace SmartVEye
             }
         }
         /// <summary>
-        /// 点击一次减少100ms
+        /// 点击一次减少10ms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -818,9 +818,9 @@ namespace SmartVEye
             {
                 if (VisCtrlList.Find((item) => item.CamName == comboBox_CamList.Text) is IVisCtrl visCtrl)
                 {
-                    if (curVal < 100)
+                    if (curVal < 10)
                         throw new Exception("最多减到0");
-                    curVal -= 100;
+                    curVal -= 10;
                     visCtrl.SetTriggerDelay(curVal);
                     IniFileHelper.SaveINI(CommonData.SetFilePath, visCtrl.CamName, "triggerdelay", curVal);
                 }
@@ -834,7 +834,7 @@ namespace SmartVEye
         }
 
         /// <summary>
-        /// 点击一次增加100ms
+        /// 点击一次增加10ms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -845,9 +845,9 @@ namespace SmartVEye
             {
                 if (VisCtrlList.Find((item) => item.CamName == comboBox_CamList.Text) is IVisCtrl visCtrl)
                 {
-                    if (curVal >= double.MaxValue - 100)
+                    if (curVal >= double.MaxValue - 10)
                         throw new Exception("不能超过上限！");
-                    curVal += 100;
+                    curVal += 10;
                     visCtrl.SetTriggerDelay(curVal);
                     IniFileHelper.SaveINI(CommonData.SetFilePath, visCtrl.CamName, "triggerdelay", curVal);
                 }
