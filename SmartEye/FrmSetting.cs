@@ -113,7 +113,6 @@ namespace SmartVEye
                 }
                 CommonData.CamReadModel(cb_CamList.SelectedIndex);
                 MessageBox.Show("参数保存成功!");
-                this.Hide();
             }
             catch (Exception ex)
             {
