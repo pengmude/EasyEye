@@ -57,5 +57,6 @@ namespace SmartVEye
         void TrainOperateBtn();    //进行按钮操作
         void SetTriggerDelay(double delay);
         double GetTriggerDelay();
+        void ClearNgPic();//清除三张历史NG图像的显示
     }
 }

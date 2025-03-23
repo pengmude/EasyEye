@@ -15,7 +15,7 @@ namespace SmartVEye.VisCtrl
 {
     public partial class PreviewWinCol : UserControl
     {
-        private Queue<Image> imageQueue = new Queue<Image>(3);// 定义一个只能存放三张NG图像的队列
+        private Queue<ImageInfo> imageQueue = new Queue<ImageInfo>(3);// 定义一个只能存放三张NG图像的队列
 
         public PreviewWinCol()
         {
@@ -26,9 +26,25 @@ namespace SmartVEye.VisCtrl
         /// 开放给外部调用，添加图像
         /// </summary>
         /// <param name="newImage"></param>
-        public void AddImage(HObject newImage)
+        /// <param name="ImageTime"></param>
+        public void AddImage(HObject newImage, string ImageTime)
         {
-            UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(newImage));
+            UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(newImage), ImageTime);
+        }
+
+        /// <summary>
+        /// 提供外部一键清除全部NG历史图片
+        /// </summary>
+        public void ClearNgPic()
+        {
+            if (imageQueue.Count > 0)
+            {
+                ImageInfo oldestImage = imageQueue.Dequeue();
+                oldestImage.Image.Dispose(); // 释放不再使用的图像资源
+            }
+            pictureBox1.Image = null;
+            pictureBox2.Image = null;
+            pictureBox3.Image = null;
         }
 
         [DllImport("kernel32.dll")]
@@ -68,17 +84,17 @@ namespace SmartVEye.VisCtrl
         /// 更新NG图像队列
         /// </summary>
         /// <param name="newImage"></param>
-        private void UpdateImageQueueAndPictureBoxes(Image newImage)
+        private void UpdateImageQueueAndPictureBoxes(Image newImage, string ImageTime)
         {
             // 如果队列已满，则移除最旧的图像
             if (imageQueue.Count == 3)
             {
-                Image oldestImage = imageQueue.Dequeue();
-                oldestImage.Dispose(); // 释放不再使用的图像资源
+                ImageInfo oldestImage = imageQueue.Dequeue();
+                oldestImage.Image.Dispose(); // 释放不再使用的图像资源
             }
 
             // 添加新图像到队列
-            imageQueue.Enqueue(newImage);
+            imageQueue.Enqueue(new ImageInfo(newImage, ImageTime));
 
             // 更新 PictureBox 控件以显示最新的三张图像
             UpdatePictureBoxesFromQueue();
@@ -91,12 +107,12 @@ namespace SmartVEye.VisCtrl
         private void UpdatePictureBoxesFromQueue()
         {
             // 获取队列中的所有图像
-            List<Image> images = imageQueue.ToList();
+            List<ImageInfo> imageInfos = imageQueue.ToList();
 
             // 根据队列中的图像数量更新 PictureBox 控件
-            pictureBox1.Image = images.ElementAtOrDefault(0);
-            pictureBox2.Image = images.ElementAtOrDefault(1);
-            pictureBox3.Image = images.ElementAtOrDefault(2);
+            pictureBox1.Image = imageInfos.ElementAtOrDefault(0).Image;
+            pictureBox2.Image = imageInfos.ElementAtOrDefault(1).Image;
+            pictureBox3.Image = imageInfos.ElementAtOrDefault(2).Image;
 
             // 确保 PictureBox 的大小模式适应图像
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -109,7 +125,10 @@ namespace SmartVEye.VisCtrl
             try
             {
                 FormPreview win = new FormPreview();
-                win.ShowImage(pictureBox1.Image);
+                // 获取队列中的所有图像
+                List<ImageInfo> imageInfos = imageQueue.ToList();
+                // 取列表第1张显示
+                win.ShowImage(imageInfos.ElementAtOrDefault(0));
                 win.Show();
             }
             catch (Exception)
@@ -122,7 +141,10 @@ namespace SmartVEye.VisCtrl
             try
             {
                 FormPreview win = new FormPreview();
-                win.ShowImage(pictureBox2.Image);
+                // 获取队列中的所有图像
+                List<ImageInfo> imageInfos = imageQueue.ToList();
+                // 取列表第2张显示
+                win.ShowImage(imageInfos.ElementAtOrDefault(1));
                 win.Show();
             }
             catch (Exception)
@@ -135,7 +157,10 @@ namespace SmartVEye.VisCtrl
             try
             {
                 FormPreview win = new FormPreview();
-                win.ShowImage(pictureBox3.Image);
+                // 获取队列中的所有图像
+                List<ImageInfo> imageInfos = imageQueue.ToList();
+                // 取列表第3张显示
+                win.ShowImage(imageInfos.ElementAtOrDefault(2));
                 win.Show();
             }
             catch (Exception)

@@ -761,6 +761,8 @@ namespace SmartVEye
         {
             foreach (var item in VisCtrlList)
             {
+                // 清楚告警同时清除历史NG图片
+                item.ClearNgPic();
 
                 //_logger.Info($"联机状态,相机[{item.CamName}]发送NG信号给PLC完成!");
 

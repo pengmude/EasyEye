@@ -415,8 +415,8 @@ namespace SmartVEye
                                     //设置显示结果为NG
                                     SetRes(false);
                                     RecordNG += 1;
-                                    //UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(grabImage));//更新NG图片的显示
-                                    previewWin1.AddImage(grabImage);
+                                    string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                    previewWin1.AddImage(grabImage, time);
                                 }
                             }
                             else
@@ -442,8 +442,8 @@ namespace SmartVEye
                                     //设置显示结果为NG
                                     SetRes(false);
                                     RecordNG += 1;
-                                    //UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(grabImage));//更新NG图片的显示
-                                    previewWin1.AddImage(grabImage);
+                                    string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                    previewWin1.AddImage(grabImage, time);
                                 }
                             }
                             else
@@ -469,8 +469,8 @@ namespace SmartVEye
                                     //设置显示结果为NG
                                     SetRes(false);
                                     RecordNG += 1;
-                                    //UpdateImageQueueAndPictureBoxes(HObject2Bitmap8(grabImage));//更新NG图片的显示
-                                    previewWin1.AddImage(grabImage);
+                                    string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                    previewWin1.AddImage(grabImage, time);
                                 }
                             }
                             else
@@ -1610,6 +1610,9 @@ namespace SmartVEye
             }
             IniFileHelper.SaveINI(CommonData.SetFilePath, CamName, "imgscore", ImgScore);   //lcl 当前图片相似度
         }
-
+        public void ClearNgPic()
+        {
+            previewWin1.ClearNgPic();
+        }
     }
 }
